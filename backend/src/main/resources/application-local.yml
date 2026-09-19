@@ -1,0 +1,7 @@
+logging:
+  level:
+    com.annapurna: DEBUG
+
+annapurna:
+  security:
+    local-password-login-enabled: true

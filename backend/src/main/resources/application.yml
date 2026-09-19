@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: annapurna-backend
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:annapurna}
+    username: ${DB_USERNAME:annapurna}
+    password: ${DB_PASSWORD:}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+  flyway:
+    enabled: true
+  mvc:
+    problemdetails:
+      enabled: true
+springdoc:
+  api-docs:
+    version: OPENAPI_3_1
+  swagger-ui:
+    path: /swagger-ui
+
+annapurna:
+  matching:
+    baseline:
+      commodity: 0.35
+      quantity: 0.30
+      quality: 0.20
+      geography: 0.10
+      delivery: 0.05
+  security:
+    jwt:
+      # A base64-encoded 256-bit HMAC key. Required outside the test profile.
+      secret: ${ANNAPURNA_JWT_SECRET:}
+      issuer: ${ANNAPURNA_JWT_ISSUER:annapurna-api}
+      audience: ${ANNAPURNA_JWT_AUDIENCE:annapurna-clients}
+      access-token-ttl: PT15M
+      refresh-token-ttl: P30D
+    local-password-login-enabled: false
