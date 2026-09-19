@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class JpaCandidateLotProvider implements CandidateLotProvider {
-    private static final List<LotStatus> ELIGIBLE_STATUSES = List.of(LotStatus.VERIFIED, LotStatus.AVAILABLE);
+    private static final List<LotStatus> ELIGIBLE_STATUSES = List.of(LotStatus.AVAILABLE);
 
     private final LotRepository lotRepository;
 

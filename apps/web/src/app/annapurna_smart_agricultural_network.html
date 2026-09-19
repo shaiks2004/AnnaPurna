@@ -1,0 +1,1843 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>ANNAPURNA - Smart Agricultural Network</title>
+
+    <style>
+      /* =========================
+           GLOBAL
+        ========================== */
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Inter, Arial, sans-serif;
+        background: #f4f1e8;
+        color: #26332d;
+      }
+
+      button,
+      input {
+        font-family: inherit;
+      }
+
+      /* =========================
+           HEADER
+        ========================== */
+
+      header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 10;
+      }
+
+      .header-inner {
+        max-width: 1400px;
+        margin: auto;
+        padding: 24px 40px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .logo-icon {
+        width: 44px;
+        height: 44px;
+
+        background: #123c2c;
+        border-radius: 12px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 22px;
+      }
+
+      .logo-name {
+        font-size: 21px;
+        font-weight: 700;
+        color: #123c2c;
+      }
+
+      .logo-subtitle {
+        font-size: 9px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #6d7d73;
+        margin-top: 2px;
+      }
+
+      .header-links {
+        display: flex;
+        gap: 24px;
+        font-size: 13px;
+        color: #526159;
+      }
+
+      /* =========================
+           MAIN
+        ========================== */
+
+      .page {
+        min-height: 100vh;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 100px 30px 60px;
+      }
+
+      .login-container {
+        width: 100%;
+        max-width: 1150px;
+        min-height: 650px;
+
+        background: white;
+        border-radius: 28px;
+        overflow: hidden;
+
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+
+        border: 1px solid #dde2db;
+
+        box-shadow: 0 25px 80px rgba(18, 60, 44, 0.12);
+      }
+
+      /* =========================
+           LEFT PANEL
+        ========================== */
+
+      .visual-panel {
+        position: relative;
+        overflow: hidden;
+
+        min-height: 650px;
+
+        background: #123c2c;
+        color: white;
+      }
+
+      .background-image {
+        position: absolute;
+        inset: 0;
+
+        background-image: url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1400&q=85');
+
+        background-size: cover;
+        background-position: center;
+      }
+
+      .dark-overlay {
+        position: absolute;
+        inset: 0;
+
+        background: linear-gradient(135deg, rgba(18, 60, 44, 0.94), rgba(18, 60, 44, 0.72));
+      }
+
+      .grid-overlay {
+        position: absolute;
+        inset: 0;
+
+        opacity: 0.08;
+
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 1) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 1) 1px, transparent 1px);
+
+        background-size: 45px 45px;
+      }
+
+      .visual-content {
+        position: relative;
+        z-index: 2;
+
+        height: 100%;
+
+        padding: 50px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      /* =========================
+           BADGE
+        ========================== */
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+
+        padding: 9px 15px;
+        border-radius: 30px;
+
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+
+        backdrop-filter: blur(10px);
+
+        font-size: 10px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .badge-dot {
+        width: 7px;
+        height: 7px;
+
+        border-radius: 50%;
+        background: #a8c99a;
+      }
+
+      /* =========================
+           HERO TEXT
+        ========================== */
+
+      .hero-title {
+        margin-top: 32px;
+
+        font-size: 52px;
+        line-height: 1.08;
+        font-weight: 600;
+        letter-spacing: -1.5px;
+      }
+
+      .green-text {
+        color: #b8d99f;
+      }
+
+      .hero-description {
+        margin-top: 22px;
+        max-width: 540px;
+
+        font-size: 15px;
+        line-height: 1.8;
+
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      /* =========================
+           NETWORK
+        ========================== */
+
+      .network-title {
+        margin-bottom: 15px;
+
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+
+        color: rgba(255, 255, 255, 0.45);
+      }
+
+      .network {
+        display: flex;
+        align-items: center;
+        width: 100%;
+      }
+
+      .network-node {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        min-width: 65px;
+      }
+
+      .network-icon {
+        width: 44px;
+        height: 44px;
+
+        border-radius: 12px;
+
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 19px;
+
+        backdrop-filter: blur(10px);
+      }
+
+      .network-name {
+        margin-top: 8px;
+        font-size: 11px;
+        font-weight: 600;
+      }
+
+      .network-status {
+        margin-top: 3px;
+
+        font-size: 8px;
+        color: rgba(255, 255, 255, 0.45);
+
+        white-space: nowrap;
+      }
+
+      .network-line {
+        flex: 1;
+
+        height: 1px;
+
+        border-top: 1px dashed rgba(255, 255, 255, 0.25);
+
+        margin: 0 8px;
+        margin-bottom: 32px;
+      }
+
+      /* =========================
+           STATS
+        ========================== */
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+
+      .stat {
+        padding: 14px;
+
+        border-radius: 13px;
+
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+
+        backdrop-filter: blur(10px);
+      }
+
+      .stat-number {
+        color: #b8d99f;
+
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      .stat-label {
+        margin-top: 5px;
+
+        color: rgba(255, 255, 255, 0.5);
+
+        font-size: 9px;
+      }
+
+      /* =========================
+           LOGIN PANEL
+        ========================== */
+
+      .login-panel {
+        display: flex;
+        align-items: center;
+
+        padding: 60px;
+
+        background: white;
+        overflow-y: auto;
+        max-height: 750px;
+      }
+
+      .login-content {
+        width: 100%;
+        max-width: 390px;
+        margin: auto;
+      }
+
+      .eyebrow {
+        font-size: 10px;
+        font-weight: 700;
+
+        letter-spacing: 1.7px;
+        text-transform: uppercase;
+
+        color: #78877e;
+
+        margin-bottom: 9px;
+      }
+
+      .login-title {
+        font-size: 32px;
+        font-weight: 600;
+        letter-spacing: -0.7px;
+      }
+
+      .login-description {
+        margin-top: 8px;
+
+        color: #78817c;
+
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      /* =========================
+           ROLE SELECTOR
+        ========================== */
+
+      .role-section {
+        margin-top: 24px;
+      }
+
+      .field-label {
+        display: block;
+
+        margin-bottom: 8px;
+
+        font-size: 11px;
+        font-weight: 700;
+
+        letter-spacing: 1px;
+        text-transform: uppercase;
+
+        color: #68766e;
+      }
+
+      .role-selector {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+
+        gap: 4px;
+        padding: 4px;
+
+        background: #f3f5f1;
+        border-radius: 14px;
+      }
+
+      .role-btn {
+        border: none;
+        background: transparent;
+
+        padding: 11px;
+        border-radius: 10px;
+
+        cursor: pointer;
+
+        font-size: 12px;
+        color: #718078;
+
+        transition: 0.2s;
+      }
+
+      .role-btn:hover {
+        color: #26332d;
+      }
+
+      .role-btn.active {
+        background: white;
+        color: #17633f;
+
+        box-shadow: 0 2px 7px rgba(0, 0, 0, 0.06);
+      }
+
+      /* =========================
+           FORM
+        ========================== */
+
+      .form {
+        margin-top: 20px;
+      }
+
+      .form-group {
+        margin-bottom: 16px;
+      }
+
+      .input-wrapper {
+        display: flex;
+        overflow: hidden;
+
+        border: 1px solid #d9ded9;
+        border-radius: 12px;
+
+        transition: 0.2s;
+      }
+
+      .input-wrapper:focus-within {
+        border-color: #17633f;
+
+        box-shadow: 0 0 0 4px rgba(23, 99, 63, 0.08);
+      }
+
+      .country-code {
+        display: flex;
+        align-items: center;
+
+        padding: 0 15px;
+
+        background: #f8f9f6;
+
+        border-right: 1px solid #e2e5e2;
+
+        font-size: 13px;
+        color: #657169;
+      }
+
+      input {
+        width: 100%;
+
+        border: none;
+        outline: none;
+
+        padding: 13px;
+
+        font-size: 13px;
+        color: #26332d;
+      }
+
+      input::placeholder {
+        color: #a1aaa5;
+      }
+
+      .password-wrapper {
+        position: relative;
+      }
+
+      .password-wrapper input {
+        padding-right: 65px;
+      }
+
+      .show-password {
+        position: absolute;
+
+        right: 14px;
+        top: 50%;
+
+        transform: translateY(-50%);
+
+        border: none;
+        background: none;
+
+        color: #17633f;
+
+        font-size: 11px;
+
+        cursor: pointer;
+      }
+
+      /* =========================
+           REMEMBER / FORGOT
+        ========================== */
+
+      .password-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        margin-bottom: 9px;
+      }
+
+      .forgot {
+        border: none;
+        background: none;
+
+        color: #17633f;
+
+        font-size: 11px;
+        cursor: pointer;
+      }
+
+      .remember {
+        display: flex;
+        align-items: center;
+
+        gap: 8px;
+
+        margin-top: 5px;
+        margin-bottom: 18px;
+
+        font-size: 11px;
+        color: #69756f;
+      }
+
+      .remember input {
+        width: 15px;
+        height: 15px;
+
+        accent-color: #17633f;
+      }
+
+      /* =========================
+           CAPTCHA
+        ========================== */
+
+      .captcha-section {
+        margin-bottom: 18px;
+      }
+
+      .captcha-box {
+        padding: 8px;
+
+        border: 1px solid #d9ded9;
+        border-radius: 12px;
+
+        background: #f8f9f6;
+      }
+
+      .captcha-track {
+        position: relative;
+
+        height: 42px;
+
+        border-radius: 9px;
+
+        background: #e9ede8;
+
+        overflow: hidden;
+      }
+
+      .captcha-target {
+        position: absolute;
+
+        top: 6px;
+
+        width: 30px;
+        height: 30px;
+
+        border-radius: 7px;
+
+        border: 2px dashed #17633f;
+
+        background: rgba(23, 99, 63, 0.08);
+      }
+
+      .captcha-slider {
+        position: absolute;
+
+        left: 0;
+        top: 3px;
+
+        width: 36px;
+        height: 36px;
+
+        border-radius: 8px;
+
+        background: white;
+
+        border: 1px solid #d9ded9;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        color: #17633f;
+
+        font-weight: 700;
+
+        cursor: grab;
+
+        user-select: none;
+
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+
+        touch-action: none;
+      }
+
+      .captcha-slider:active {
+        cursor: grabbing;
+      }
+
+      .captcha-status {
+        margin-top: 6px;
+
+        text-align: center;
+
+        font-size: 10px;
+
+        color: #8b9690;
+      }
+
+      /* =========================
+           BUTTONS
+        ========================== */
+
+      .login-button {
+        width: 100%;
+
+        border: none;
+        border-radius: 12px;
+
+        padding: 13px;
+
+        background: #17633f;
+
+        color: white;
+
+        font-size: 13px;
+        font-weight: 600;
+
+        cursor: pointer;
+
+        transition: 0.2s;
+
+        box-shadow: 0 8px 20px rgba(23, 99, 63, 0.2);
+      }
+
+      .login-button:hover {
+        background: #124d31;
+        transform: translateY(-1px);
+      }
+
+      .divider {
+        display: flex;
+        align-items: center;
+
+        gap: 12px;
+
+        margin: 20px 0;
+      }
+
+      .divider-line {
+        flex: 1;
+
+        height: 1px;
+
+        background: #e5e8e4;
+      }
+
+      .divider-text {
+        font-size: 9px;
+
+        text-transform: uppercase;
+        letter-spacing: 1px;
+
+        color: #a0aaa4;
+      }
+
+      .register-button {
+        width: 100%;
+
+        padding: 12px;
+
+        border-radius: 12px;
+
+        border: 1px solid #17633f;
+
+        background: white;
+
+        color: #17633f;
+
+        font-size: 13px;
+        font-weight: 600;
+
+        cursor: pointer;
+
+        transition: 0.2s;
+      }
+
+      .register-button:hover {
+        background: #f1f7f2;
+      }
+
+      .google-signin-btn {
+        width: 100%;
+        margin-bottom: 16px;
+        padding: 12px;
+        border-radius: 12px;
+        border: 1px solid #d9ded9;
+        background: #ffffff;
+        color: #26332d;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        transition: 0.2s;
+      }
+
+      .google-signin-btn:hover {
+        background: #f8f9f6;
+        border-color: #c0c8c0;
+      }
+
+      /* =========================
+           SECURITY
+        ========================== */
+
+      .security {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        gap: 7px;
+
+        margin-top: 18px;
+
+        font-size: 9px;
+        color: #8b9690;
+      }
+
+      /* =========================
+           OTP & DASHBOARD STYLES
+        ========================== */
+
+      .hidden {
+        display: none !important;
+      }
+
+      .otp-inputs-row {
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        margin: 20px 0;
+      }
+
+      .otp-digit {
+        width: 42px;
+        height: 48px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: 700;
+        border: 1px solid #d9ded9;
+        border-radius: 10px;
+        outline: none;
+        background: #f8f9f6;
+      }
+
+      .otp-digit:focus {
+        border-color: #17633f;
+        box-shadow: 0 0 0 3px rgba(23, 99, 63, 0.08);
+        background: #fff;
+      }
+
+      /* Dashboard Styles matching theme */
+      .dashboard-container {
+        width: 100%;
+      }
+
+      .dash-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 24px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid #e5e8e4;
+      }
+
+      .dash-user-info h3 {
+        font-size: 20px;
+        color: #123c2c;
+        font-weight: 700;
+      }
+
+      .dash-user-info p {
+        font-size: 12px;
+        color: #657169;
+        margin-top: 2px;
+      }
+
+      .badge-role {
+        background: #eaf3ec;
+        color: #17633f;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .dash-card {
+        background: #f8f9f6;
+        border: 1px solid #dde2db;
+        border-radius: 14px;
+        padding: 16px;
+        margin-bottom: 16px;
+      }
+
+      .dash-card-title {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #78877e;
+        margin-bottom: 10px;
+      }
+
+      .dash-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .dash-item-label {
+        font-size: 10px;
+        color: #8b9690;
+      }
+
+      .dash-item-val {
+        font-size: 13px;
+        font-weight: 600;
+        color: #26332d;
+        margin-top: 2px;
+      }
+
+      .logout-btn {
+        background: #fdf2f2;
+        color: #9b2c2c;
+        border: 1px solid #f5c6c6;
+        padding: 10px 16px;
+        border-radius: 10px;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.2s;
+        width: 100%;
+      }
+
+      .logout-btn:hover {
+        background: #fadcdc;
+      }
+
+      /* =========================
+           FOOTER
+        ========================== */
+
+      footer {
+        position: fixed;
+
+        bottom: 18px;
+
+        left: 0;
+        right: 0;
+
+        text-align: center;
+
+        font-size: 9px;
+
+        letter-spacing: 2px;
+
+        text-transform: uppercase;
+
+        color: #87928b;
+      }
+
+      /* =========================
+           RESPONSIVE
+        ========================== */
+
+      @media (max-width: 900px) {
+        .login-container {
+          grid-template-columns: 1fr;
+        }
+
+        .visual-panel {
+          min-height: 480px;
+        }
+
+        .login-panel {
+          padding: 50px 30px;
+        }
+
+        .header-links {
+          display: none;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .page {
+          padding: 80px 15px 30px;
+        }
+
+        .header-inner {
+          padding: 18px 20px;
+        }
+
+        .visual-content {
+          padding: 35px 25px;
+        }
+
+        .hero-title {
+          font-size: 38px;
+        }
+
+        .network-name {
+          font-size: 9px;
+        }
+
+        .network-status {
+          display: none;
+        }
+
+        .network-line {
+          margin: 0 3px;
+          margin-bottom: 25px;
+        }
+
+        .stats {
+          gap: 6px;
+        }
+
+        .stat {
+          padding: 10px;
+        }
+
+        .stat-label {
+          font-size: 8px;
+        }
+
+        .login-panel {
+          padding: 40px 25px;
+        }
+
+        footer {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- =========================================================
+         HEADER
+    ========================================================== -->
+
+    <header>
+      <div class="header-inner">
+        <div class="logo">
+          <div class="logo-icon">🌾</div>
+
+          <div>
+            <div class="logo-name">ANNAPURNA</div>
+
+            <div class="logo-subtitle">Farm to Future</div>
+          </div>
+        </div>
+
+        <div class="header-links">
+          <span>Market Intelligence</span>
+          <span>•</span>
+          <span>Smart Logistics</span>
+          <span>•</span>
+          <span>Less Waste</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- =========================================================
+         MAIN LOGIN AREA
+    ========================================================== -->
+
+    <main class="page">
+      <div class="login-container">
+        <!-- =====================================================
+                 LEFT SIDE
+            ====================================================== -->
+
+        <section class="visual-panel">
+          <div class="background-image"></div>
+          <div class="dark-overlay"></div>
+          <div class="grid-overlay"></div>
+
+          <div class="visual-content">
+            <div>
+              <div class="badge">
+                <span class="badge-dot"></span>
+
+                Agricultural Intelligence
+              </div>
+
+              <h1 class="hero-title">
+                Move produce
+
+                <br />
+
+                <span class="green-text"> smarter. </span>
+
+                <br />
+
+                Sell at the right time.
+              </h1>
+
+              <p class="hero-description">
+                ANNAPURNA connects farmers and FPOs with markets, verified buyers, storage and
+                logistics through one intelligent agricultural network.
+              </p>
+            </div>
+
+            <!-- NETWORK -->
+
+            <div>
+              <div class="network-title">Farm-to-market network</div>
+
+              <div class="network">
+                <!-- FARM -->
+
+                <div class="network-node">
+                  <div class="network-icon">🌾</div>
+
+                  <div class="network-name">Farm</div>
+
+                  <div class="network-status">Lot created</div>
+                </div>
+
+                <div class="network-line"></div>
+
+                <!-- MARKET -->
+
+                <div class="network-node">
+                  <div class="network-icon">🏪</div>
+
+                  <div class="network-name">Market</div>
+
+                  <div class="network-status">Price matched</div>
+                </div>
+
+                <div class="network-line"></div>
+
+                <!-- BUYER -->
+
+                <div class="network-node">
+                  <div class="network-icon">🏭</div>
+
+                  <div class="network-name">Buyer</div>
+
+                  <div class="network-status">Demand verified</div>
+                </div>
+
+                <div class="network-line"></div>
+
+                <!-- DELIVERY -->
+
+                <div class="network-node">
+                  <div class="network-icon">🚛</div>
+
+                  <div class="network-name">Delivery</div>
+
+                  <div class="network-status">Route optimized</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- STATS -->
+
+            <div class="stats">
+              <div class="stat">
+                <div class="stat-number">LOT</div>
+
+                <div class="stat-label">Digital Passport</div>
+              </div>
+
+              <div class="stat">
+                <div class="stat-number">₹</div>
+
+                <div class="stat-label">Net Realisation</div>
+              </div>
+
+              <div class="stat">
+                <div class="stat-number">24/7</div>
+
+                <div class="stat-label">Market Signals</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =====================================================
+                 RIGHT SIDE (DYNAMIC MODES CONTAINER)
+            ====================================================== -->
+
+        <section class="login-panel">
+          <div class="login-content">
+            <!-- =============================================
+                         VIEW 1: SIGN IN FORM
+                    ============================================== -->
+            <div id="signinView">
+              <div class="eyebrow" id="signinEyebrow">Secure Access</div>
+
+              <h2 class="login-title" id="signinTitle">Welcome back</h2>
+
+              <p class="login-description" id="signinDesc">
+                Sign in to manage your agricultural marketplace.
+              </p>
+
+              <!-- GOOGLE SIGN IN -->
+              <div style="margin-top: 24px">
+                <button type="button" class="google-signin-btn" onclick="simulateGoogleAuth()">
+                  <svg width="18" height="18" viewBox="0 0 24 24">
+                    <path
+                      fill="#4285F4"
+                      d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"
+                    />
+                    <path
+                      fill="#34A853"
+                      d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.19v3.15C3.17 21.32 7.24 24 12 24z"
+                    />
+                    <path
+                      fill="#FBBC05"
+                      d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.19C.43 8.1 0 9.8 0 12s.43 3.9 1.19 5.42l4.09-3.15z"
+                    />
+                    <path
+                      fill="#EA4335"
+                      d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.24 0 3.17 2.68 1.19 6.58l4.09 3.15c.95-2.83 3.6-4.98 6.72-4.98z"
+                    />
+                  </svg>
+                  Continue with Google
+                </button>
+              </div>
+
+              <div class="divider">
+                <div class="divider-line"></div>
+                <span class="divider-text">Or with phone/email</span>
+                <div class="divider-line"></div>
+              </div>
+
+              <!-- ROLE -->
+
+              <div class="role-section">
+                <label class="field-label"> Continue as </label>
+
+                <div class="role-selector">
+                  <button
+                    type="button"
+                    class="role-btn active"
+                    onclick="selectRole(this, 'Farmer')"
+                  >
+                    Farmer
+                  </button>
+
+                  <button type="button" class="role-btn" onclick="selectRole(this, 'FPO')">
+                    FPO
+                  </button>
+
+                  <button type="button" class="role-btn" onclick="selectRole(this, 'Buyer')">
+                    Buyer
+                  </button>
+                </div>
+              </div>
+
+              <!-- FORM -->
+
+              <form class="form" onsubmit="handleLoginSubmit(event)">
+                <!-- MOBILE -->
+
+                <div class="form-group">
+                  <label class="field-label"> Mobile number </label>
+
+                  <div class="input-wrapper">
+                    <div class="country-code">+91</div>
+
+                    <input id="loginPhone" type="tel" placeholder="Enter mobile number" required />
+                  </div>
+                </div>
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+                  <div class="password-header">
+                    <label class="field-label"> Password </label>
+
+                    <button type="button" class="forgot" onclick="forgotPassword()">
+                      Forgot password?
+                    </button>
+                  </div>
+
+                  <div class="input-wrapper password-wrapper">
+                    <input
+                      id="loginPassword"
+                      type="password"
+                      placeholder="Enter your password"
+                      required
+                    />
+
+                    <button
+                      type="button"
+                      class="show-password"
+                      onclick="togglePassword('loginPassword', this)"
+                    >
+                      Show
+                    </button>
+                  </div>
+                </div>
+
+                <!-- REMEMBER -->
+
+                <label class="remember">
+                  <input type="checkbox" />
+
+                  Keep me signed in
+                </label>
+
+                <!-- CAPTCHA -->
+
+                <div class="captcha-section">
+                  <label class="field-label"> Security check </label>
+
+                  <div class="captcha-box">
+                    <div class="captcha-track" id="captchaTrack">
+                      <div class="captcha-target" id="captchaTarget"></div>
+
+                      <div class="captcha-slider" id="captchaSlider" aria-label="Captcha slider">
+                        →
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="captcha-status" id="captchaStatus">Slide to verify</div>
+                </div>
+
+                <!-- LOGIN -->
+
+                <button class="login-button" type="submit">Sign in to ANNAPURNA &nbsp; →</button>
+              </form>
+
+              <!-- DIVIDER -->
+
+              <div class="divider">
+                <div class="divider-line"></div>
+
+                <span class="divider-text"> New to ANNAPURNA? </span>
+
+                <div class="divider-line"></div>
+              </div>
+
+              <!-- REGISTER SWITCH BUTTON -->
+
+              <button class="register-button" type="button" onclick="switchView('registerView')">
+                Create Farmer account
+              </button>
+            </div>
+
+            <!-- =============================================
+                         VIEW 2: REGISTER FORM
+                    ============================================== -->
+            <div id="registerView" class="hidden">
+              <div class="eyebrow">Join Network</div>
+
+              <h2 class="login-title">Create Account</h2>
+
+              <p class="login-description">
+                Register your details to access the agricultural marketplace.
+              </p>
+
+              <!-- ROLE SELECTOR FOR REGISTRATION -->
+              <div class="role-section" style="margin-top: 20px">
+                <label class="field-label">Account Role</label>
+                <div class="role-selector">
+                  <button
+                    type="button"
+                    class="role-btn active"
+                    onclick="selectRegRole(this, 'Farmer')"
+                  >
+                    Farmer
+                  </button>
+                  <button type="button" class="role-btn" onclick="selectRegRole(this, 'FPO')">
+                    FPO
+                  </button>
+                  <button type="button" class="role-btn" onclick="selectRegRole(this, 'Buyer')">
+                    Buyer
+                  </button>
+                </div>
+              </div>
+
+              <form class="form" onsubmit="handleRegisterSubmit(event)">
+                <div class="form-group">
+                  <label class="field-label">Full Name</label>
+                  <div class="input-wrapper">
+                    <input id="regName" type="text" placeholder="Enter your full name" required />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="field-label">Email Address</label>
+                  <div class="input-wrapper">
+                    <input id="regEmail" type="email" placeholder="name@example.com" required />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="field-label">Mobile Number</label>
+                  <div class="input-wrapper">
+                    <div class="country-code">+91</div>
+                    <input id="regPhone" type="tel" placeholder="Enter mobile number" required />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="field-label">Password</label>
+                  <div class="input-wrapper password-wrapper">
+                    <input
+                      id="regPassword"
+                      type="password"
+                      placeholder="At least 6 characters"
+                      required
+                    />
+                    <button
+                      type="button"
+                      class="show-password"
+                      onclick="togglePassword('regPassword', this)"
+                    >
+                      Show
+                    </button>
+                  </div>
+                </div>
+
+                <button class="login-button" type="submit" style="margin-top: 10px">
+                  Continue & Verify OTP &nbsp; →
+                </button>
+              </form>
+
+              <div class="divider">
+                <div class="divider-line"></div>
+                <span class="divider-text">Already registered?</span>
+                <div class="divider-line"></div>
+              </div>
+
+              <button class="register-button" type="button" onclick="switchView('signinView')">
+                Back to Sign In
+              </button>
+            </div>
+
+            <!-- =============================================
+                         VIEW 3: OTP VERIFICATION MODAL / SCREEN
+                    ============================================== -->
+            <div id="otpView" class="hidden" style="text-align: center; padding: 20px 0">
+              <div class="eyebrow">Security Verification</div>
+              <h2 class="login-title" style="margin-bottom: 8px">Enter OTP Code</h2>
+              <p class="login-description" style="margin-bottom: 24px">
+                We've sent a 6-digit verification code to your mobile / email.<br />
+                <span style="color: #17633f; font-weight: 600" id="otpTargetDisplay"
+                  >+91 9876543210</span
+                >
+              </p>
+
+              <div
+                style="
+                  background: #eaf3ec;
+                  border: 1px solid #c4e0cc;
+                  padding: 12px;
+                  border-radius: 10px;
+                  margin-bottom: 20px;
+                  font-size: 11px;
+                  color: #123c2c;
+                "
+              >
+                💡 Demo OTP verification code is:
+                <strong id="simulatedOtpCode" style="font-size: 14px; letter-spacing: 2px"
+                  >123456</strong
+                >
+              </div>
+
+              <div class="otp-inputs-row">
+                <input type="text" maxlength="1" class="otp-digit" oninput="moveToNext(this, 1)" />
+                <input type="text" maxlength="1" class="otp-digit" oninput="moveToNext(this, 2)" />
+                <input type="text" maxlength="1" class="otp-digit" oninput="moveToNext(this, 3)" />
+                <input type="text" maxlength="1" class="otp-digit" oninput="moveToNext(this, 4)" />
+                <input type="text" maxlength="1" class="otp-digit" oninput="moveToNext(this, 5)" />
+                <input type="text" maxlength="1" class="otp-digit" oninput="moveToNext(this, 6)" />
+              </div>
+
+              <button
+                class="login-button"
+                type="button"
+                onclick="verifyOtpAndRegister()"
+                style="margin-top: 15px"
+              >
+                Verify & Complete Registration
+              </button>
+
+              <div style="margin-top: 20px">
+                <button type="button" class="forgot" onclick="resendOtp()" style="font-size: 12px">
+                  Resend Code
+                </button>
+                <span style="color: #dde2db; margin: 0 8px">•</span>
+                <button
+                  type="button"
+                  class="forgot"
+                  onclick="switchView('registerView')"
+                  style="font-size: 12px"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+
+            <!-- =============================================
+                         VIEW 4: USER DASHBOARD (SUCCESSFUL LOGIN)
+                    ============================================== -->
+            <div id="dashboardView" class="hidden">
+              <div class="dashboard-container">
+                <div class="dash-header">
+                  <div class="dash-user-info">
+                    <h3 id="dashWelcomeName">Welcome, Farmer</h3>
+                    <p id="dashEmailText">user@annapurna.net</p>
+                  </div>
+                  <div>
+                    <span class="badge-role" id="dashRoleBadge">Farmer</span>
+                  </div>
+                </div>
+
+                <div class="dash-card">
+                  <div class="dash-card-title">Stored User Profile (localStorage)</div>
+                  <div class="dash-grid">
+                    <div>
+                      <div class="dash-item-label">Phone Number</div>
+                      <div class="dash-item-val" id="dashPhoneVal">+91 9876543210</div>
+                    </div>
+                    <div>
+                      <div class="dash-item-label">Account Status</div>
+                      <div class="dash-item-val" style="color: #17633f">✓ Verified & Active</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="dash-card">
+                  <div class="dash-card-title">Network Intelligence Summary</div>
+                  <div class="dash-grid">
+                    <div>
+                      <div class="dash-item-label">Active Lots</div>
+                      <div class="dash-item-val">3 Harvest Batches</div>
+                    </div>
+                    <div>
+                      <div class="dash-item-label">Market Match</div>
+                      <div class="dash-item-val" style="color: #17633f">Optimal (Delhi Mandi)</div>
+                    </div>
+                  </div>
+                </div>
+
+                <button class="logout-btn" onclick="handleLogout()">Sign Out of ANNAPURNA</button>
+              </div>
+            </div>
+
+            <!-- SECURITY -->
+
+            <div class="security">
+              <span>🔒</span>
+
+              <span> Secure & transparent agricultural transactions </span>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer>Digital • Transparent • Sustainable</footer>
+
+    <!-- =========================================================
+         JAVASCRIPT LOGIC & INTERACTIONS
+    ========================================================== -->
+
+    <script>
+      let selectedRole = 'Farmer';
+      let selectedRegRole = 'Farmer';
+      let captchaValid = false;
+      let generatedOtp = '123456';
+      let pendingRegistration = null;
+
+      /* CAPTCHA STATE */
+      const captchaState = {
+        track: null,
+        target: null,
+        slider: null,
+        status: null,
+        dragging: false,
+        startX: 0,
+        startLeft: 0,
+        targetLeft: 0,
+      };
+
+      /* ROLE SELECTION */
+      function selectRole(button, role) {
+        selectedRole = role;
+        document.querySelectorAll('.role-btn').forEach(function (btn) {
+          if (btn.parentElement.closest('#signinView')) {
+            btn.classList.remove('active');
+          }
+        });
+        button.classList.add('active');
+      }
+
+      function selectRegRole(button, role) {
+        selectedRegRole = role;
+        document.querySelectorAll('#registerView .role-btn').forEach(function (btn) {
+          btn.classList.remove('active');
+        });
+        button.classList.add('active');
+      }
+
+      /* SHOW / HIDE PASSWORD */
+      function togglePassword(inputId, button) {
+        const passwordInput = document.getElementById(inputId);
+        if (passwordInput.type === 'password') {
+          passwordInput.type = 'text';
+          button.textContent = 'Hide';
+        } else {
+          passwordInput.type = 'password';
+          button.textContent = 'Show';
+        }
+      }
+
+      /* CAPTCHA SETUP & GENERATION */
+      function setupCaptcha() {
+        captchaState.track = document.getElementById('captchaTrack');
+        captchaState.target = document.getElementById('captchaTarget');
+        captchaState.slider = document.getElementById('captchaSlider');
+        captchaState.status = document.getElementById('captchaStatus');
+
+        if (!captchaState.slider) return;
+        const slider = captchaState.slider;
+
+        slider.addEventListener('pointerdown', function (event) {
+          if (captchaValid) return;
+          captchaState.dragging = true;
+          captchaState.startX = event.clientX;
+          captchaState.startLeft = parseFloat(slider.style.left || '0');
+          slider.setPointerCapture(event.pointerId);
+        });
+
+        slider.addEventListener('pointermove', function (event) {
+          if (!captchaState.dragging) return;
+          const maxMove = captchaState.track.clientWidth - slider.offsetWidth - 8;
+          const delta = event.clientX - captchaState.startX;
+          const nextLeft = Math.min(Math.max(0, captchaState.startLeft + delta), maxMove);
+          slider.style.left = nextLeft + 'px';
+
+          const sliderCenter = nextLeft + slider.offsetWidth / 2;
+          const targetCenter = captchaState.targetLeft + captchaState.target.offsetWidth / 2;
+
+          if (Math.abs(sliderCenter - targetCenter) < 18) {
+            captchaValid = true;
+            captchaState.status.textContent = 'Captcha verified';
+            captchaState.status.style.color = '#17633F';
+            slider.style.background = '#17633F';
+            slider.style.color = '#fff';
+            slider.textContent = '✓';
+          } else {
+            captchaValid = false;
+            captchaState.status.textContent = 'Slide to verify';
+            captchaState.status.style.color = '#8B9690';
+            slider.style.background = '#fff';
+            slider.style.color = '#17633F';
+            slider.textContent = '→';
+          }
+        });
+
+        slider.addEventListener('pointerup', function () {
+          if (!captchaState.dragging) return;
+          captchaState.dragging = false;
+          if (!captchaValid) {
+            slider.style.left = '0px';
+            captchaState.status.textContent = 'Try again';
+            captchaState.status.style.color = '#9b5d00';
+            slider.style.background = '#fff';
+            slider.style.color = '#17633F';
+            slider.textContent = '→';
+          }
+        });
+
+        slider.addEventListener('pointerleave', function () {
+          if (captchaState.dragging && !captchaValid) {
+            slider.style.left = '0px';
+            captchaState.dragging = false;
+            captchaState.status.textContent = 'Try again';
+            captchaState.status.style.color = '#9b5d00';
+            slider.style.background = '#fff';
+            slider.style.color = '#17633F';
+            slider.textContent = '→';
+          }
+        });
+      }
+
+      function generateCaptcha() {
+        if (!captchaState.track) setupCaptcha();
+        if (!captchaState.track) return;
+        const maxTrack = captchaState.track.clientWidth - 70;
+        const minTarget = 20;
+        const maxTarget = Math.max(minTarget + 30, maxTrack - 30);
+        captchaState.targetLeft = minTarget + Math.random() * (maxTarget - minTarget);
+        captchaState.target.style.left = captchaState.targetLeft + 'px';
+        captchaState.slider.style.left = '0px';
+        captchaState.slider.style.background = '#fff';
+        captchaState.slider.style.color = '#17633F';
+        captchaState.slider.textContent = '→';
+        captchaState.status.textContent = 'Slide to verify';
+        captchaState.status.style.color = '#8B9690';
+        captchaValid = false;
+      }
+
+      /* VIEW SWITCHER */
+      function switchView(viewId) {
+        document.getElementById('signinView').classList.add('hidden');
+        document.getElementById('registerView').classList.add('hidden');
+        document.getElementById('otpView').classList.add('hidden');
+        document.getElementById('dashboardView').classList.add('hidden');
+
+        document.getElementById(viewId).classList.remove('hidden');
+
+        if (viewId === 'signinView') {
+          generateCaptcha();
+        }
+      }
+
+      /* LOGIN & AUTHENTICATION */
+      function handleLoginSubmit(event) {
+        event.preventDefault();
+        if (!captchaValid) {
+          alert('Please complete the captcha verification.');
+          generateCaptcha();
+          return;
+        }
+
+        const phone = document.getElementById('loginPhone').value;
+        const password = document.getElementById('loginPassword').value;
+
+        // Check localStorage for stored user
+        const storedUserStr = localStorage.getItem('annapurna_user_' + phone);
+        if (storedUserStr) {
+          const user = JSON.parse(storedUserStr);
+          if (user.password === password) {
+            loginUser(user);
+            return;
+          }
+        }
+
+        // Fallback for demo login if not pre-registered in localStorage
+        const demoUser = {
+          name: selectedRole + ' User',
+          email: phone + '@annapurna.agri',
+          phone: phone,
+          role: selectedRole,
+        };
+        loginUser(demoUser);
+      }
+
+      function simulateGoogleAuth() {
+        const googleUser = {
+          name: 'Google Farmer Account',
+          email: 'google.farmer@gmail.com',
+          phone: '+91 9988776655',
+          role: 'Farmer',
+        };
+        localStorage.setItem('annapurna_user_google', JSON.stringify(googleUser));
+        loginUser(googleUser);
+      }
+
+      /* REGISTRATION & OTP */
+      function handleRegisterSubmit(event) {
+        event.preventDefault();
+        const name = document.getElementById('regName').value;
+        const email = document.getElementById('regEmail').value;
+        const phone = document.getElementById('regPhone').value;
+        const password = document.getElementById('regPassword').value;
+
+        if (password.length < 6) {
+          alert('Password must be at least 6 characters long.');
+          return;
+        }
+
+        pendingRegistration = {
+          name,
+          email,
+          phone,
+          password,
+          role: selectedRegRole,
+        };
+
+        // Generate 6 digit OTP
+        generatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
+        document.getElementById('simulatedOtpCode').textContent = generatedOtp;
+        document.getElementById('otpTargetDisplay').textContent = '+91 ' + phone;
+
+        switchView('otpView');
+      }
+
+      function moveToNext(el, index) {
+        if (el.value.length === 1) {
+          const inputs = document.querySelectorAll('.otp-digit');
+          if (index < inputs.length) {
+            inputs[index].focus();
+          }
+        }
+      }
+
+      function resendOtp() {
+        generatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
+        document.getElementById('simulatedOtpCode').textContent = generatedOtp;
+        alert('New OTP sent: ' + generatedOtp);
+      }
+
+      function verifyOtpAndRegister() {
+        const inputs = document.querySelectorAll('.otp-digit');
+        let enteredOtp = '';
+        inputs.forEach((inp) => (enteredOtp += inp.value));
+
+        if (enteredOtp.length < 6) {
+          alert('Please enter the complete 6-digit OTP code.');
+          return;
+        }
+
+        if (enteredOtp !== generatedOtp) {
+          alert('Incorrect OTP code. Please check the demo code box.');
+          return;
+        }
+
+        // Save securely in localStorage
+        if (pendingRegistration) {
+          localStorage.setItem(
+            'annapurna_user_' + pendingRegistration.phone,
+            JSON.stringify(pendingRegistration),
+          );
+          loginUser(pendingRegistration);
+        }
+      }
+
+      /* DASHBOARD STATE & SESSION */
+      function loginUser(userData) {
+        document.getElementById('dashWelcomeName').textContent = 'Welcome, ' + userData.name;
+        document.getElementById('dashEmailText').textContent = userData.email;
+        document.getElementById('dashRoleBadge').textContent = userData.role;
+        document.getElementById('dashPhoneVal').textContent = userData.phone;
+
+        switchView('dashboardView');
+      }
+
+      function handleLogout() {
+        pendingRegistration = null;
+        document.getElementById('loginPhone').value = '';
+        document.getElementById('loginPassword').value = '';
+        switchView('signinView');
+      }
+
+      function forgotPassword() {
+        const ph = prompt('Enter your registered mobile number for password assistance:');
+        if (ph) {
+          alert('Password reset instructions sent to registered phone.');
+        }
+      }
+
+      function register() {
+        switchView('registerView');
+      }
+
+      /* INITIALIZE */
+      document.addEventListener('DOMContentLoaded', function () {
+        setupCaptcha();
+        generateCaptcha();
+      });
+    </script>
+  </body>
+</html>

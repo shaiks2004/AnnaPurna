@@ -34,7 +34,7 @@ class JpaCandidateLotProviderTest {
         when(lot.getQuantityUnit()).thenReturn("MT");
         when(lot.getAvailableFrom()).thenReturn(LocalDate.now());
         when(lot.getStatus()).thenReturn(LotStatus.AVAILABLE);
-        when(lotRepository.findByCommodityIdAndStatusIn(commodityId, List.of(LotStatus.VERIFIED, LotStatus.AVAILABLE)))
+        when(lotRepository.findByCommodityIdAndStatusIn(commodityId, List.of(LotStatus.AVAILABLE)))
                 .thenReturn(List.of(lot));
 
         assertThat(provider.findCandidates(requirement)).extracting(MatchCandidate::lotId).containsExactly(lotId);

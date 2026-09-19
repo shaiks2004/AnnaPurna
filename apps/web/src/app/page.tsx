@@ -1,20 +1,30 @@
-import { publicEnv } from '@/config/env';
+'use client';
 
-export default function HomePage() {
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/lib/auth';
+import { Loader2 } from 'lucide-react';
+
+export default function RootPage() {
+  const { user, loading } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!loading) {
+      if (user) {
+        router.replace('/dashboard');
+      } else {
+        router.replace('/login');
+      }
+    }
+  }, [user, loading, router]);
+
   return (
-    <main className="mx-auto flex min-h-dvh max-w-5xl items-center px-6 py-16 sm:px-10">
-      <section aria-labelledby="page-title" className="max-w-2xl space-y-5">
-        <p className="text-sm font-medium tracking-wide text-neutral-600 dark:text-neutral-300">
-          Platform foundation
-        </p>
-        <h1 id="page-title" className="text-4xl font-semibold tracking-tight sm:text-5xl">
-          {publicEnv.appName}
-        </h1>
-        <p className="text-lg leading-8 text-neutral-700 dark:text-neutral-200">
-          The web application foundation is in place. Product capabilities will be introduced as
-          their requirements are approved.
-        </p>
-      </section>
-    </main>
+    <div className="min-h-screen flex items-center justify-center bg-stone-100 text-stone-600">
+      <div className="flex items-center gap-2.5 bg-white p-5 rounded-lg border border-stone-200 shadow-xs">
+        <Loader2 className="h-5 w-5 animate-spin text-emerald-800" />
+        <span className="text-sm font-medium">Initializing Annapurna platform...</span>
+      </div>
+    </div>
   );
 }
