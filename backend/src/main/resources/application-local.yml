@@ -1,0 +1,10 @@
+logging:
+  level:
+    com.annapurna: DEBUG
+
+annapurna:
+  security:
+    jwt:
+      secret: ${ANNAPURNA_JWT_SECRET:dGVzdC1zZWNyZXQtdGhhdC1pcy1hdC1sZWFzdC0zMi1ieXRlcy1sb25nIQ==}
+    local-password-login-enabled: true
+

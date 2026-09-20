@@ -1,0 +1,26 @@
+{
+  "name": "annapurna",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Annapurna agricultural procurement platform",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=@annapurna/web",
+    "lint": "npm run lint --workspace=@annapurna/web",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "npm run typecheck --workspace=@annapurna/web",
+    "test": "npm run test --workspace=@annapurna/web",
+    "build": "npm run build --workspace=@annapurna/web"
+  },
+  "devDependencies": {
+    "prettier": "^3.5.3"
+  },
+  "engines": {
+    "node": ">=22.0.0",
+    "npm": ">=10.0.0"
+  }
+}

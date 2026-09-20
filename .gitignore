@@ -1,0 +1,21 @@
+# Dependencies and build output
+node_modules/
+.next/
+coverage/
+backend/target/
+backend/.mvn/apache-maven-*/
+backend/.mvn/*.zip
+
+# Local environment files
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Tooling and operating-system files
+*.tsbuildinfo
+.DS_Store
+Thumbs.db
+
+# Logs
+npm-debug.log*

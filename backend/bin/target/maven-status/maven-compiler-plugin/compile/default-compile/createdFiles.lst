@@ -1,0 +1,8 @@
+com\annapurna\organization\Organization.class
+com\annapurna\common\security\SecurityConfiguration.class
+com\annapurna\common\web\HealthController$HealthResponse.class
+com\annapurna\common\persistence\AuditableEntity.class
+com\annapurna\organization\OrganizationMembership.class
+com\annapurna\user\PlatformUser.class
+com\annapurna\common\web\HealthController.class
+com\annapurna\AnnapurnaApplication.class
