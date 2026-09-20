@@ -86,7 +86,7 @@ export default function LotLocationPage() {
         actions={
           <Link
             href={`/lots/${id}`}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-stone-300 hover:bg-stone-50 text-stone-700 text-xs font-medium transition"
+            className="agri-btn-secondary"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             <span>Lot Overview</span>
@@ -101,13 +101,13 @@ export default function LotLocationPage() {
 
       <div className="space-y-6 max-w-2xl">
         {/* Information Notice */}
-        <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-lg text-xs text-emerald-950 flex items-start gap-3">
-          <Info className="h-5 w-5 text-emerald-800 shrink-0 mt-0.5" />
+        <div className="p-4 bg-[#EAF2E8] border border-[#B8D99F] rounded-lg text-xs text-[#123C2C] flex items-start gap-3">
+          <Info className="h-5 w-5 text-[#17633F] shrink-0 mt-0.5" />
           <div className="leading-relaxed">
-            <strong className="font-semibold block mb-0.5">
+            <strong className="font-semibold block mb-0.5 font-heading">
               PostGIS Geographic Point Specification
             </strong>
-            <span>
+            <span className="text-[#26332D]">
               Coordinates are stored as a WGS84 (EPSG:4326) Point. Proximity calculations and
               geospatial matching algorithms use these coordinates to compute farm-to-mandi travel
               distances.
@@ -116,7 +116,7 @@ export default function LotLocationPage() {
         </div>
 
         {/* Location Form */}
-        <div className="bg-white rounded-lg border border-stone-200 shadow-2xs p-6 sm:p-8">
+        <div className="agri-card p-6 sm:p-8">
           <LocationForm
             key={
               locationQuery.data?.coordinates ? locationQuery.data.coordinates.join(',') : 'empty'
@@ -163,7 +163,7 @@ function LocationForm({
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label
-            className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+            className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
             htmlFor="loc-lat"
           >
             Latitude (-90 to +90) *
@@ -178,13 +178,13 @@ function LocationForm({
             value={latitude}
             onChange={(e) => setLatitude(e.target.value)}
             placeholder="e.g. 19.9975"
-            className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900 font-mono"
+            className="agri-input text-xs font-mono"
           />
         </div>
 
         <div>
           <label
-            className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+            className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
             htmlFor="loc-lon"
           >
             Longitude (-180 to +180) *
@@ -199,25 +199,25 @@ function LocationForm({
             value={longitude}
             onChange={(e) => setLongitude(e.target.value)}
             placeholder="e.g. 73.7898"
-            className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900 font-mono"
+            className="agri-input text-xs font-mono"
           />
         </div>
       </div>
 
       {savedCoordinates && (
-        <div className="p-3 bg-stone-50 rounded border border-stone-200 text-xs text-stone-700 flex items-center justify-between">
-          <span className="text-stone-500">Current Saved Coordinates:</span>
-          <span className="font-mono font-semibold text-emerald-900">
+        <div className="p-3 bg-[#F8F9F6] rounded-md border border-[#DDE2DB] text-xs text-[#26332D] flex items-center justify-between">
+          <span className="text-[#657169] font-medium">Current Saved Coordinates:</span>
+          <span className="font-mono font-semibold text-[#123C2C]">
             [{savedCoordinates[0]}, {savedCoordinates[1]}]
           </span>
         </div>
       )}
 
-      <div className="pt-4 border-t border-stone-200 flex items-center justify-end gap-2.5">
+      <div className="pt-4 border-t border-[#DDE2DB] flex items-center justify-end gap-2.5">
         <button
           type="submit"
           disabled={isPending}
-          className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#0e4937] hover:bg-[#135f48] text-white text-xs font-medium rounded-md shadow-xs transition disabled:opacity-50"
+          className="agri-btn-primary"
         >
           {isPending ? (
             <Loader2 className="h-3.5 w-3.5 animate-spin" />

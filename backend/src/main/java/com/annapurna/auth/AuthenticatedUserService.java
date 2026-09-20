@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class AuthenticatedUserService {
@@ -18,6 +19,7 @@ public class AuthenticatedUserService {
         this.roleRepository = roleRepository;
     }
 
+    @Transactional(readOnly = true)
     public AuthenticatedUser load(UUID userId) {
         Set<UUID> organizationIds = membershipRepository.findByUserId(userId).stream()
                 .map(OrganizationMembership::getOrganization)

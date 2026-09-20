@@ -45,7 +45,7 @@ export default function LotPassportPage() {
           <div className="flex items-center gap-2">
             <Link
               href={`/lots/${id}`}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-stone-300 hover:bg-stone-50 text-stone-700 text-xs font-medium transition"
+              className="agri-btn-secondary"
             >
               <ArrowLeft className="h-3.5 w-3.5" />
               <span>Back to Lot</span>
@@ -63,24 +63,24 @@ export default function LotPassportPage() {
       ) : (
         <div className="space-y-6 max-w-4xl">
           {/* Passport Header Seal */}
-          <div className="bg-gradient-to-r from-[#0e4937] to-[#135f48] text-white rounded-lg p-6 sm:p-8 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-6 border border-emerald-800">
+          <div className="bg-gradient-to-r from-[#123C2C] to-[#17633F] text-white rounded-lg p-6 sm:p-8 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-6 border border-[#B8D99F]/30">
             <div className="flex items-start gap-4">
-              <div className="p-3.5 bg-emerald-950/80 rounded-full border border-emerald-400 text-amber-300 shrink-0">
+              <div className="p-3.5 bg-[#0B261C] rounded-full border border-[#B8D99F]/40 text-[#B8D99F] shrink-0">
                 <ShieldCheck className="h-8 w-8" />
               </div>
               <div>
-                <span className="text-[10px] font-semibold uppercase tracking-widest text-emerald-300 block">
-                  Official Lot Passport
+                <span className="text-[10px] font-semibold uppercase tracking-widest text-[#B8D99F] block font-heading">
+                  Official Lot Traceability Passport
                 </span>
-                <h2 className="text-2xl sm:text-3xl font-serif font-bold tracking-tight mt-0.5 font-mono">
+                <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mt-0.5 font-heading font-mono text-white">
                   {query.data.lot.lotNumber}
                 </h2>
-                <div className="flex items-center gap-3 mt-2 flex-wrap text-xs text-emerald-100">
-                  <span className="font-semibold">
+                <div className="flex items-center gap-3 mt-2 flex-wrap text-xs text-[#EAF2E8]">
+                  <span className="font-semibold font-heading">
                     {query.data.lot.quantity} {query.data.lot.quantityUnit}
                   </span>
                   <span>·</span>
-                  <span className="flex items-center gap-1 font-mono text-[11px]">
+                  <span className="flex items-center gap-1 font-mono text-[11px] text-[#B8D99F]">
                     <Lock className="h-3 w-3" />
                     <span>ID: {query.data.lotId.substring(0, 18)}...</span>
                   </span>
@@ -89,14 +89,14 @@ export default function LotPassportPage() {
             </div>
 
             <div className="flex flex-col sm:items-end">
-              <span className="text-[11px] text-emerald-300 uppercase tracking-wider mb-1">
-                Status Verification
+              <span className="text-[11px] text-[#B8D99F] uppercase tracking-wider mb-1.5 font-heading font-medium">
+                Verification Status
               </span>
               <span
-                className={`px-3 py-1 rounded text-xs font-bold uppercase tracking-wider border ${
+                className={`px-3.5 py-1.5 rounded text-xs font-bold uppercase tracking-wider border font-heading ${
                   query.data.lot.status === 'VERIFIED'
-                    ? 'bg-emerald-900/80 text-emerald-200 border-emerald-400'
-                    : 'bg-amber-950/80 text-amber-200 border-amber-400'
+                    ? 'bg-[#17633F] text-[#EAF2E8] border-[#B8D99F]'
+                    : 'bg-[#5C3D10] text-[#FDF3D6] border-[#E8B931]'
                 }`}
               >
                 {query.data.lot.status}
@@ -105,34 +105,34 @@ export default function LotPassportPage() {
           </div>
 
           {/* Section 1: Origin & Supplier Traceability */}
-          <div className="bg-white rounded-lg border border-stone-200 shadow-2xs overflow-hidden">
-            <div className="px-5 py-3.5 border-b border-stone-200 bg-stone-50/50 flex items-center gap-2">
-              <Building className="h-4 w-4 text-emerald-800" />
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-stone-900">
+          <div className="agri-card overflow-hidden">
+            <div className="px-5 py-3.5 border-b border-[#DDE2DB] bg-[#F8F9F6] flex items-center gap-2">
+              <Building className="h-4 w-4 text-[#17633F]" />
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-[#123C2C] font-heading">
                 1. Origin & Supplier Custody
               </h3>
             </div>
             <div className="p-5 grid grid-cols-1 sm:grid-cols-3 gap-5 text-xs">
               <div>
-                <span className="text-stone-400 font-semibold uppercase tracking-wider block mb-1">
+                <span className="text-[#78877E] font-semibold uppercase tracking-wider block mb-1 font-heading text-[11px]">
                   Supplier Model
                 </span>
-                <span className="text-sm font-semibold text-stone-800 flex items-center gap-1.5">
+                <span className="text-sm font-semibold text-[#26332D] flex items-center gap-1.5">
                   {query.data.supplierType === 'ORGANIZATION' ? (
-                    <Building className="h-3.5 w-3.5 text-stone-500" />
+                    <Building className="h-3.5 w-3.5 text-[#17633F]" />
                   ) : (
-                    <User className="h-3.5 w-3.5 text-stone-500" />
+                    <User className="h-3.5 w-3.5 text-[#17633F]" />
                   )}
                   <span>{query.data.supplierType}</span>
                 </span>
               </div>
 
               <div>
-                <span className="text-stone-400 font-semibold uppercase tracking-wider block mb-1">
+                <span className="text-[#78877E] font-semibold uppercase tracking-wider block mb-1 font-heading text-[11px]">
                   Supplier Entity ID
                 </span>
                 <span
-                  className="text-xs font-mono font-medium text-stone-800 block truncate"
+                  className="text-xs font-mono font-medium text-[#26332D] block truncate"
                   title={query.data.supplierId}
                 >
                   {query.data.supplierId}
@@ -140,11 +140,11 @@ export default function LotPassportPage() {
               </div>
 
               <div>
-                <span className="text-stone-400 font-semibold uppercase tracking-wider block mb-1">
+                <span className="text-[#78877E] font-semibold uppercase tracking-wider block mb-1 font-heading text-[11px]">
                   Commodity Reference
                 </span>
                 <span
-                  className="text-xs font-mono font-medium text-stone-800 block truncate"
+                  className="text-xs font-mono font-medium text-[#26332D] block truncate"
                   title={query.data.lot.commodityId}
                 >
                   {query.data.lot.commodityId}
@@ -152,30 +152,30 @@ export default function LotPassportPage() {
               </div>
 
               <div>
-                <span className="text-stone-400 font-semibold uppercase tracking-wider block mb-1">
+                <span className="text-[#78877E] font-semibold uppercase tracking-wider block mb-1 font-heading text-[11px]">
                   Harvest Timeline
                 </span>
-                <span className="text-xs font-medium text-stone-800 flex items-center gap-1">
-                  <Calendar className="h-3.5 w-3.5 text-stone-500" />
+                <span className="text-xs font-medium text-[#26332D] flex items-center gap-1.5">
+                  <Calendar className="h-4 w-4 text-[#17633F]" />
                   <span>{query.data.lot.harvestDate ?? 'Unspecified'}</span>
                 </span>
               </div>
 
               <div>
-                <span className="text-stone-400 font-semibold uppercase tracking-wider block mb-1">
+                <span className="text-[#78877E] font-semibold uppercase tracking-wider block mb-1 font-heading text-[11px]">
                   Availability Window
                 </span>
-                <span className="text-xs font-medium text-stone-800 flex items-center gap-1">
-                  <Calendar className="h-3.5 w-3.5 text-stone-500" />
+                <span className="text-xs font-medium text-[#26332D] flex items-center gap-1.5">
+                  <Calendar className="h-4 w-4 text-[#17633F]" />
                   <span>{query.data.lot.availableFrom ?? 'Immediate'}</span>
                 </span>
               </div>
 
               <div>
-                <span className="text-stone-400 font-semibold uppercase tracking-wider block mb-1">
+                <span className="text-[#78877E] font-semibold uppercase tracking-wider block mb-1 font-heading text-[11px]">
                   Source Supply
                 </span>
-                <span className="text-xs font-mono text-stone-600 block truncate">
+                <span className="text-xs font-mono text-[#657169] block truncate">
                   {query.data.lot.sourceSupplyId ?? 'Direct Declaration'}
                 </span>
               </div>
@@ -183,17 +183,17 @@ export default function LotPassportPage() {
           </div>
 
           {/* Section 2: Origin GPS Coordinates */}
-          <div className="bg-white rounded-lg border border-stone-200 shadow-2xs overflow-hidden">
-            <div className="px-5 py-3.5 border-b border-stone-200 bg-stone-50/50 flex items-center justify-between">
+          <div className="agri-card overflow-hidden">
+            <div className="px-5 py-3.5 border-b border-[#DDE2DB] bg-[#F8F9F6] flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-emerald-800" />
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-stone-900">
+                <MapPin className="h-4 w-4 text-[#17633F]" />
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-[#123C2C] font-heading">
                   2. Origin GPS Location (WGS84)
                 </h3>
               </div>
               <Link
                 href={`/lots/${id}/location`}
-                className="text-xs text-emerald-800 hover:text-emerald-950 font-medium"
+                className="text-xs text-[#17633F] hover:text-[#123C2C] font-semibold transition"
               >
                 Manage location
               </Link>
@@ -201,25 +201,25 @@ export default function LotPassportPage() {
             <div className="p-5 text-xs">
               {query.data.location ? (
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  <div className="bg-stone-50 p-3 rounded border border-stone-200">
-                    <span className="text-stone-500 font-medium block mb-0.5">Geometry Type</span>
-                    <span className="font-semibold text-stone-900">{query.data.location.type}</span>
+                  <div className="bg-[#F8F9F6] p-3 rounded-md border border-[#DDE2DB]">
+                    <span className="text-[#78877E] font-semibold block mb-0.5 font-heading text-[11px] uppercase tracking-wider">Geometry Type</span>
+                    <span className="font-semibold text-[#123C2C]">{query.data.location.type}</span>
                   </div>
-                  <div className="bg-stone-50 p-3 rounded border border-stone-200">
-                    <span className="text-stone-500 font-medium block mb-0.5">Longitude (X)</span>
-                    <span className="font-mono font-semibold text-stone-900">
+                  <div className="bg-[#F8F9F6] p-3 rounded-md border border-[#DDE2DB]">
+                    <span className="text-[#78877E] font-semibold block mb-0.5 font-heading text-[11px] uppercase tracking-wider">Longitude (X)</span>
+                    <span className="font-mono font-semibold text-[#123C2C]">
                       {query.data.location.coordinates[0]}
                     </span>
                   </div>
-                  <div className="bg-stone-50 p-3 rounded border border-stone-200">
-                    <span className="text-stone-500 font-medium block mb-0.5">Latitude (Y)</span>
-                    <span className="font-mono font-semibold text-stone-900">
+                  <div className="bg-[#F8F9F6] p-3 rounded-md border border-[#DDE2DB]">
+                    <span className="text-[#78877E] font-semibold block mb-0.5 font-heading text-[11px] uppercase tracking-wider">Latitude (Y)</span>
+                    <span className="font-mono font-semibold text-[#123C2C]">
                       {query.data.location.coordinates[1]}
                     </span>
                   </div>
                 </div>
               ) : (
-                <p className="text-stone-500 italic">
+                <p className="text-[#78877E] italic">
                   No GPS coordinates recorded for this lot yet.
                 </p>
               )}
@@ -227,17 +227,17 @@ export default function LotPassportPage() {
           </div>
 
           {/* Section 3: Verified Quality Evidence */}
-          <div className="bg-white rounded-lg border border-stone-200 shadow-2xs overflow-hidden">
-            <div className="px-5 py-3.5 border-b border-stone-200 bg-stone-50/50 flex items-center justify-between">
+          <div className="agri-card overflow-hidden">
+            <div className="px-5 py-3.5 border-b border-[#DDE2DB] bg-[#F8F9F6] flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <FlaskConical className="h-4 w-4 text-emerald-800" />
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-stone-900">
+                <FlaskConical className="h-4 w-4 text-[#17633F]" />
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-[#123C2C] font-heading">
                   3. Quality Tests & Inspection
                 </h3>
               </div>
               <Link
                 href={`/lots/${id}/quality`}
-                className="text-xs text-emerald-800 hover:text-emerald-950 font-medium"
+                className="text-xs text-[#17633F] hover:text-[#123C2C] font-semibold transition"
               >
                 All quality tests
               </Link>
@@ -250,13 +250,13 @@ export default function LotPassportPage() {
                       key={test.id}
                       className={`p-4 rounded-md border ${
                         test.status === 'VERIFIED'
-                          ? 'bg-emerald-50/40 border-emerald-200'
-                          : 'bg-stone-50 border-stone-200'
+                          ? 'bg-[#EAF2E8]/60 border-[#B8D99F]'
+                          : 'bg-[#F8F9F6] border-[#DDE2DB]'
                       }`}
                     >
                       <div className="flex items-center justify-between flex-wrap gap-2 mb-2">
                         <div className="flex items-center gap-2">
-                          <span className="font-semibold text-stone-900 text-sm">
+                          <span className="font-semibold text-[#123C2C] text-sm font-heading">
                             {test.testType}
                           </span>
                           <Badge variant={test.status === 'VERIFIED' ? 'success' : 'default'}>
@@ -264,79 +264,79 @@ export default function LotPassportPage() {
                           </Badge>
                         </div>
                         {test.verifiedAt && (
-                          <span className="text-[11px] text-emerald-800 font-medium flex items-center gap-1">
-                            <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" />
+                          <span className="text-[11px] text-[#17633F] font-semibold flex items-center gap-1 font-heading">
+                            <CheckCircle2 className="h-3.5 w-3.5 text-[#17633F]" />
                             <span>
                               Verified on {new Date(test.verifiedAt).toLocaleDateString()}
                             </span>
                           </span>
                         )}
                       </div>
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-stone-600 text-[11px] mt-2">
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-[#657169] text-[11px] mt-2">
                         <div>
-                          Method: <strong className="text-stone-800">{test.methodCode}</strong>
+                          Method: <strong className="text-[#26332D] font-mono">{test.methodCode}</strong>
                         </div>
                         <div>
                           Source:{' '}
-                          <strong className="text-stone-800">{test.sourceCode ?? 'Lab'}</strong>
+                          <strong className="text-[#26332D] font-mono">{test.sourceCode ?? 'Lab'}</strong>
                         </div>
                         <div>
                           Inspector ID:{' '}
-                          <span className="font-mono text-stone-700">
+                          <span className="font-mono text-[#657169]">
                             {test.inspectorUserId?.substring(0, 8) ?? '—'}
                           </span>
                         </div>
                       </div>
                       {test.notes && (
-                        <p className="mt-2 text-stone-500 italic text-[11px]">{test.notes}</p>
+                        <p className="mt-2 text-[#657169] italic text-[11px]">{test.notes}</p>
                       )}
                     </div>
                   ))}
                 </div>
               ) : (
-                <p className="text-stone-500 italic">No quality tests recorded yet.</p>
+                <p className="text-[#78877E] italic">No quality tests recorded yet.</p>
               )}
             </div>
           </div>
 
           {/* Section 4: Document Metadata Records */}
-          <div className="bg-white rounded-lg border border-stone-200 shadow-2xs overflow-hidden">
-            <div className="px-5 py-3.5 border-b border-stone-200 bg-stone-50/50 flex items-center justify-between">
+          <div className="agri-card overflow-hidden">
+            <div className="px-5 py-3.5 border-b border-[#DDE2DB] bg-[#F8F9F6] flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <FileText className="h-4 w-4 text-emerald-800" />
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-stone-900">
+                <FileText className="h-4 w-4 text-[#17633F]" />
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-[#123C2C] font-heading">
                   4. Attached Verifiable Document Records
                 </h3>
               </div>
               <Link
                 href={`/lots/${id}/documents`}
-                className="text-xs text-emerald-800 hover:text-emerald-950 font-medium"
+                className="text-xs text-[#17633F] hover:text-[#123C2C] font-semibold transition"
               >
                 Manage documents
               </Link>
             </div>
             <div className="p-5 text-xs">
               {query.data.documents?.length ? (
-                <div className="divide-y divide-stone-100">
+                <div className="divide-y divide-[#E6EBE4]">
                   {query.data.documents.map((doc: LotDocument) => (
                     <div key={doc.id} className="py-2.5 flex items-center justify-between text-xs">
                       <div>
-                        <strong className="text-stone-900 block font-medium">
+                        <strong className="text-[#123C2C] block font-medium font-heading">
                           {doc.documentTypeCode}
                         </strong>
-                        <span className="text-[11px] text-stone-500 font-mono">
+                        <span className="text-[11px] text-[#657169] font-mono">
                           Ref: {doc.storageReference}{' '}
                           {doc.originalFilename ? `(${doc.originalFilename})` : ''}
                         </span>
                       </div>
-                      <span className="text-[10px] text-stone-400 font-mono">
+                      <span className="text-[10px] text-[#78877E] font-mono">
                         {doc.createdAt?.split('T')[0]}
                       </span>
                     </div>
                   ))}
                 </div>
               ) : (
-                <p className="text-stone-500 italic">No document metadata records attached.</p>
+                <p className="text-[#78877E] italic">No document metadata records attached.</p>
               )}
             </div>
           </div>

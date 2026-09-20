@@ -90,7 +90,7 @@ export default function NewSupplyPage() {
         actions={
           <Link
             href="/supplies"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-stone-300 hover:bg-stone-50 text-stone-700 text-xs font-medium transition"
+            className="agri-btn-secondary"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             <span>Back to Supplies</span>
@@ -100,11 +100,11 @@ export default function NewSupplyPage() {
 
       {errorMsg && <StatusNotification type="error" message={errorMsg} />}
 
-      <div className="bg-white rounded-lg border border-stone-200 shadow-2xs p-6 sm:p-8 max-w-2xl">
+      <div className="agri-card p-6 sm:p-8 max-w-2xl">
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
             <label
-              className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+              className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
               htmlFor="sup-comm-select"
             >
               Commodity *
@@ -114,7 +114,7 @@ export default function NewSupplyPage() {
               required
               value={commodityId}
               onChange={(e) => setCommodityId(e.target.value)}
-              className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900 bg-white"
+              className="agri-input text-xs"
             >
               <option value="">Select agricultural commodity...</option>
               {commoditiesQuery.data?.data.map((c) => (
@@ -127,15 +127,15 @@ export default function NewSupplyPage() {
 
           {/* Supplier Ownership Radio Group */}
           <div>
-            <label className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-2">
+            <label className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-2 font-heading">
               Supplier Ownership Model *
             </label>
             <div className="grid grid-cols-2 gap-3">
               <label
-                className={`flex items-center gap-2 p-3 border rounded-md cursor-pointer text-xs transition ${
+                className={`flex items-center gap-2.5 p-3.5 border rounded-md cursor-pointer text-xs transition ${
                   supplierType === 'ORGANIZATION'
-                    ? 'border-emerald-700 bg-emerald-50/50 text-emerald-950 font-semibold'
-                    : 'border-stone-200 hover:bg-stone-50 text-stone-700'
+                    ? 'border-[#17633F] bg-[#EAF2E8] text-[#123C2C] font-semibold ring-1 ring-[#17633F]'
+                    : 'border-[#DDE2DB] hover:bg-[#F8F9F6] text-[#657169]'
                 }`}
               >
                 <input
@@ -144,16 +144,16 @@ export default function NewSupplyPage() {
                   value="ORGANIZATION"
                   checked={supplierType === 'ORGANIZATION'}
                   onChange={() => setSupplierType('ORGANIZATION')}
-                  className="h-4 w-4 text-emerald-800"
+                  className="h-4 w-4 text-[#17633F] focus:ring-[#17633F]"
                 />
-                <span>FPO / Organization</span>
+                <span>FPO / Enterprise</span>
               </label>
 
               <label
-                className={`flex items-center gap-2 p-3 border rounded-md cursor-pointer text-xs transition ${
+                className={`flex items-center gap-2.5 p-3.5 border rounded-md cursor-pointer text-xs transition ${
                   supplierType === 'FARMER'
-                    ? 'border-emerald-700 bg-emerald-50/50 text-emerald-950 font-semibold'
-                    : 'border-stone-200 hover:bg-stone-50 text-stone-700'
+                    ? 'border-[#17633F] bg-[#EAF2E8] text-[#123C2C] font-semibold ring-1 ring-[#17633F]'
+                    : 'border-[#DDE2DB] hover:bg-[#F8F9F6] text-[#657169]'
                 }`}
               >
                 <input
@@ -162,7 +162,7 @@ export default function NewSupplyPage() {
                   value="FARMER"
                   checked={supplierType === 'FARMER'}
                   onChange={() => setSupplierType('FARMER')}
-                  className="h-4 w-4 text-emerald-800"
+                  className="h-4 w-4 text-[#17633F] focus:ring-[#17633F]"
                 />
                 <span>Individual Farmer</span>
               </label>
@@ -172,7 +172,7 @@ export default function NewSupplyPage() {
           {supplierType === 'ORGANIZATION' ? (
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                 htmlFor="sup-org-id"
               >
                 Organization ID *
@@ -184,13 +184,13 @@ export default function NewSupplyPage() {
                 value={organizationId}
                 onChange={(e) => setOrganizationId(e.target.value)}
                 placeholder="UUID of registered FPO / enterprise"
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900 font-mono"
+                className="agri-input text-xs font-mono"
               />
             </div>
           ) : (
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                 htmlFor="sup-farmer-id"
               >
                 Farmer ID *
@@ -202,7 +202,7 @@ export default function NewSupplyPage() {
                 value={farmerId}
                 onChange={(e) => setFarmerId(e.target.value)}
                 placeholder="UUID of registered farmer"
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900 font-mono"
+                className="agri-input text-xs font-mono"
               />
             </div>
           )}
@@ -210,7 +210,7 @@ export default function NewSupplyPage() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                 htmlFor="sup-kind-select"
               >
                 Supply Kind *
@@ -220,7 +220,7 @@ export default function NewSupplyPage() {
                 required
                 value={supplyKind}
                 onChange={(e) => setSupplyKind(e.target.value as SupplyKind)}
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900 bg-white"
+                className="agri-input text-xs"
               >
                 <option value="HARVESTED">HARVESTED</option>
                 <option value="PLANNED">PLANNED</option>
@@ -230,7 +230,7 @@ export default function NewSupplyPage() {
 
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                 htmlFor="sup-qty"
               >
                 Quantity *
@@ -244,13 +244,13 @@ export default function NewSupplyPage() {
                 value={quantity}
                 onChange={(e) => setQuantity(e.target.value)}
                 placeholder="e.g. 50.000"
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+                className="agri-input text-xs"
               />
             </div>
 
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                 htmlFor="sup-unit"
               >
                 Quantity Unit *
@@ -262,7 +262,7 @@ export default function NewSupplyPage() {
                 value={quantityUnit}
                 onChange={(e) => setQuantityUnit(e.target.value)}
                 placeholder="MT / QUINTAL / KG"
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900 uppercase font-mono"
+                className="agri-input text-xs uppercase font-mono"
               />
             </div>
           </div>
@@ -270,7 +270,7 @@ export default function NewSupplyPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                 htmlFor="sup-harvest-date"
               >
                 Expected Harvest Date
@@ -280,13 +280,13 @@ export default function NewSupplyPage() {
                 type="date"
                 value={expectedHarvestDate}
                 onChange={(e) => setExpectedHarvestDate(e.target.value)}
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+                className="agri-input text-xs"
               />
             </div>
 
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                 htmlFor="sup-avail-from"
               >
                 Available From
@@ -296,22 +296,22 @@ export default function NewSupplyPage() {
                 type="date"
                 value={availableFrom}
                 onChange={(e) => setAvailableFrom(e.target.value)}
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+                className="agri-input text-xs"
               />
             </div>
           </div>
 
-          <div className="pt-4 border-t border-stone-200 flex items-center justify-end gap-2.5">
+          <div className="pt-4 border-t border-[#DDE2DB] flex items-center justify-end gap-2.5">
             <Link
               href="/supplies"
-              className="px-4 py-2 border border-stone-300 hover:bg-stone-50 text-stone-700 text-xs font-medium rounded-md transition"
+              className="agri-btn-secondary"
             >
               Cancel
             </Link>
             <button
               type="submit"
               disabled={mutation.isPending}
-              className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#0e4937] hover:bg-[#135f48] text-white text-xs font-medium rounded-md shadow-xs transition disabled:opacity-50"
+              className="agri-btn-primary"
             >
               {mutation.isPending && <Loader2 className="h-3.5 w-3.5 animate-spin" />}
               <span>Submit Declaration</span>

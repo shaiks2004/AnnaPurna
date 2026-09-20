@@ -10,9 +10,9 @@ import org.springframework.data.repository.query.Param;
 public interface MarketRepository extends JpaRepository<Market, UUID> {
     @Query("""
             select m from Market m
-            where (:search is null or lower(m.name) like lower(concat('%', :search, '%')))
-              and (:state is null or lower(m.state) = lower(:state))
-              and (:district is null or lower(m.district) = lower(:district))
+            where (:search is null or lower(m.name) like lower(concat('%', cast(:search as string), '%')))
+              and (:state is null or lower(m.state) = lower(cast(:state as string)))
+              and (:district is null or lower(m.district) = lower(cast(:district as string)))
               and (:commodityId is null or exists (
                   select p.id from MarketPrice p
                   where p.market = m and p.commodity.id = :commodityId

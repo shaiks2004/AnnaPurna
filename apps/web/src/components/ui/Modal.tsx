@@ -33,23 +33,23 @@ export function Modal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-900/60 backdrop-blur-xs animate-in fade-in duration-150">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#123C2C]/50 backdrop-blur-xs animate-in fade-in duration-150">
       <div
-        className={`w-full ${maxWidth} bg-white rounded-lg shadow-xl border border-stone-200 overflow-hidden flex flex-col max-h-[90vh]`}
+        className={`w-full ${maxWidth} bg-[#FFFFFF] rounded-2xl shadow-xl border border-[#DDE2DB] overflow-hidden flex flex-col max-h-[90vh]`}
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
       >
-        <div className="flex items-center justify-between px-6 py-4 border-b border-stone-200 bg-stone-50/70">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[#DDE2DB] bg-[#F8F9F6]">
           <div>
-            <h2 id="modal-title" className="text-base font-semibold text-stone-900">
+            <h2 id="modal-title" className="text-base font-heading font-semibold text-[#26332D]">
               {title}
             </h2>
-            {subtitle && <p className="text-xs text-stone-500 mt-0.5">{subtitle}</p>}
+            {subtitle && <p className="text-xs text-[#657169] mt-0.5">{subtitle}</p>}
           </div>
           <button
             onClick={onClose}
-            className="p-1 rounded-md text-stone-400 hover:text-stone-700 hover:bg-stone-200/60 transition"
+            className="p-1.5 rounded-lg text-[#78877E] hover:text-[#26332D] hover:bg-[#DDE2DB]/40 transition"
             aria-label="Close dialog"
           >
             <X className="h-4 w-4" />

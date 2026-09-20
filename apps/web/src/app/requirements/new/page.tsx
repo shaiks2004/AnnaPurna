@@ -14,7 +14,18 @@ export default function NewRequirementPage() {
   const router = useRouter();
   const { user } = useAuth();
 
-  const [buyerProfileId, setBuyerProfileId] = useState(user?.userId ?? '');
+  const [buyerProfileId, setBuyerProfileId] = useState(
+    user?.buyerProfileId ?? user?.organizationIds?.[0] ?? '',
+  );
+
+  React.useEffect(() => {
+    if (user?.buyerProfileId) {
+      setBuyerProfileId(user.buyerProfileId);
+    } else if (user?.organizationIds?.[0]) {
+      setBuyerProfileId(user.organizationIds[0]);
+    }
+  }, [user]);
+
   const [commodityId, setCommodityId] = useState('');
   const [quantity, setQuantity] = useState('');
   const [quantityUnit, setQuantityUnit] = useState('MT');
@@ -94,7 +105,7 @@ export default function NewRequirementPage() {
         actions={
           <Link
             href="/requirements"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-stone-300 hover:bg-stone-50 text-stone-700 text-xs font-medium transition"
+            className="agri-btn-secondary"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             <span>Back to Requirements</span>
@@ -104,12 +115,12 @@ export default function NewRequirementPage() {
 
       {errorMsg && <StatusNotification type="error" message={errorMsg} />}
 
-      <div className="bg-white rounded-lg border border-stone-200 shadow-2xs p-6 sm:p-8 max-w-2xl">
+      <div className="agri-card p-6 sm:p-8 max-w-2xl">
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                 htmlFor="req-buyer-id"
               >
                 Buyer Profile ID *
@@ -121,13 +132,13 @@ export default function NewRequirementPage() {
                 value={buyerProfileId}
                 onChange={(e) => setBuyerProfileId(e.target.value)}
                 placeholder="UUID of registered buyer profile"
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900 font-mono"
+                className="agri-input text-xs font-mono"
               />
             </div>
 
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                 htmlFor="req-comm-select"
               >
                 Commodity *
@@ -137,7 +148,7 @@ export default function NewRequirementPage() {
                 required
                 value={commodityId}
                 onChange={(e) => setCommodityId(e.target.value)}
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900 bg-white"
+                className="agri-input text-xs"
               >
                 <option value="">Select commodity...</option>
                 {commoditiesQuery.data?.data.map((c) => (
@@ -152,7 +163,7 @@ export default function NewRequirementPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                 htmlFor="req-qty"
               >
                 Required Quantity *
@@ -166,13 +177,13 @@ export default function NewRequirementPage() {
                 value={quantity}
                 onChange={(e) => setQuantity(e.target.value)}
                 placeholder="e.g. 50.000"
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+                className="agri-input text-xs"
               />
             </div>
 
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                 htmlFor="req-unit"
               >
                 Quantity Unit *
@@ -184,14 +195,14 @@ export default function NewRequirementPage() {
                 value={quantityUnit}
                 onChange={(e) => setQuantityUnit(e.target.value)}
                 placeholder="MT / QUINTAL / KG"
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900 uppercase font-mono"
+                className="agri-input text-xs uppercase font-mono"
               />
             </div>
           </div>
 
           <div>
             <label
-              className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+              className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
               htmlFor="req-qual"
             >
               Quality Specification *
@@ -203,13 +214,13 @@ export default function NewRequirementPage() {
               value={qualitySpecification}
               onChange={(e) => setQualitySpecification(e.target.value)}
               placeholder="e.g. Grade A; moisture content <= 12%; foreign matter <= 1%"
-              className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+              className="agri-input text-xs"
             />
           </div>
 
           <div>
             <label
-              className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+              className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
               htmlFor="req-loc"
             >
               Delivery Location *
@@ -221,14 +232,14 @@ export default function NewRequirementPage() {
               value={deliveryLocation}
               onChange={(e) => setDeliveryLocation(e.target.value)}
               placeholder="e.g. Central Warehouse, Sector 4, Pune APMC"
-              className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+              className="agri-input text-xs"
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                 htmlFor="req-by"
               >
                 Required By Date *
@@ -239,13 +250,13 @@ export default function NewRequirementPage() {
                 required
                 value={requiredBy}
                 onChange={(e) => setRequiredBy(e.target.value)}
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+                className="agri-input text-xs"
               />
             </div>
 
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                 htmlFor="req-target-p"
               >
                 Target Price
@@ -257,13 +268,13 @@ export default function NewRequirementPage() {
                 value={targetPrice}
                 onChange={(e) => setTargetPrice(e.target.value)}
                 placeholder="e.g. 2350.00"
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+                className="agri-input text-xs"
               />
             </div>
 
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                 htmlFor="req-max-p"
               >
                 Maximum Price Ceiling
@@ -275,14 +286,14 @@ export default function NewRequirementPage() {
                 value={maximumPrice}
                 onChange={(e) => setMaximumPrice(e.target.value)}
                 placeholder="e.g. 2500.00"
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+                className="agri-input text-xs"
               />
             </div>
           </div>
 
           <div>
             <label
-              className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+              className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
               htmlFor="req-notes"
             >
               Procurement Notes & Terms
@@ -293,21 +304,21 @@ export default function NewRequirementPage() {
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               placeholder="Packaging requirements, gate delivery slots..."
-              className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+              className="agri-input text-xs"
             />
           </div>
 
-          <div className="pt-4 border-t border-stone-200 flex items-center justify-end gap-2.5">
+          <div className="pt-4 border-t border-[#DDE2DB] flex items-center justify-end gap-2.5">
             <Link
               href="/requirements"
-              className="px-4 py-2 border border-stone-300 hover:bg-stone-50 text-stone-700 text-xs font-medium rounded-md transition"
+              className="agri-btn-secondary"
             >
               Cancel
             </Link>
             <button
               type="submit"
               disabled={mutation.isPending}
-              className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#0e4937] hover:bg-[#135f48] text-white text-xs font-medium rounded-md shadow-xs transition disabled:opacity-50"
+              className="agri-btn-primary"
             >
               {mutation.isPending && <Loader2 className="h-3.5 w-3.5 animate-spin" />}
               <span>Create Draft Requirement</span>

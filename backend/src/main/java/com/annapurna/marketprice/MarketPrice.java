@@ -10,6 +10,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -48,6 +50,7 @@ public class MarketPrice {
     private BigDecimal modalPrice;
 
     @Column(name = "currency_code", length = 3)
+    @JdbcTypeCode(SqlTypes.CHAR)
     private String currencyCode;
 
     @Column(name = "price_unit", nullable = false, length = 32)

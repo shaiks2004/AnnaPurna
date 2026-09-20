@@ -64,7 +64,7 @@ export default function SuppliesPage() {
           canCreate && (
             <Link
               href="/supplies/new"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md bg-[#0e4937] hover:bg-[#135f48] text-white text-xs font-medium shadow-xs transition"
+              className="agri-btn-primary"
             >
               <Plus className="h-4 w-4" />
               <span>Declare Supply</span>
@@ -74,14 +74,14 @@ export default function SuppliesPage() {
       />
 
       {/* Filter Bar */}
-      <div className="bg-white p-4 rounded-lg border border-stone-200 shadow-2xs mb-6">
+      <div className="agri-card p-4 sm:p-5 mb-6">
         <form
           onSubmit={handleFilterSubmit}
           className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-end"
         >
           <div>
             <label
-              className="block text-[11px] font-semibold uppercase tracking-wider text-stone-500 mb-1"
+              className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
               htmlFor="sup-comm"
             >
               Commodity
@@ -90,7 +90,7 @@ export default function SuppliesPage() {
               id="sup-comm"
               value={commodityId}
               onChange={(e) => setCommodityId(e.target.value)}
-              className="w-full px-3 py-1.5 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900 bg-white"
+              className="agri-input text-xs py-1.5"
             >
               <option value="">All Commodities</option>
               {commoditiesQuery.data?.data.map((c) => (
@@ -103,7 +103,7 @@ export default function SuppliesPage() {
 
           <div>
             <label
-              className="block text-[11px] font-semibold uppercase tracking-wider text-stone-500 mb-1"
+              className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
               htmlFor="sup-kind"
             >
               Supply Kind
@@ -112,7 +112,7 @@ export default function SuppliesPage() {
               id="sup-kind"
               value={supplyKind}
               onChange={(e) => setSupplyKind(e.target.value as SupplyKind | '')}
-              className="w-full px-3 py-1.5 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900 bg-white"
+              className="agri-input text-xs py-1.5"
             >
               <option value="">All Kinds</option>
               <option value="PLANNED">PLANNED (Future Crop)</option>
@@ -124,7 +124,7 @@ export default function SuppliesPage() {
           <div className="flex gap-2">
             <button
               type="submit"
-              className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-stone-800 hover:bg-stone-900 text-white text-xs font-medium rounded-md transition"
+              className="flex-1 agri-btn-primary justify-center text-xs py-2"
             >
               <Filter className="h-3.5 w-3.5" />
               <span>Apply Filters</span>
@@ -133,7 +133,7 @@ export default function SuppliesPage() {
               <button
                 type="button"
                 onClick={handleClear}
-                className="px-3 py-2 border border-stone-300 hover:bg-stone-50 text-stone-700 text-xs font-medium rounded-md transition"
+                className="agri-btn-secondary text-xs py-2"
               >
                 Clear
               </button>
@@ -143,7 +143,7 @@ export default function SuppliesPage() {
       </div>
 
       {/* Supplies Table */}
-      <div className="bg-white rounded-lg border border-stone-200 shadow-2xs overflow-hidden">
+      <div className="agri-card overflow-hidden">
         {query.isLoading ? (
           <LoadingState message="Fetching supply declarations from backend..." />
         ) : query.error ? (
@@ -159,7 +159,7 @@ export default function SuppliesPage() {
                 canCreate ? (
                   <Link
                     href="/supplies/new"
-                    className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md bg-[#0e4937] hover:bg-[#135f48] text-white text-xs font-medium transition"
+                    className="agri-btn-primary"
                   >
                     <Plus className="h-4 w-4" />
                     <span>Create Supply Declaration</span>
@@ -171,33 +171,27 @@ export default function SuppliesPage() {
         ) : (
           <div>
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs border-collapse">
+              <table className="agri-table">
                 <thead>
-                  <tr className="border-b border-stone-200 bg-stone-50/50 text-stone-600">
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider">Supply ID</th>
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider">
-                      Supply Kind
-                    </th>
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider">Quantity</th>
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider">
-                      Available From
-                    </th>
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider">
-                      Expected Harvest
-                    </th>
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider text-right">
-                      Action
-                    </th>
+                  <tr>
+                    <th>Supply ID</th>
+                    <th>Supply Kind</th>
+                    <th>Quantity</th>
+                    <th>Available From</th>
+                    <th>Expected Harvest</th>
+                    <th className="text-right">Action</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-stone-100">
+                <tbody>
                   {query.data.data.map((s: Supply) => (
-                    <tr key={s.id} className="hover:bg-stone-50/60 transition">
-                      <td className="py-3.5 px-4 font-medium text-stone-900 font-mono flex items-center gap-1.5">
-                        <Database className="h-3.5 w-3.5 text-emerald-700" />
-                        <span>{s.id.substring(0, 8)}...</span>
+                    <tr key={s.id}>
+                      <td className="font-medium text-[#26332D] font-mono">
+                        <span className="inline-flex items-center gap-1.5">
+                          <Database className="h-3.5 w-3.5 text-[#17633F]" />
+                          <span>{s.id.substring(0, 8)}...</span>
+                        </span>
                       </td>
-                      <td className="py-3.5 px-4">
+                      <td>
                         <Badge
                           variant={
                             s.supplyKind === 'HARVESTED'
@@ -210,17 +204,17 @@ export default function SuppliesPage() {
                           {s.supplyKind}
                         </Badge>
                       </td>
-                      <td className="py-3.5 px-4 font-semibold text-stone-900">
+                      <td className="font-semibold text-[#123C2C]">
                         {s.quantity} {s.quantityUnit}
                       </td>
-                      <td className="py-3.5 px-4 text-stone-700">
+                      <td className="text-[#657169]">
                         {s.availableFrom ?? 'Immediate'}
                       </td>
-                      <td className="py-3.5 px-4 text-stone-600">{s.expectedHarvestDate ?? '—'}</td>
-                      <td className="py-3.5 px-4 text-right">
+                      <td className="text-[#657169]">{s.expectedHarvestDate ?? '—'}</td>
+                      <td className="text-right">
                         <Link
                           href={`/supplies/${s.id}`}
-                          className="inline-flex items-center gap-1 text-emerald-800 hover:text-emerald-950 font-medium"
+                          className="inline-flex items-center gap-1 text-[#17633F] hover:text-[#123C2C] font-semibold transition"
                         >
                           <Eye className="h-3.5 w-3.5" />
                           <span>View</span>

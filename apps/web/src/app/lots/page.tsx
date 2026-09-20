@@ -69,7 +69,7 @@ export default function LotsPage() {
           canCreate && (
             <Link
               href="/lots/new"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md bg-[#0e4937] hover:bg-[#135f48] text-white text-xs font-medium shadow-xs transition"
+              className="agri-btn-primary"
             >
               <Plus className="h-4 w-4" />
               <span>Create Physical Lot</span>
@@ -79,34 +79,34 @@ export default function LotsPage() {
       />
 
       {/* Filter Bar */}
-      <div className="bg-white p-4 rounded-lg border border-stone-200 shadow-2xs mb-6">
+      <div className="agri-card p-4 sm:p-5 mb-6">
         <form
           onSubmit={handleFilterSubmit}
           className="grid grid-cols-1 sm:grid-cols-4 gap-3 items-end"
         >
           <div>
             <label
-              className="block text-[11px] font-semibold uppercase tracking-wider text-stone-500 mb-1"
+              className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
               htmlFor="lot-search"
             >
               Keyword
             </label>
             <div className="relative">
-              <Search className="absolute left-3 top-2.5 h-3.5 w-3.5 text-stone-400" />
+              <Search className="absolute left-3 top-2.5 h-3.5 w-3.5 text-[#78877E]" />
               <input
                 id="lot-search"
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search lot number..."
-                className="w-full pl-8 pr-3 py-1.5 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+                className="agri-input pl-8 text-xs py-1.5"
               />
             </div>
           </div>
 
           <div>
             <label
-              className="block text-[11px] font-semibold uppercase tracking-wider text-stone-500 mb-1"
+              className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
               htmlFor="lot-comm"
             >
               Commodity
@@ -115,7 +115,7 @@ export default function LotsPage() {
               id="lot-comm"
               value={commodityId}
               onChange={(e) => setCommodityId(e.target.value)}
-              className="w-full px-3 py-1.5 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900 bg-white"
+              className="agri-input text-xs py-1.5"
             >
               <option value="">All Commodities</option>
               {commoditiesQuery.data?.data.map((c) => (
@@ -128,7 +128,7 @@ export default function LotsPage() {
 
           <div>
             <label
-              className="block text-[11px] font-semibold uppercase tracking-wider text-stone-500 mb-1"
+              className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
               htmlFor="lot-status"
             >
               Lifecycle Status
@@ -137,7 +137,7 @@ export default function LotsPage() {
               id="lot-status"
               value={status}
               onChange={(e) => setStatus(e.target.value as LotStatus | '')}
-              className="w-full px-3 py-1.5 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900 bg-white"
+              className="agri-input text-xs py-1.5"
             >
               <option value="">All Statuses</option>
               <option value="DECLARED">DECLARED (Initial State)</option>
@@ -150,7 +150,7 @@ export default function LotsPage() {
           <div className="flex gap-2">
             <button
               type="submit"
-              className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-stone-800 hover:bg-stone-900 text-white text-xs font-medium rounded-md transition"
+              className="flex-1 agri-btn-primary justify-center text-xs py-2"
             >
               <Filter className="h-3.5 w-3.5" />
               <span>Apply Filters</span>
@@ -159,7 +159,7 @@ export default function LotsPage() {
               <button
                 type="button"
                 onClick={handleClear}
-                className="px-3 py-2 border border-stone-300 hover:bg-stone-50 text-stone-700 text-xs font-medium rounded-md transition"
+                className="agri-btn-secondary text-xs py-2"
               >
                 Clear
               </button>
@@ -169,7 +169,7 @@ export default function LotsPage() {
       </div>
 
       {/* Lots Table */}
-      <div className="bg-white rounded-lg border border-stone-200 shadow-2xs overflow-hidden">
+      <div className="agri-card overflow-hidden">
         {query.isLoading ? (
           <LoadingState message="Fetching lot records from backend..." />
         ) : query.error ? (
@@ -185,7 +185,7 @@ export default function LotsPage() {
                 canCreate ? (
                   <Link
                     href="/lots/new"
-                    className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md bg-[#0e4937] hover:bg-[#135f48] text-white text-xs font-medium transition"
+                    className="agri-btn-primary"
                   >
                     <Plus className="h-4 w-4" />
                     <span>Create First Lot</span>
@@ -197,38 +197,34 @@ export default function LotsPage() {
         ) : (
           <div>
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs border-collapse">
+              <table className="agri-table">
                 <thead>
-                  <tr className="border-b border-stone-200 bg-stone-50/50 text-stone-600">
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider">Lot Number</th>
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider">Quantity</th>
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider">
-                      Harvest Date
-                    </th>
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider">
-                      Available From
-                    </th>
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider">Status</th>
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider text-right">
-                      Actions
-                    </th>
+                  <tr>
+                    <th>Lot Number</th>
+                    <th>Quantity</th>
+                    <th>Harvest Date</th>
+                    <th>Available From</th>
+                    <th>Status</th>
+                    <th className="text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-stone-100">
+                <tbody>
                   {query.data.data.map((lot: Lot) => (
-                    <tr key={lot.id} className="hover:bg-stone-50/60 transition">
-                      <td className="py-3.5 px-4 font-medium text-stone-900 font-mono flex items-center gap-2">
-                        <Leaf className="h-4 w-4 text-emerald-700" />
-                        <span>{lot.lotNumber}</span>
+                    <tr key={lot.id}>
+                      <td className="font-medium text-[#26332D] font-mono">
+                        <span className="inline-flex items-center gap-2">
+                          <Leaf className="h-4 w-4 text-[#17633F]" />
+                          <span className="font-semibold">{lot.lotNumber}</span>
+                        </span>
                       </td>
-                      <td className="py-3.5 px-4 font-semibold text-stone-800">
+                      <td className="font-semibold text-[#123C2C]">
                         {lot.quantity} {lot.quantityUnit}
                       </td>
-                      <td className="py-3.5 px-4 text-stone-600">{lot.harvestDate ?? '—'}</td>
-                      <td className="py-3.5 px-4 text-stone-600">
+                      <td className="text-[#657169]">{lot.harvestDate ?? '—'}</td>
+                      <td className="text-[#657169]">
                         {lot.availableFrom ?? 'Immediate'}
                       </td>
-                      <td className="py-3.5 px-4">
+                      <td>
                         <Badge
                           variant={
                             lot.status === 'VERIFIED'
@@ -243,18 +239,18 @@ export default function LotsPage() {
                           {lot.status}
                         </Badge>
                       </td>
-                      <td className="py-3.5 px-4 text-right space-x-2">
+                      <td className="text-right space-x-2">
                         <Link
                           href={`/lots/${lot.id}/passport`}
-                          className="inline-flex items-center gap-1 text-emerald-800 hover:text-emerald-950 font-semibold bg-emerald-50 px-2 py-1 rounded border border-emerald-200 transition"
+                          className="inline-flex items-center gap-1 text-[#17633F] hover:text-[#123C2C] font-semibold bg-[#EAF2E8] px-2.5 py-1 rounded border border-[#B8D99F]/60 transition text-xs"
                           title="View complete immutable Lot Passport"
                         >
-                          <ShieldCheck className="h-3.5 w-3.5" />
+                          <ShieldCheck className="h-3.5 w-3.5 text-[#17633F]" />
                           <span>Passport</span>
                         </Link>
                         <Link
                           href={`/lots/${lot.id}`}
-                          className="inline-flex items-center gap-1 text-stone-700 hover:text-stone-950 font-medium px-2 py-1 rounded border border-stone-200 hover:bg-stone-50 transition"
+                          className="agri-btn-secondary text-xs py-1 px-2.5"
                         >
                           <Eye className="h-3.5 w-3.5" />
                           <span>Manage</span>

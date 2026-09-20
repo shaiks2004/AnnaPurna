@@ -173,9 +173,9 @@ export default function RequirementDetailPage() {
               {(query.data.status === 'OPEN' || query.data.status === 'PUBLISHED') && (
                 <Link
                   href={`/requirements/${id}/matches`}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md bg-[#0e4937] hover:bg-[#135f48] text-white text-xs font-semibold shadow-xs transition"
+                  className="agri-btn-primary bg-[#123C2C] hover:bg-[#17633F]"
                 >
-                  <Boxes className="h-4 w-4 text-amber-300" />
+                  <Boxes className="h-4 w-4 text-[#B8D99F]" />
                   <span>Execute Matching Engine</span>
                 </Link>
               )}
@@ -184,7 +184,7 @@ export default function RequirementDetailPage() {
               {query.data.status === 'DRAFT' && isBuyer && !isEditing && (
                 <button
                   onClick={startEditing}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md bg-stone-800 hover:bg-stone-900 text-white text-xs font-medium shadow-xs transition"
+                  className="agri-btn-secondary"
                 >
                   <Edit2 className="h-3.5 w-3.5" />
                   <span>Edit Draft</span>
@@ -204,12 +204,12 @@ export default function RequirementDetailPage() {
                     }
                   }}
                   disabled={isTransitioning}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md bg-emerald-800 hover:bg-emerald-900 text-white text-xs font-medium shadow-xs transition disabled:opacity-50"
+                  className="agri-btn-primary bg-[#17633F] hover:bg-[#124D31] text-xs disabled:opacity-50"
                 >
                   {publishMutation.isPending ? (
                     <Loader2 className="h-3.5 w-3.5 animate-spin" />
                   ) : (
-                    <CheckCircle2 className="h-3.5 w-3.5" />
+                    <CheckCircle2 className="h-3.5 w-3.5 text-[#B8D99F]" />
                   )}
                   <span>Publish Requirement</span>
                 </button>
@@ -223,12 +223,12 @@ export default function RequirementDetailPage() {
                     }
                   }}
                   disabled={isTransitioning}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md bg-emerald-800 hover:bg-emerald-900 text-white text-xs font-medium shadow-xs transition disabled:opacity-50"
+                  className="agri-btn-primary bg-[#17633F] hover:bg-[#124D31] text-xs disabled:opacity-50"
                 >
                   {openMutation.isPending ? (
                     <Loader2 className="h-3.5 w-3.5 animate-spin" />
                   ) : (
-                    <Boxes className="h-3.5 w-3.5" />
+                    <Boxes className="h-3.5 w-3.5 text-[#B8D99F]" />
                   )}
                   <span>Open for Matching</span>
                 </button>
@@ -246,7 +246,7 @@ export default function RequirementDetailPage() {
                     }
                   }}
                   disabled={isTransitioning}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md border border-stone-300 hover:bg-red-50 hover:text-red-700 hover:border-red-200 text-stone-700 text-xs font-medium transition disabled:opacity-50"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg border border-red-200 bg-red-50/60 hover:bg-red-50 text-red-700 text-xs font-semibold font-heading transition disabled:opacity-50"
                 >
                   {closeMutation.isPending ? (
                     <Loader2 className="h-3.5 w-3.5 animate-spin" />
@@ -273,20 +273,20 @@ export default function RequirementDetailPage() {
         <ErrorState error={new Error('Requirement not found')} />
       ) : isEditing ? (
         /* Edit Form */
-        <div className="bg-white rounded-lg border border-stone-200 shadow-2xs p-6 max-w-2xl">
-          <div className="flex items-center justify-between pb-4 mb-4 border-b border-stone-200">
+        <div className="agri-card p-6 sm:p-7 max-w-2xl">
+          <div className="flex items-center justify-between pb-4 mb-5 border-b border-[#DDE2DB]">
             <div>
-              <h2 className="text-sm font-semibold text-stone-900">
+              <h2 className="text-sm font-semibold text-[#123C2C] font-heading">
                 Edit DRAFT Procurement Requirement
               </h2>
-              <p className="text-[11px] text-stone-500">
+              <p className="text-[11px] text-[#657169]">
                 You can adjust required quantity, quality specifications, and pricing targets before
                 publishing.
               </p>
             </div>
             <button
               onClick={() => setIsEditing(false)}
-              className="text-stone-400 hover:text-stone-700 p-1 rounded"
+              className="text-[#78877E] hover:text-[#26332D] p-1.5 rounded-md hover:bg-[#F4F1E8] transition"
               aria-label="Cancel editing"
             >
               <X className="h-4 w-4" />
@@ -297,10 +297,10 @@ export default function RequirementDetailPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label
-                  className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                  className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                   htmlFor="edit-req-qty"
                 >
-                  Quantity
+                  Quantity *
                 </label>
                 <input
                   id="edit-req-qty"
@@ -310,16 +310,16 @@ export default function RequirementDetailPage() {
                   required
                   value={editQty}
                   onChange={(e) => setEditQty(e.target.value)}
-                  className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+                  className="agri-input text-xs"
                 />
               </div>
 
               <div>
                 <label
-                  className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                  className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                   htmlFor="edit-req-unit"
                 >
-                  Quantity Unit
+                  Quantity Unit *
                 </label>
                 <input
                   id="edit-req-unit"
@@ -327,17 +327,17 @@ export default function RequirementDetailPage() {
                   required
                   value={editUnit}
                   onChange={(e) => setEditUnit(e.target.value)}
-                  className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900 uppercase font-mono"
+                  className="agri-input text-xs uppercase font-mono"
                 />
               </div>
             </div>
 
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                 htmlFor="edit-req-qual"
               >
-                Quality Specification
+                Quality Specification *
               </label>
               <textarea
                 id="edit-req-qual"
@@ -345,16 +345,16 @@ export default function RequirementDetailPage() {
                 rows={2}
                 value={editQual}
                 onChange={(e) => setEditQual(e.target.value)}
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+                className="agri-input text-xs"
               />
             </div>
 
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                 htmlFor="edit-req-loc"
               >
-                Delivery Location
+                Delivery Location *
               </label>
               <input
                 id="edit-req-loc"
@@ -362,17 +362,17 @@ export default function RequirementDetailPage() {
                 required
                 value={editLoc}
                 onChange={(e) => setEditLoc(e.target.value)}
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+                className="agri-input text-xs"
               />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
                 <label
-                  className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                  className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                   htmlFor="edit-req-by"
                 >
-                  Required By Date
+                  Required By Date *
                 </label>
                 <input
                   id="edit-req-by"
@@ -380,13 +380,13 @@ export default function RequirementDetailPage() {
                   required
                   value={editRequiredBy}
                   onChange={(e) => setEditRequiredBy(e.target.value)}
-                  className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+                  className="agri-input text-xs"
                 />
               </div>
 
               <div>
                 <label
-                  className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                  className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                   htmlFor="edit-req-tp"
                 >
                   Target Price
@@ -397,13 +397,13 @@ export default function RequirementDetailPage() {
                   step="0.0001"
                   value={editTargetPrice}
                   onChange={(e) => setEditTargetPrice(e.target.value)}
-                  className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+                  className="agri-input text-xs"
                 />
               </div>
 
               <div>
                 <label
-                  className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                  className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                   htmlFor="edit-req-mp"
                 >
                   Maximum Price
@@ -414,14 +414,14 @@ export default function RequirementDetailPage() {
                   step="0.0001"
                   value={editMaxPrice}
                   onChange={(e) => setEditMaxPrice(e.target.value)}
-                  className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+                  className="agri-input text-xs"
                 />
               </div>
             </div>
 
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                 htmlFor="edit-req-notes"
               >
                 Notes
@@ -431,22 +431,22 @@ export default function RequirementDetailPage() {
                 rows={2}
                 value={editNotes}
                 onChange={(e) => setEditNotes(e.target.value)}
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+                className="agri-input text-xs"
               />
             </div>
 
-            <div className="pt-4 border-t border-stone-200 flex items-center justify-end gap-2">
+            <div className="pt-4 border-t border-[#DDE2DB] flex items-center justify-end gap-3">
               <button
                 type="button"
                 onClick={() => setIsEditing(false)}
-                className="px-4 py-2 border border-stone-300 hover:bg-stone-50 text-stone-700 text-xs font-medium rounded-md transition"
+                className="agri-btn-secondary"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={updateMutation.isPending}
-                className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#0e4937] hover:bg-[#135f48] text-white text-xs font-medium rounded-md shadow-xs transition disabled:opacity-50"
+                className="agri-btn-primary bg-[#17633F] hover:bg-[#124D31] disabled:opacity-50"
               >
                 {updateMutation.isPending ? (
                   <Loader2 className="h-3.5 w-3.5 animate-spin" />
@@ -462,15 +462,15 @@ export default function RequirementDetailPage() {
         /* Read Details View */
         <div className="space-y-6 max-w-4xl">
           {/* Main Summary Panel */}
-          <div className="bg-white rounded-lg border border-stone-200 shadow-2xs overflow-hidden">
-            <div className="p-6 border-b border-stone-200 bg-stone-50/50 flex items-start gap-4">
-              <div className="p-3 bg-emerald-100 rounded-lg text-emerald-800">
+          <div className="agri-card overflow-hidden">
+            <div className="p-6 border-b border-[#DDE2DB] bg-[#F8F9F6] flex items-start gap-4">
+              <div className="p-3 bg-[#E8F0E6] rounded-xl text-[#17633F] border border-[#B8D99F]/40 shrink-0">
                 <ClipboardList className="h-6 w-6" />
               </div>
               <div className="flex-1">
                 <div className="flex items-center justify-between flex-wrap gap-2 mb-1">
                   <div className="flex items-center gap-2.5">
-                    <h2 className="text-xl font-semibold text-stone-900">
+                    <h2 className="text-xl font-bold text-[#123C2C] font-heading">
                       {query.data.quantity} {query.data.quantityUnit}
                     </h2>
                     <Badge
@@ -487,21 +487,21 @@ export default function RequirementDetailPage() {
                       {query.data.status}
                     </Badge>
                   </div>
-                  <span className="text-xs text-stone-400 font-mono">
+                  <span className="text-xs text-[#78877E] font-mono bg-white px-2.5 py-1 rounded-md border border-[#DDE2DB]">
                     Version: v{query.data.version}
                   </span>
                 </div>
-                <p className="text-xs text-stone-500 font-mono">Requirement ID: {query.data.id}</p>
+                <p className="text-xs text-[#657169] font-mono">Requirement ID: {query.data.id}</p>
               </div>
             </div>
 
-            <div className="p-6 grid grid-cols-1 sm:grid-cols-3 gap-6 text-xs border-b border-stone-100">
+            <div className="p-6 grid grid-cols-1 sm:grid-cols-3 gap-6 text-xs border-b border-[#DDE2DB]/60 bg-white">
               <div>
-                <span className="text-stone-400 font-semibold uppercase tracking-wider block mb-1">
+                <span className="text-[#657169] font-semibold uppercase tracking-wider text-[11px] block mb-1 font-heading">
                   Commodity Reference
                 </span>
                 <span
-                  className="text-xs font-mono font-medium text-stone-800 block truncate"
+                  className="text-xs font-mono font-medium text-[#26332D] block truncate"
                   title={query.data.commodityId}
                 >
                   {query.data.commodityId}
@@ -509,11 +509,11 @@ export default function RequirementDetailPage() {
               </div>
 
               <div>
-                <span className="text-stone-400 font-semibold uppercase tracking-wider block mb-1">
+                <span className="text-[#657169] font-semibold uppercase tracking-wider text-[11px] block mb-1 font-heading">
                   Buyer Profile
                 </span>
                 <span
-                  className="text-xs font-mono font-medium text-stone-800 block truncate"
+                  className="text-xs font-mono font-medium text-[#26332D] block truncate"
                   title={query.data.buyerProfileId}
                 >
                   {query.data.buyerProfileId}
@@ -521,11 +521,11 @@ export default function RequirementDetailPage() {
               </div>
 
               <div>
-                <span className="text-stone-400 font-semibold uppercase tracking-wider block mb-1">
+                <span className="text-[#657169] font-semibold uppercase tracking-wider text-[11px] block mb-1 font-heading">
                   Buyer Organization
                 </span>
                 <span
-                  className="text-xs font-mono font-medium text-stone-800 block truncate"
+                  className="text-xs font-mono font-medium text-[#26332D] block truncate"
                   title={query.data.buyerOrganizationId}
                 >
                   {query.data.buyerOrganizationId}
@@ -533,10 +533,10 @@ export default function RequirementDetailPage() {
               </div>
 
               <div>
-                <span className="text-stone-400 font-semibold uppercase tracking-wider block mb-1">
+                <span className="text-[#657169] font-semibold uppercase tracking-wider text-[11px] block mb-1 font-heading">
                   Target Price
                 </span>
-                <span className="text-sm font-semibold text-stone-900">
+                <span className="text-sm font-bold text-[#123C2C] font-heading">
                   {query.data.targetPrice !== null
                     ? `${query.data.currencyCode ?? 'INR'} ${query.data.targetPrice}`
                     : 'Flexible'}
@@ -544,10 +544,10 @@ export default function RequirementDetailPage() {
               </div>
 
               <div>
-                <span className="text-stone-400 font-semibold uppercase tracking-wider block mb-1">
+                <span className="text-[#657169] font-semibold uppercase tracking-wider text-[11px] block mb-1 font-heading">
                   Maximum Price Ceiling
                 </span>
-                <span className="text-sm font-semibold text-stone-900">
+                <span className="text-sm font-bold text-[#123C2C] font-heading">
                   {query.data.maximumPrice !== null
                     ? `${query.data.currencyCode ?? 'INR'} ${query.data.maximumPrice}`
                     : 'No Ceiling'}
@@ -555,42 +555,44 @@ export default function RequirementDetailPage() {
               </div>
 
               <div>
-                <span className="text-stone-400 font-semibold uppercase tracking-wider block mb-1">
+                <span className="text-[#657169] font-semibold uppercase tracking-wider text-[11px] block mb-1 font-heading">
                   Required By
                 </span>
-                <span className="text-sm font-medium text-stone-800 flex items-center gap-1.5">
-                  <Calendar className="h-3.5 w-3.5 text-stone-500" />
+                <span className="text-sm font-medium text-[#26332D] flex items-center gap-1.5">
+                  <Calendar className="h-3.5 w-3.5 text-[#17633F]" />
                   <span>{query.data.requiredBy}</span>
                 </span>
               </div>
             </div>
 
-            <div className="p-6 space-y-4 text-xs">
+            <div className="p-6 space-y-4 text-xs bg-[#F8F9F6]/40">
               <div>
-                <span className="text-stone-400 font-semibold uppercase tracking-wider block mb-1">
+                <span className="text-[#657169] font-semibold uppercase tracking-wider text-[11px] block mb-1 font-heading">
                   Delivery Destination
                 </span>
-                <span className="text-sm font-medium text-stone-800 flex items-center gap-1.5">
-                  <MapPin className="h-3.5 w-3.5 text-stone-500" />
+                <span className="text-sm font-medium text-[#26332D] flex items-center gap-1.5">
+                  <MapPin className="h-3.5 w-3.5 text-[#17633F]" />
                   <span>{query.data.deliveryLocation}</span>
                 </span>
               </div>
 
               <div>
-                <span className="text-stone-400 font-semibold uppercase tracking-wider block mb-1">
+                <span className="text-[#657169] font-semibold uppercase tracking-wider text-[11px] block mb-1 font-heading">
                   Quality Specification
                 </span>
-                <p className="text-xs leading-relaxed text-stone-800 bg-stone-50 p-3 rounded border border-stone-200">
+                <p className="text-xs leading-relaxed text-[#26332D] bg-white p-3.5 rounded-lg border border-[#DDE2DB]">
                   {query.data.qualitySpecification}
                 </p>
               </div>
 
               {query.data.notes && (
                 <div>
-                  <span className="text-stone-400 font-semibold uppercase tracking-wider block mb-1">
+                  <span className="text-[#657169] font-semibold uppercase tracking-wider text-[11px] block mb-1 font-heading">
                     Procurement Notes
                   </span>
-                  <p className="text-xs text-stone-600 italic">{query.data.notes}</p>
+                  <p className="text-xs text-[#657169] italic bg-white p-3.5 rounded-lg border border-[#DDE2DB]">
+                    {query.data.notes}
+                  </p>
                 </div>
               )}
             </div>
@@ -598,15 +600,15 @@ export default function RequirementDetailPage() {
 
           {/* Matching Engine Callout */}
           {(query.data.status === 'OPEN' || query.data.status === 'PUBLISHED') && (
-            <div className="p-6 bg-gradient-to-r from-emerald-950 to-emerald-900 text-white rounded-lg border border-emerald-800 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="p-6 sm:p-7 bg-[#123C2C] text-white rounded-xl border border-[#17633F] shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-5">
               <div>
-                <div className="flex items-center gap-2 mb-1">
-                  <Boxes className="h-5 w-5 text-amber-300" />
-                  <h3 className="text-sm font-semibold uppercase tracking-wider text-emerald-100">
+                <div className="flex items-center gap-2 mb-1.5">
+                  <Boxes className="h-5 w-5 text-[#B8D99F]" />
+                  <h3 className="text-sm font-bold uppercase tracking-wider text-[#B8D99F] font-heading">
                     Deterministic Baseline Matching Engine
                   </h3>
                 </div>
-                <p className="text-xs text-emerald-200/90 max-w-xl leading-relaxed">
+                <p className="text-xs text-white/85 max-w-xl leading-relaxed">
                   Evaluate real inventory lots against this requirement. Computes multi-factor
                   scores across commodity match (35%), quantity coverage (30%), verified quality
                   (20%), geospatial proximity (10%), and delivery window (5%).
@@ -614,10 +616,10 @@ export default function RequirementDetailPage() {
               </div>
               <Link
                 href={`/requirements/${id}/matches`}
-                className="inline-flex items-center gap-2 px-4 py-2.5 bg-amber-400 hover:bg-amber-300 text-stone-950 text-xs font-bold rounded-md shadow-xs transition shrink-0"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#B8D99F] hover:bg-[#a8cd8d] text-[#123C2C] text-xs font-bold font-heading rounded-lg shadow-sm transition shrink-0"
               >
                 <span>Find Ranked Matches</span>
-                <ArrowRight className="h-4 w-4" />
+                <ArrowRight className="h-4 w-4 text-[#123C2C]" />
               </Link>
             </div>
           )}

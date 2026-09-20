@@ -99,7 +99,7 @@ export default function LotDocumentsPage() {
           <div className="flex items-center gap-2">
             <Link
               href={`/lots/${id}`}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-stone-300 hover:bg-stone-50 text-stone-700 text-xs font-medium transition"
+              className="agri-btn-secondary"
             >
               <ArrowLeft className="h-3.5 w-3.5" />
               <span>Lot Overview</span>
@@ -109,7 +109,7 @@ export default function LotDocumentsPage() {
                 setNotification(null);
                 setModalOpen(true);
               }}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-md bg-[#0e4937] hover:bg-[#135f48] text-white text-xs font-medium shadow-xs transition"
+              className="agri-btn-primary"
             >
               <Plus className="h-4 w-4" />
               <span>Attach Document Metadata</span>
@@ -124,13 +124,13 @@ export default function LotDocumentsPage() {
 
       <div className="space-y-6 max-w-4xl">
         {/* Compliance info banner */}
-        <div className="p-4 bg-stone-50 border border-stone-200 rounded-lg text-xs text-stone-700 flex items-start gap-3">
-          <Info className="h-5 w-5 text-stone-500 shrink-0 mt-0.5" />
+        <div className="p-4 bg-[#F8F9F6] border border-[#DDE2DB] rounded-lg text-xs text-[#26332D] flex items-start gap-3">
+          <Info className="h-5 w-5 text-[#17633F] shrink-0 mt-0.5" />
           <div className="leading-relaxed">
-            <strong className="font-semibold block mb-0.5 text-stone-900">
+            <strong className="font-semibold block mb-0.5 text-[#123C2C] font-heading">
               Verifiable Metadata Storage
             </strong>
-            <span>
+            <span className="text-[#657169]">
               The backend stores cryptographic hashes, document type codes, and storage references
               for audits and passport verification. File bytes reside in external object storage.
             </span>
@@ -138,7 +138,7 @@ export default function LotDocumentsPage() {
         </div>
 
         {/* Documents Table */}
-        <div className="bg-white rounded-lg border border-stone-200 shadow-2xs overflow-hidden">
+        <div className="agri-card overflow-hidden">
           {query.isLoading ? (
             <LoadingState message="Fetching attached document records..." />
           ) : query.error ? (
@@ -153,7 +153,7 @@ export default function LotDocumentsPage() {
                 action={
                   <button
                     onClick={() => setModalOpen(true)}
-                    className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md bg-[#0e4937] hover:bg-[#135f48] text-white text-xs font-medium transition"
+                    className="agri-btn-primary"
                   >
                     <Plus className="h-4 w-4" />
                     <span>Attach Certificate Record</span>
@@ -163,43 +163,39 @@ export default function LotDocumentsPage() {
             </div>
           ) : (
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs border-collapse">
+              <table className="agri-table">
                 <thead>
-                  <tr className="border-b border-stone-200 bg-stone-50/50 text-stone-600">
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider">
-                      Document Type
-                    </th>
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider">
-                      Storage Reference
-                    </th>
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider">
-                      Original Filename
-                    </th>
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider">Checksum</th>
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider">Created</th>
+                  <tr>
+                    <th>Document Type</th>
+                    <th>Storage Reference</th>
+                    <th>Original Filename</th>
+                    <th>Checksum</th>
+                    <th>Created</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-stone-100">
+                <tbody>
                   {query.data.map((doc: LotDocument) => (
-                    <tr key={doc.id} className="hover:bg-stone-50/60 transition">
-                      <td className="py-3.5 px-4 font-medium text-stone-900 flex items-center gap-2">
-                        <FileText className="h-4 w-4 text-emerald-700" />
-                        <span>{doc.documentTypeCode}</span>
+                    <tr key={doc.id}>
+                      <td className="font-medium text-[#26332D]">
+                        <span className="inline-flex items-center gap-2">
+                          <FileText className="h-4 w-4 text-[#17633F]" />
+                          <span className="font-semibold font-heading">{doc.documentTypeCode}</span>
+                        </span>
                       </td>
                       <td
-                        className="py-3.5 px-4 font-mono text-[11px] text-stone-700 max-w-xs truncate"
+                        className="font-mono text-[11px] text-[#657169] max-w-xs truncate"
                         title={doc.storageReference}
                       >
                         {doc.storageReference}
                       </td>
-                      <td className="py-3.5 px-4 text-stone-700">{doc.originalFilename ?? '—'}</td>
+                      <td className="text-[#26332D]">{doc.originalFilename ?? '—'}</td>
                       <td
-                        className="py-3.5 px-4 font-mono text-[10px] text-stone-500 max-w-[150px] truncate"
+                        className="font-mono text-[10px] text-[#78877E] max-w-[150px] truncate"
                         title={doc.checksum ?? ''}
                       >
                         {doc.checksum ?? '—'}
                       </td>
-                      <td className="py-3.5 px-4 text-stone-500 text-[11px]">
+                      <td className="text-[#78877E] text-[11px]">
                         {doc.createdAt?.split('T')[0]}
                       </td>
                     </tr>
@@ -221,7 +217,7 @@ export default function LotDocumentsPage() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label
-              className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+              className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
               htmlFor="doc-type"
             >
               Document Type Code *
@@ -233,13 +229,13 @@ export default function LotDocumentsPage() {
               value={docType}
               onChange={(e) => setDocType(e.target.value)}
               placeholder="e.g. ORGANIC_CERTIFICATE / APMC_RECEIPT / PHYTO_CERT"
-              className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900 font-mono"
+              className="agri-input text-xs font-mono"
             />
           </div>
 
           <div>
             <label
-              className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+              className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
               htmlFor="doc-ref"
             >
               Storage Reference / URI *
@@ -251,14 +247,14 @@ export default function LotDocumentsPage() {
               value={storageRef}
               onChange={(e) => setStorageRef(e.target.value)}
               placeholder="e.g. s3://vault/certificates/2026/wht-001.pdf"
-              className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900 font-mono"
+              className="agri-input text-xs font-mono"
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                 htmlFor="doc-fn"
               >
                 Original Filename
@@ -269,13 +265,13 @@ export default function LotDocumentsPage() {
                 value={filename}
                 onChange={(e) => setFilename(e.target.value)}
                 placeholder="e.g. audit_certificate.pdf"
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+                className="agri-input text-xs"
               />
             </div>
 
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                 htmlFor="doc-ct"
               >
                 Content / MIME Type
@@ -286,14 +282,14 @@ export default function LotDocumentsPage() {
                 value={contentType}
                 onChange={(e) => setContentType(e.target.value)}
                 placeholder="e.g. application/pdf"
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900 font-mono"
+                className="agri-input text-xs font-mono"
               />
             </div>
           </div>
 
           <div>
             <label
-              className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+              className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
               htmlFor="doc-cs"
             >
               Cryptographic Checksum / Hash
@@ -304,22 +300,22 @@ export default function LotDocumentsPage() {
               value={checksum}
               onChange={(e) => setChecksum(e.target.value)}
               placeholder="e.g. sha256:4f53cda18c2baa..."
-              className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900 font-mono"
+              className="agri-input text-xs font-mono"
             />
           </div>
 
-          <div className="pt-4 border-t border-stone-200 flex items-center justify-end gap-2">
+          <div className="pt-4 border-t border-[#DDE2DB] flex items-center justify-end gap-2.5">
             <button
               type="button"
               onClick={() => setModalOpen(false)}
-              className="px-4 py-2 border border-stone-300 hover:bg-stone-50 text-stone-700 text-xs font-medium rounded-md transition"
+              className="agri-btn-secondary"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={createMutation.isPending}
-              className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#0e4937] hover:bg-[#135f48] text-white text-xs font-medium rounded-md shadow-xs transition disabled:opacity-50"
+              className="agri-btn-primary"
             >
               {createMutation.isPending && <Loader2 className="h-3.5 w-3.5 animate-spin" />}
               <span>Save Record</span>

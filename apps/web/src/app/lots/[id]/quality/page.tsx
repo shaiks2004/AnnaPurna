@@ -176,7 +176,7 @@ export default function LotQualityPage() {
           <div className="flex items-center gap-2">
             <Link
               href={`/lots/${id}`}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-stone-300 hover:bg-stone-50 text-stone-700 text-xs font-medium transition"
+              className="agri-btn-secondary"
             >
               <ArrowLeft className="h-3.5 w-3.5" />
               <span>Lot Overview</span>
@@ -186,7 +186,7 @@ export default function LotQualityPage() {
                 setNotification(null);
                 setTestModalOpen(true);
               }}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-md bg-[#0e4937] hover:bg-[#135f48] text-white text-xs font-medium shadow-xs transition"
+              className="agri-btn-primary"
             >
               <Plus className="h-4 w-4" />
               <span>Record Quality Test</span>
@@ -210,7 +210,7 @@ export default function LotQualityPage() {
           action={
             <button
               onClick={() => setTestModalOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md bg-[#0e4937] hover:bg-[#135f48] text-white text-xs font-medium transition"
+              className="agri-btn-primary"
             >
               <Plus className="h-4 w-4" />
               <span>Create Quality Test</span>
@@ -245,7 +245,7 @@ export default function LotQualityPage() {
         <form onSubmit={handleTestSubmit} className="space-y-4">
           <div>
             <label
-              className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+              className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
               htmlFor="qt-type"
             >
               Test Type *
@@ -257,14 +257,14 @@ export default function LotQualityPage() {
               value={testType}
               onChange={(e) => setTestType(e.target.value)}
               placeholder="e.g. PHYSICAL_MOISTURE_ASSAY"
-              className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+              className="agri-input text-xs"
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                 htmlFor="qt-method"
               >
                 Method Code *
@@ -276,13 +276,13 @@ export default function LotQualityPage() {
                 value={methodCode}
                 onChange={(e) => setMethodCode(e.target.value)}
                 placeholder="e.g. ISO-712-OVEN"
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900 font-mono"
+                className="agri-input text-xs font-mono"
               />
             </div>
 
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                 htmlFor="qt-source"
               >
                 Source / Laboratory Code
@@ -293,14 +293,14 @@ export default function LotQualityPage() {
                 value={sourceCode}
                 onChange={(e) => setSourceCode(e.target.value)}
                 placeholder="e.g. LAB-NABL-01"
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900 font-mono"
+                className="agri-input text-xs font-mono"
               />
             </div>
           </div>
 
           <div>
             <label
-              className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+              className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
               htmlFor="qt-notes"
             >
               Inspection Notes
@@ -311,22 +311,22 @@ export default function LotQualityPage() {
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
               placeholder="Sampled from center bags, dry batch..."
-              className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+              className="agri-input text-xs"
             />
           </div>
 
-          <div className="pt-4 border-t border-stone-200 flex items-center justify-end gap-2">
+          <div className="pt-4 border-t border-[#DDE2DB] flex items-center justify-end gap-2.5">
             <button
               type="button"
               onClick={() => setTestModalOpen(false)}
-              className="px-4 py-2 border border-stone-300 hover:bg-stone-50 text-stone-700 text-xs font-medium rounded-md transition"
+              className="agri-btn-secondary"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={createTestMutation.isPending}
-              className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#0e4937] hover:bg-[#135f48] text-white text-xs font-medium rounded-md shadow-xs transition disabled:opacity-50"
+              className="agri-btn-primary"
             >
               {createTestMutation.isPending && <Loader2 className="h-3.5 w-3.5 animate-spin" />}
               <span>Save Quality Test</span>
@@ -346,7 +346,7 @@ export default function LotQualityPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                 htmlFor="m-name"
               >
                 Metric Name *
@@ -358,13 +358,13 @@ export default function LotQualityPage() {
                 value={metricName}
                 onChange={(e) => setMetricName(e.target.value)}
                 placeholder="e.g. MoistureContent / ForeignMatter"
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+                className="agri-input text-xs"
               />
             </div>
 
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                 htmlFor="m-unit"
               >
                 Unit *
@@ -376,14 +376,14 @@ export default function LotQualityPage() {
                 value={unit}
                 onChange={(e) => setUnit(e.target.value)}
                 placeholder="% / PPM / mm"
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900 font-mono"
+                className="agri-input text-xs font-mono"
               />
             </div>
           </div>
 
           <div>
             <label
-              className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+              className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
               htmlFor="m-val"
             >
               Numeric Value *
@@ -396,13 +396,13 @@ export default function LotQualityPage() {
               value={numericValue}
               onChange={(e) => setNumericValue(e.target.value)}
               placeholder="e.g. 11.4"
-              className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+              className="agri-input text-xs font-mono"
             />
           </div>
 
           <div>
             <label
-              className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+              className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
               htmlFor="m-text"
             >
               Qualitative / Observation Text
@@ -413,22 +413,22 @@ export default function LotQualityPage() {
               value={textValue}
               onChange={(e) => setTextValue(e.target.value)}
               placeholder="e.g. Within Grade A threshold"
-              className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+              className="agri-input text-xs"
             />
           </div>
 
-          <div className="pt-4 border-t border-stone-200 flex items-center justify-end gap-2">
+          <div className="pt-4 border-t border-[#DDE2DB] flex items-center justify-end gap-2.5">
             <button
               type="button"
               onClick={() => setMeasModalOpen(false)}
-              className="px-4 py-2 border border-stone-300 hover:bg-stone-50 text-stone-700 text-xs font-medium rounded-md transition"
+              className="agri-btn-secondary"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={createMeasMutation.isPending}
-              className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#0e4937] hover:bg-[#135f48] text-white text-xs font-medium rounded-md shadow-xs transition disabled:opacity-50"
+              className="agri-btn-primary"
             >
               {createMeasMutation.isPending && <Loader2 className="h-3.5 w-3.5 animate-spin" />}
               <span>Save Measurement</span>
@@ -461,20 +461,20 @@ function TestCard({
   });
 
   return (
-    <div className="bg-white rounded-lg border border-stone-200 shadow-2xs overflow-hidden">
-      <div className="p-5 border-b border-stone-200 bg-stone-50/50 flex items-center justify-between flex-wrap gap-3">
+    <div className="agri-card overflow-hidden">
+      <div className="p-5 border-b border-[#DDE2DB] bg-[#F8F9F6] flex items-center justify-between flex-wrap gap-3">
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-emerald-100 rounded text-emerald-800">
+          <div className="p-2.5 bg-[#EAF2E8] border border-[#B8D99F]/50 rounded-lg text-[#17633F]">
             <FlaskConical className="h-5 w-5" />
           </div>
           <div>
-            <div className="flex items-center gap-2">
-              <h3 className="text-sm font-semibold text-stone-900">{test.testType}</h3>
+            <div className="flex items-center gap-2.5">
+              <h3 className="text-sm font-semibold text-[#123C2C] font-heading">{test.testType}</h3>
               <Badge variant={test.status === 'VERIFIED' ? 'success' : 'warning'}>
                 {test.status}
               </Badge>
             </div>
-            <span className="text-[11px] text-stone-500 font-mono">Test ID: {test.id}</span>
+            <span className="text-[11px] text-[#657169] font-mono">Test ID: {test.id}</span>
           </div>
         </div>
 
@@ -483,19 +483,19 @@ function TestCard({
             <button
               onClick={onVerify}
               disabled={verifying}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded bg-emerald-800 hover:bg-emerald-900 text-white text-xs font-semibold shadow-2xs transition disabled:opacity-50"
+              className="agri-btn-primary bg-[#123C2C] hover:bg-[#17633F] text-xs py-1.5 px-3"
             >
               {verifying ? (
                 <Loader2 className="h-3.5 w-3.5 animate-spin" />
               ) : (
-                <ShieldCheck className="h-3.5 w-3.5" />
+                <ShieldCheck className="h-3.5 w-3.5 text-[#B8D99F]" />
               )}
               <span>Verify Test</span>
             </button>
           )}
           <button
             onClick={() => setExpanded(!expanded)}
-            className="p-1.5 rounded hover:bg-stone-200/60 text-stone-500"
+            className="p-1.5 rounded-md hover:bg-[#EAF2E8] text-[#657169] transition"
             aria-label="Toggle measurements panel"
           >
             {expanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
@@ -504,33 +504,33 @@ function TestCard({
       </div>
 
       <div className="p-5 text-xs">
-        <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 pb-4 border-b border-stone-100 text-stone-600">
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 pb-4 border-b border-[#E6EBE4] text-[#657169]">
           <div>
-            <span className="text-stone-400 font-semibold uppercase tracking-wider block mb-0.5">
+            <span className="text-[#78877E] font-semibold uppercase tracking-wider block mb-0.5 font-heading text-[11px]">
               Method Code
             </span>
-            <span className="font-mono text-stone-900 font-medium">{test.methodCode}</span>
+            <span className="font-mono text-[#26332D] font-medium">{test.methodCode}</span>
           </div>
           <div>
-            <span className="text-stone-400 font-semibold uppercase tracking-wider block mb-0.5">
+            <span className="text-[#78877E] font-semibold uppercase tracking-wider block mb-0.5 font-heading text-[11px]">
               Source / Lab
             </span>
-            <span className="font-mono text-stone-900 font-medium">{test.sourceCode ?? 'Lab'}</span>
+            <span className="font-mono text-[#26332D] font-medium">{test.sourceCode ?? 'Lab'}</span>
           </div>
           <div>
-            <span className="text-stone-400 font-semibold uppercase tracking-wider block mb-0.5">
+            <span className="text-[#78877E] font-semibold uppercase tracking-wider block mb-0.5 font-heading text-[11px]">
               Sampled At
             </span>
-            <span>{test.sampledAt ? new Date(test.sampledAt).toLocaleString() : '—'}</span>
+            <span className="text-[#26332D]">{test.sampledAt ? new Date(test.sampledAt).toLocaleString() : '—'}</span>
           </div>
           <div>
-            <span className="text-stone-400 font-semibold uppercase tracking-wider block mb-0.5">
+            <span className="text-[#78877E] font-semibold uppercase tracking-wider block mb-0.5 font-heading text-[11px]">
               Verification
             </span>
             <span>
               {test.verifiedAt ? (
-                <span className="text-emerald-800 font-semibold flex items-center gap-1">
-                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" />
+                <span className="text-[#17633F] font-semibold flex items-center gap-1 font-heading">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-[#17633F]" />
                   <span>Verified</span>
                 </span>
               ) : (
@@ -540,21 +540,21 @@ function TestCard({
           </div>
         </div>
 
-        {test.notes && <p className="mt-3 text-stone-500 italic">{test.notes}</p>}
+        {test.notes && <p className="mt-3 text-[#657169] italic">{test.notes}</p>}
 
         {/* Measurements List */}
         {expanded && (
-          <div className="mt-5 pt-4 border-t border-stone-100">
+          <div className="mt-5 pt-4 border-t border-[#E6EBE4]">
             <div className="flex items-center justify-between mb-3">
-              <h4 className="text-xs font-semibold uppercase tracking-wider text-stone-700">
+              <h4 className="text-[11px] font-semibold uppercase tracking-wider text-[#123C2C] font-heading">
                 Assay Measurements ({measurementsQuery.data?.length ?? 0})
               </h4>
               {test.status !== 'VERIFIED' && (
                 <button
                   onClick={onAddMeasurement}
-                  className="text-xs text-emerald-800 hover:text-emerald-950 font-medium inline-flex items-center gap-1"
+                  className="text-xs text-[#17633F] hover:text-[#123C2C] font-semibold inline-flex items-center gap-1 transition"
                 >
-                  <Plus className="h-3 w-3" />
+                  <Plus className="h-3.5 w-3.5" />
                   <span>Add Metric</span>
                 </button>
               )}
@@ -563,29 +563,29 @@ function TestCard({
             {measurementsQuery.isLoading ? (
               <LoadingState message="Loading measurements..." />
             ) : !measurementsQuery.data?.length ? (
-              <p className="text-stone-400 italic text-xs py-2">
+              <p className="text-[#78877E] italic text-xs py-2">
                 No metric measurements added yet.
               </p>
             ) : (
               <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs border-collapse">
+                <table className="agri-table">
                   <thead>
-                    <tr className="border-b border-stone-100 text-stone-400 uppercase tracking-wider font-semibold text-[10px]">
-                      <th className="py-2">Metric Name</th>
-                      <th className="py-2">Numeric Result</th>
-                      <th className="py-2">Unit</th>
-                      <th className="py-2">Observation / Qualitative Note</th>
+                    <tr>
+                      <th>Metric Name</th>
+                      <th>Numeric Result</th>
+                      <th>Unit</th>
+                      <th>Observation / Qualitative Note</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-stone-50">
+                  <tbody>
                     {measurementsQuery.data.map((m) => (
                       <tr key={m.id}>
-                        <td className="py-2.5 font-medium text-stone-900">{m.metricName}</td>
-                        <td className="py-2.5 font-mono font-semibold text-emerald-900">
+                        <td className="font-medium text-[#26332D]">{m.metricName}</td>
+                        <td className="font-mono font-semibold text-[#123C2C]">
                           {m.numericValue ?? '—'}
                         </td>
-                        <td className="py-2.5 font-mono text-stone-500">{m.unit ?? '—'}</td>
-                        <td className="py-2.5 text-stone-600">{m.textValue ?? '—'}</td>
+                        <td className="font-mono text-[#657169]">{m.unit ?? '—'}</td>
+                        <td className="text-[#657169]">{m.textValue ?? '—'}</td>
                       </tr>
                     ))}
                   </tbody>

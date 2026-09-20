@@ -88,7 +88,7 @@ export default function SupplyDetailPage() {
           query.data && (
             <button
               onClick={startEditing}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md bg-stone-800 hover:bg-stone-900 text-white text-xs font-medium shadow-xs transition"
+              className="agri-btn-secondary"
             >
               <Edit2 className="h-3.5 w-3.5" />
               <span>Edit Supply</span>
@@ -109,12 +109,15 @@ export default function SupplyDetailPage() {
         <ErrorState error={new Error('Supply declaration not found')} />
       ) : isEditing ? (
         /* Edit Form */
-        <div className="bg-white rounded-lg border border-stone-200 shadow-2xs p-6 max-w-2xl">
-          <div className="flex items-center justify-between pb-4 mb-4 border-b border-stone-200">
-            <h2 className="text-sm font-semibold text-stone-900">Edit Supply Declaration</h2>
+        <div className="agri-card p-6 sm:p-7 max-w-2xl">
+          <div className="flex items-center justify-between pb-4 mb-5 border-b border-[#DDE2DB]">
+            <div>
+              <h2 className="text-sm font-semibold text-[#123C2C] font-heading">Edit Supply Declaration</h2>
+              <p className="text-[11px] text-[#657169]">Update quantity and expected timeline for this declared crop volume</p>
+            </div>
             <button
               onClick={() => setIsEditing(false)}
-              className="text-stone-400 hover:text-stone-700 p-1 rounded"
+              className="text-[#78877E] hover:text-[#26332D] p-1.5 rounded-md hover:bg-[#F4F1E8] transition"
               aria-label="Cancel editing"
             >
               <X className="h-4 w-4" />
@@ -125,10 +128,10 @@ export default function SupplyDetailPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label
-                  className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                  className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                   htmlFor="edit-sup-qty"
                 >
-                  Quantity
+                  Quantity *
                 </label>
                 <input
                   id="edit-sup-qty"
@@ -138,16 +141,16 @@ export default function SupplyDetailPage() {
                   required
                   value={editQty}
                   onChange={(e) => setEditQty(e.target.value)}
-                  className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+                  className="agri-input text-xs"
                 />
               </div>
 
               <div>
                 <label
-                  className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                  className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                   htmlFor="edit-sup-unit"
                 >
-                  Quantity Unit
+                  Quantity Unit *
                 </label>
                 <input
                   id="edit-sup-unit"
@@ -155,7 +158,7 @@ export default function SupplyDetailPage() {
                   required
                   value={editUnit}
                   onChange={(e) => setEditUnit(e.target.value)}
-                  className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900 uppercase font-mono"
+                  className="agri-input text-xs uppercase font-mono"
                 />
               </div>
             </div>
@@ -163,7 +166,7 @@ export default function SupplyDetailPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label
-                  className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                  className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                   htmlFor="edit-sup-harvest"
                 >
                   Expected Harvest Date
@@ -173,13 +176,13 @@ export default function SupplyDetailPage() {
                   type="date"
                   value={editHarvest}
                   onChange={(e) => setEditHarvest(e.target.value)}
-                  className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+                  className="agri-input text-xs"
                 />
               </div>
 
               <div>
                 <label
-                  className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                  className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                   htmlFor="edit-sup-avail"
                 >
                   Available From
@@ -189,23 +192,23 @@ export default function SupplyDetailPage() {
                   type="date"
                   value={editAvail}
                   onChange={(e) => setEditAvail(e.target.value)}
-                  className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+                  className="agri-input text-xs"
                 />
               </div>
             </div>
 
-            <div className="pt-4 border-t border-stone-200 flex items-center justify-end gap-2">
+            <div className="pt-4 border-t border-[#DDE2DB] flex items-center justify-end gap-2.5">
               <button
                 type="button"
                 onClick={() => setIsEditing(false)}
-                className="px-4 py-2 border border-stone-300 hover:bg-stone-50 text-stone-700 text-xs font-medium rounded-md transition"
+                className="agri-btn-secondary"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={updateMutation.isPending}
-                className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#0e4937] hover:bg-[#135f48] text-white text-xs font-medium rounded-md shadow-xs transition disabled:opacity-50"
+                className="agri-btn-primary"
               >
                 {updateMutation.isPending ? (
                   <Loader2 className="h-3.5 w-3.5 animate-spin" />
@@ -219,14 +222,14 @@ export default function SupplyDetailPage() {
         </div>
       ) : (
         /* Read Details View */
-        <div className="bg-white rounded-lg border border-stone-200 shadow-2xs overflow-hidden max-w-3xl">
-          <div className="p-6 border-b border-stone-200 bg-stone-50/50 flex items-start gap-4">
-            <div className="p-3 bg-emerald-100 rounded-lg text-emerald-800">
+        <div className="agri-card overflow-hidden max-w-3xl">
+          <div className="p-6 border-b border-[#DDE2DB] bg-[#F8F9F6] flex items-start gap-4">
+            <div className="p-3 bg-[#EAF2E8] border border-[#B8D99F]/50 rounded-lg text-[#17633F]">
               <Database className="h-6 w-6" />
             </div>
             <div>
-              <div className="flex items-center gap-2 mb-1">
-                <h2 className="text-xl font-semibold text-stone-900">
+              <div className="flex items-center gap-2.5 mb-1">
+                <h2 className="text-xl font-semibold text-[#123C2C] font-heading">
                   {query.data.quantity} {query.data.quantityUnit}
                 </h2>
                 <Badge
@@ -241,17 +244,17 @@ export default function SupplyDetailPage() {
                   {query.data.supplyKind}
                 </Badge>
               </div>
-              <p className="text-xs text-stone-500 font-mono">Supply ID: {query.data.id}</p>
+              <p className="text-xs text-[#657169] font-mono">Supply ID: <span className="text-[#26332D] font-semibold">{query.data.id}</span></p>
             </div>
           </div>
 
           <div className="p-6 grid grid-cols-1 sm:grid-cols-2 gap-6 text-xs">
             <div>
-              <span className="text-stone-400 font-semibold uppercase tracking-wider block mb-1">
+              <span className="text-[#78877E] font-semibold uppercase tracking-wider block mb-1 font-heading text-[11px]">
                 Commodity ID
               </span>
               <span
-                className="text-xs font-mono font-medium text-stone-800 block truncate"
+                className="text-xs font-mono font-medium text-[#26332D] block truncate"
                 title={query.data.commodityId}
               >
                 {query.data.commodityId}
@@ -259,10 +262,10 @@ export default function SupplyDetailPage() {
             </div>
 
             <div>
-              <span className="text-stone-400 font-semibold uppercase tracking-wider block mb-1">
+              <span className="text-[#78877E] font-semibold uppercase tracking-wider block mb-1 font-heading text-[11px]">
                 Supplier Ownership
               </span>
-              <span className="text-xs font-mono font-medium text-stone-800 block truncate">
+              <span className="text-xs font-mono font-medium text-[#26332D] block truncate">
                 {query.data.organizationId
                   ? `Organization: ${query.data.organizationId}`
                   : `Farmer: ${query.data.farmerId}`}
@@ -270,21 +273,21 @@ export default function SupplyDetailPage() {
             </div>
 
             <div>
-              <span className="text-stone-400 font-semibold uppercase tracking-wider block mb-1">
+              <span className="text-[#78877E] font-semibold uppercase tracking-wider block mb-1 font-heading text-[11px]">
                 Expected Harvest
               </span>
-              <span className="text-sm font-medium text-stone-800 flex items-center gap-1.5">
-                <Calendar className="h-3.5 w-3.5 text-stone-500" />
+              <span className="text-sm font-medium text-[#26332D] flex items-center gap-1.5">
+                <Calendar className="h-4 w-4 text-[#17633F]" />
                 <span>{query.data.expectedHarvestDate ?? 'Not specified'}</span>
               </span>
             </div>
 
             <div>
-              <span className="text-stone-400 font-semibold uppercase tracking-wider block mb-1">
+              <span className="text-[#78877E] font-semibold uppercase tracking-wider block mb-1 font-heading text-[11px]">
                 Available From Date
               </span>
-              <span className="text-sm font-medium text-stone-800 flex items-center gap-1.5">
-                <Calendar className="h-3.5 w-3.5 text-stone-500" />
+              <span className="text-sm font-medium text-[#26332D] flex items-center gap-1.5">
+                <Calendar className="h-4 w-4 text-[#17633F]" />
                 <span>{query.data.availableFrom ?? 'Immediate availability'}</span>
               </span>
             </div>

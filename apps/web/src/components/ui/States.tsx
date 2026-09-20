@@ -18,11 +18,11 @@ export function LoadingState({
 }) {
   return (
     <div
-      className="flex flex-col items-center justify-center py-14 px-4 text-center text-stone-500"
+      className="flex flex-col items-center justify-center py-16 px-4 text-center text-[#657169]"
       role="status"
     >
-      <Loader2 className="h-7 w-7 animate-spin text-emerald-800 mb-3" />
-      <p className="text-sm font-medium">{message}</p>
+      <Loader2 className="h-6 w-6 animate-spin text-[#17633F] mb-3" />
+      <p className="text-xs font-medium tracking-wide">{message}</p>
     </div>
   );
 }
@@ -37,12 +37,12 @@ export function EmptyState({
   action?: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col items-center justify-center py-14 px-4 text-center border border-dashed border-stone-200 rounded-lg bg-stone-50/50">
-      <div className="rounded-full bg-stone-100 p-3 mb-3 text-stone-400">
-        <Info className="h-6 w-6" />
+    <div className="flex flex-col items-center justify-center py-14 px-4 text-center border border-dashed border-[#DDE2DB] rounded-xl bg-[#F8F9F6]/80 my-2">
+      <div className="rounded-full bg-[#FFFFFF] p-3 mb-3 text-[#78877E] border border-[#DDE2DB] shadow-xs">
+        <Info className="h-5 w-5 text-[#17633F]" />
       </div>
-      <h3 className="text-sm font-semibold text-stone-800">{title}</h3>
-      <p className="text-xs text-stone-500 max-w-sm mt-1 mb-4">{description}</p>
+      <h3 className="text-sm font-heading font-semibold text-[#26332D]">{title}</h3>
+      <p className="text-xs text-[#657169] max-w-sm mt-1 mb-4 leading-relaxed">{description}</p>
       {action && <div>{action}</div>}
     </div>
   );
@@ -66,22 +66,22 @@ export function ErrorState({ error, onRetry }: { error: unknown; onRetry?: () =>
   return (
     <div
       role="alert"
-      className={`rounded-md p-4 border my-4 ${
+      className={`rounded-xl p-4 border my-4 ${
         isConcurrentConflict
-          ? 'bg-amber-50 border-amber-200 text-amber-900'
+          ? 'bg-[#FEF7EA] border-[#F6E3BD] text-[#96600E]'
           : isForbidden
-            ? 'bg-orange-50 border-orange-200 text-orange-900'
-            : 'bg-red-50 border-red-200 text-red-900'
+            ? 'bg-[#FEF7EA] border-[#F6E3BD] text-[#96600E]'
+            : 'bg-[#FDEEEC] border-[#F9D0CB] text-[#A82B24]'
       }`}
     >
       <div className="flex items-start gap-3">
         {isConcurrentConflict ? (
-          <AlertTriangle className="h-5 w-5 text-amber-600 shrink-0 mt-0.5" />
+          <AlertTriangle className="h-5 w-5 text-[#96600E] shrink-0 mt-0.5" />
         ) : (
-          <AlertCircle className="h-5 w-5 text-red-600 shrink-0 mt-0.5" />
+          <AlertCircle className="h-5 w-5 text-[#A82B24] shrink-0 mt-0.5" />
         )}
         <div className="flex-1 text-sm">
-          <h4 className="font-semibold mb-1">
+          <h4 className="font-heading font-semibold mb-1">
             {isConcurrentConflict
               ? 'Concurrent Update Detected'
               : isUnauthorized
@@ -94,9 +94,9 @@ export function ErrorState({ error, onRetry }: { error: unknown; onRetry?: () =>
           {onRetry && (
             <button
               onClick={onRetry}
-              className="mt-3 inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded bg-white border shadow-sm hover:bg-stone-50 transition"
+              className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg bg-white border border-[#DDE2DB] text-[#26332D] shadow-xs hover:bg-[#F8F9F6] transition"
             >
-              <RefreshCw className="h-3.5 w-3.5" /> Retry
+              <RefreshCw className="h-3.5 w-3.5 text-[#17633F]" /> Retry
             </button>
           )}
         </div>
@@ -113,19 +113,29 @@ export function Badge({
   variant?: 'default' | 'success' | 'warning' | 'danger' | 'info' | 'outline';
 }) {
   const styles = {
-    default: 'bg-stone-100 text-stone-800 border-stone-200',
-    success: 'bg-emerald-50 text-emerald-800 border-emerald-200',
-    warning: 'bg-amber-50 text-amber-800 border-amber-200',
-    danger: 'bg-red-50 text-red-800 border-red-200',
-    info: 'bg-sky-50 text-sky-800 border-sky-200',
-    outline: 'bg-transparent text-stone-700 border-stone-300',
+    default: 'bg-[#F8F9F6] text-[#26332D] border-[#DDE2DB]',
+    success: 'bg-[#E8F4EC] text-[#17633F] border-[#C6E2D0]',
+    warning: 'bg-[#FEF7EA] text-[#96600E] border-[#F6E3BD]',
+    danger: 'bg-[#FDEEEC] text-[#A82B24] border-[#F9D0CB]',
+    info: 'bg-[#EEF6FA] text-[#2B5E77] border-[#CFE3EE]',
+    outline: 'bg-transparent text-[#657169] border-[#DDE2DB]',
+  };
+
+  const dotColors = {
+    default: 'bg-[#78877E]',
+    success: 'bg-[#17633F]',
+    warning: 'bg-[#96600E]',
+    danger: 'bg-[#A82B24]',
+    info: 'bg-[#2B5E77]',
+    outline: 'bg-[#78877E]',
   };
 
   return (
     <span
-      className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium border ${styles[variant]}`}
+      className={`agri-badge ${styles[variant]}`}
     >
-      {children}
+      <span className={`badge-dot ${dotColors[variant]}`} />
+      <span>{children}</span>
     </span>
   );
 }
@@ -142,33 +152,33 @@ export function PageHeader({
   actions?: React.ReactNode;
 }) {
   return (
-    <div className="pb-5 mb-6 border-b border-stone-200 flex flex-col md:flex-row md:items-end justify-between gap-4">
+    <div className="pb-5 mb-6 border-b border-[#DDE2DB] flex flex-col md:flex-row md:items-end justify-between gap-4">
       <div>
         {breadcrumbs && breadcrumbs.length > 0 && (
           <nav
             aria-label="Breadcrumb"
-            className="flex items-center gap-1.5 text-xs text-stone-500 mb-2"
+            className="flex items-center gap-1.5 text-xs text-[#78877E] mb-2"
           >
             {breadcrumbs.map((crumb, idx) => (
               <React.Fragment key={crumb.label}>
-                {idx > 0 && <ChevronRight className="h-3 w-3 text-stone-400" />}
+                {idx > 0 && <ChevronRight className="h-3 w-3 text-[#DDE2DB]" />}
                 {crumb.href ? (
-                  <Link href={crumb.href} className="hover:text-emerald-800 transition">
+                  <Link href={crumb.href} className="hover:text-[#17633F] transition">
                     {crumb.label}
                   </Link>
                 ) : (
-                  <span className="font-semibold text-stone-800">{crumb.label}</span>
+                  <span className="font-semibold text-[#26332D]">{crumb.label}</span>
                 )}
               </React.Fragment>
             ))}
           </nav>
         )}
         {eyebrow && (
-          <span className="text-[11px] font-semibold tracking-wider uppercase text-stone-500">
+          <span className="text-[10px] font-semibold tracking-widest uppercase text-[#78877E] block mb-1">
             {eyebrow}
           </span>
         )}
-        <h1 className="text-2xl sm:text-3xl font-semibold text-stone-900 mt-0.5">{title}</h1>
+        <h1 className="text-2xl sm:text-3xl font-heading font-semibold text-[#26332D] tracking-tight">{title}</h1>
       </div>
       {actions && <div className="flex items-center gap-2.5 flex-wrap">{actions}</div>}
     </div>
@@ -183,16 +193,16 @@ export function StatusNotification({
   message: string;
 }) {
   const styles = {
-    success: 'bg-emerald-50 text-emerald-900 border-emerald-200',
-    error: 'bg-red-50 text-red-900 border-red-200',
-    info: 'bg-sky-50 text-sky-900 border-sky-200',
+    success: 'bg-[#E8F4EC] text-[#17633F] border-[#C6E2D0]',
+    error: 'bg-[#FDEEEC] text-[#A82B24] border-[#F9D0CB]',
+    info: 'bg-[#EEF6FA] text-[#2B5E77] border-[#CFE3EE]',
   };
 
   const Icon = type === 'success' ? CheckCircle2 : type === 'error' ? AlertCircle : Info;
 
   return (
     <div
-      className={`flex items-center gap-2.5 p-3 rounded-md border text-xs font-medium my-3 ${styles[type]}`}
+      className={`flex items-center gap-2.5 p-3 rounded-lg border text-xs font-medium my-3 ${styles[type]}`}
     >
       <Icon className="h-4 w-4 shrink-0" />
       <span>{message}</span>

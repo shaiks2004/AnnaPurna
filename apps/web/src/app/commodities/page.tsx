@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { Plus, Search, Eye, Loader2, Leaf } from 'lucide-react';
+import { Plus, Search, Eye, Loader2, Sprout } from 'lucide-react';
 import { AppShell } from '@/components/layout/AppShell';
 import {
   PageHeader,
@@ -96,7 +96,7 @@ export default function CommoditiesPage() {
                 setNotification(null);
                 setModalOpen(true);
               }}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md bg-[#0e4937] hover:bg-[#135f48] text-white text-xs font-medium shadow-xs transition"
+              className="agri-btn-primary"
             >
               <Plus className="h-4 w-4" />
               <span>Add Commodity</span>
@@ -110,21 +110,21 @@ export default function CommoditiesPage() {
       )}
 
       {/* Filter Bar */}
-      <div className="bg-white p-4 rounded-lg border border-stone-200 shadow-2xs mb-6">
+      <div className="agri-card p-4 mb-6">
         <form onSubmit={handleSearchSubmit} className="flex gap-2">
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-2.5 h-4 w-4 text-stone-400" />
+            <Search className="absolute left-3 top-2.5 h-4 w-4 text-[#78877E]" />
             <input
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search by commodity name..."
-              className="w-full pl-9 pr-4 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+              className="agri-input pl-9"
             />
           </div>
           <button
             type="submit"
-            className="px-4 py-2 bg-stone-800 hover:bg-stone-900 text-white text-xs font-medium rounded-md transition"
+            className="agri-btn-primary"
           >
             Search
           </button>
@@ -136,7 +136,7 @@ export default function CommoditiesPage() {
                 setAppliedSearch('');
                 setPage(0);
               }}
-              className="px-3 py-2 border border-stone-300 hover:bg-stone-50 text-stone-700 text-xs font-medium rounded-md transition"
+              className="agri-btn-secondary"
             >
               Clear
             </button>
@@ -145,7 +145,7 @@ export default function CommoditiesPage() {
       </div>
 
       {/* Data Table */}
-      <div className="bg-white rounded-lg border border-stone-200 shadow-2xs overflow-hidden">
+      <div className="agri-card overflow-hidden">
         {query.isLoading ? (
           <LoadingState message="Fetching commodities from backend..." />
         ) : query.error ? (
@@ -166,38 +166,36 @@ export default function CommoditiesPage() {
         ) : (
           <div>
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs border-collapse">
+              <table className="agri-table">
                 <thead>
-                  <tr className="border-b border-stone-200 bg-stone-50/50 text-stone-600">
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider">
-                      Commodity Name
-                    </th>
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider">Code</th>
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider">Status</th>
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider text-right">
-                      Action
-                    </th>
+                  <tr>
+                    <th>Commodity Name</th>
+                    <th>Code</th>
+                    <th>Status</th>
+                    <th className="text-right">Action</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-stone-100">
+                <tbody>
                   {query.data.data.map((c: Commodity) => (
-                    <tr key={c.id} className="hover:bg-stone-50/60 transition">
-                      <td className="py-3.5 px-4 font-medium text-stone-900 flex items-center gap-2">
-                        <Leaf className="h-4 w-4 text-emerald-700" />
-                        <span>{c.name}</span>
+                    <tr key={c.id}>
+                      <td className="font-heading font-semibold text-[#26332D]">
+                        <div className="flex items-center gap-2">
+                          <Sprout className="h-4 w-4 text-[#17633F]" />
+                          <span>{c.name}</span>
+                        </div>
                       </td>
-                      <td className="py-3.5 px-4 font-mono text-stone-600">
+                      <td className="font-mono text-[#657169] text-xs">
                         {c.commodityCode ?? '—'}
                       </td>
-                      <td className="py-3.5 px-4">
+                      <td>
                         <Badge variant={c.active ? 'success' : 'default'}>
                           {c.active ? 'Active' : 'Inactive'}
                         </Badge>
                       </td>
-                      <td className="py-3.5 px-4 text-right">
+                      <td className="text-right">
                         <Link
                           href={`/commodities/${c.id}`}
-                          className="inline-flex items-center gap-1 text-emerald-800 hover:text-emerald-950 font-medium"
+                          className="inline-flex items-center gap-1 text-[#17633F] hover:text-[#124D31] font-heading font-semibold text-xs"
                         >
                           <Eye className="h-3.5 w-3.5" />
                           <span>View Details</span>
@@ -230,7 +228,7 @@ export default function CommoditiesPage() {
         <form onSubmit={handleCreateSubmit} className="space-y-4">
           <div>
             <label
-              className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+              className="block text-[11px] font-heading font-semibold uppercase tracking-wider text-[#26332D] mb-1"
               htmlFor="comm-name"
             >
               Commodity Name *
@@ -242,13 +240,13 @@ export default function CommoditiesPage() {
               value={newName}
               onChange={(e) => setNewName(e.target.value)}
               placeholder="e.g. Wheat (Lokwan)"
-              className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+              className="agri-input"
             />
           </div>
 
           <div>
             <label
-              className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+              className="block text-[11px] font-heading font-semibold uppercase tracking-wider text-[#26332D] mb-1"
               htmlFor="comm-code"
             >
               Commodity Code
@@ -259,7 +257,7 @@ export default function CommoditiesPage() {
               value={newCode}
               onChange={(e) => setNewCode(e.target.value)}
               placeholder="e.g. WHT-LOK-01"
-              className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900 font-mono"
+              className="agri-input font-mono"
             />
           </div>
 
@@ -269,25 +267,25 @@ export default function CommoditiesPage() {
               type="checkbox"
               checked={newActive}
               onChange={(e) => setNewActive(e.target.checked)}
-              className="h-4 w-4 text-emerald-800 rounded border-stone-300 focus:ring-emerald-700"
+              className="h-4 w-4 text-[#17633F] rounded border-[#DDE2DB] focus:ring-[#17633F]"
             />
-            <label htmlFor="comm-active" className="text-xs font-medium text-stone-700">
+            <label htmlFor="comm-active" className="text-xs font-medium text-[#26332D]">
               Active in trade catalog
             </label>
           </div>
 
-          <div className="pt-4 border-t border-stone-200 flex items-center justify-end gap-2">
+          <div className="pt-4 border-t border-[#DDE2DB] flex items-center justify-end gap-2">
             <button
               type="button"
               onClick={() => setModalOpen(false)}
-              className="px-4 py-2 border border-stone-300 hover:bg-stone-50 text-stone-700 text-xs font-medium rounded-md transition"
+              className="agri-btn-secondary"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={createMutation.isPending}
-              className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#0e4937] hover:bg-[#135f48] text-white text-xs font-medium rounded-md shadow-xs transition disabled:opacity-50"
+              className="agri-btn-primary"
             >
               {createMutation.isPending && <Loader2 className="h-3.5 w-3.5 animate-spin" />}
               <span>Save Commodity</span>

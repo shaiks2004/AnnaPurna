@@ -8,10 +8,11 @@ import {
   ClipboardList,
   Database,
   ExternalLink,
-  Leaf,
+  Sprout,
   Plus,
   Store,
   ArrowRight,
+  TrendingUp,
 } from 'lucide-react';
 import { AppShell } from '@/components/layout/AppShell';
 import { PageHeader, LoadingState, ErrorState, EmptyState, Badge } from '@/components/ui/States';
@@ -65,14 +66,14 @@ export default function DashboardPage() {
   return (
     <AppShell>
       <PageHeader
-        title="Operations Overview"
+        title="Procurement Control Center"
         eyebrow="Annapurna Live Agricultural Network"
         actions={
           <div className="flex items-center gap-2">
             {(hasRole('BUYER_USER') || hasRole('ADMIN')) && (
               <Link
                 href="/requirements/new"
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md bg-[#0e4937] hover:bg-[#135f48] text-white text-xs font-medium shadow-xs transition"
+                className="agri-btn-primary"
               >
                 <Plus className="h-4 w-4" />
                 <span>New Requirement</span>
@@ -81,7 +82,7 @@ export default function DashboardPage() {
             {(hasRole('FARMER') || hasRole('FPO_USER') || hasRole('ADMIN')) && (
               <Link
                 href="/lots/new"
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md bg-stone-800 hover:bg-stone-900 text-white text-xs font-medium shadow-xs transition"
+                className="agri-btn-secondary"
               >
                 <Plus className="h-4 w-4" />
                 <span>Create Lot</span>
@@ -91,66 +92,86 @@ export default function DashboardPage() {
         }
       />
 
-      {/* Real Summary Metric Cards */}
+      {/* Real Summary Metric KPI Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 mb-8">
-        <div className="bg-white p-4 rounded-lg border border-stone-200 shadow-2xs">
-          <div className="flex items-center justify-between text-stone-500 mb-2">
-            <span className="text-xs font-medium">Commodities</span>
-            <Leaf className="h-4 w-4 text-emerald-700" />
+        <div className="agri-card p-4">
+          <div className="flex items-center justify-between text-[#78877E] mb-2">
+            <span className="text-[11px] font-heading font-semibold uppercase tracking-wider text-[#657169]">
+              Commodities
+            </span>
+            <div className="p-1.5 rounded-lg bg-[#E8F4EC] text-[#17633F]">
+              <Sprout className="h-3.5 w-3.5" />
+            </div>
           </div>
-          <div className="text-2xl font-bold text-stone-900">
+          <div className="text-2xl sm:text-3xl font-heading font-bold text-[#26332D]">
             {commoditiesQuery.isLoading ? '...' : (commoditiesQuery.data?.page.totalElements ?? 0)}
           </div>
-          <span className="text-[11px] text-stone-500 mt-1 block">Active agricultural catalog</span>
+          <span className="text-[11px] text-[#78877E] mt-1 block">Active agricultural catalog</span>
         </div>
 
-        <div className="bg-white p-4 rounded-lg border border-stone-200 shadow-2xs">
-          <div className="flex items-center justify-between text-stone-500 mb-2">
-            <span className="text-xs font-medium">Mandis & Markets</span>
-            <Store className="h-4 w-4 text-emerald-700" />
+        <div className="agri-card p-4">
+          <div className="flex items-center justify-between text-[#78877E] mb-2">
+            <span className="text-[11px] font-heading font-semibold uppercase tracking-wider text-[#657169]">
+              Mandis & Markets
+            </span>
+            <div className="p-1.5 rounded-lg bg-[#E8F4EC] text-[#17633F]">
+              <Store className="h-3.5 w-3.5" />
+            </div>
           </div>
-          <div className="text-2xl font-bold text-stone-900">
+          <div className="text-2xl sm:text-3xl font-heading font-bold text-[#26332D]">
             {marketsQuery.isLoading ? '...' : (marketsQuery.data?.page.totalElements ?? 0)}
           </div>
-          <span className="text-[11px] text-stone-500 mt-1 block">Registered physical markets</span>
+          <span className="text-[11px] text-[#78877E] mt-1 block">Registered physical markets</span>
         </div>
 
-        <div className="bg-white p-4 rounded-lg border border-stone-200 shadow-2xs">
-          <div className="flex items-center justify-between text-stone-500 mb-2">
-            <span className="text-xs font-medium">Physical Lots</span>
-            <Database className="h-4 w-4 text-emerald-700" />
+        <div className="agri-card p-4">
+          <div className="flex items-center justify-between text-[#78877E] mb-2">
+            <span className="text-[11px] font-heading font-semibold uppercase tracking-wider text-[#657169]">
+              Active Lots
+            </span>
+            <div className="p-1.5 rounded-lg bg-[#E8F4EC] text-[#17633F]">
+              <Database className="h-3.5 w-3.5" />
+            </div>
           </div>
-          <div className="text-2xl font-bold text-stone-900">
+          <div className="text-2xl sm:text-3xl font-heading font-bold text-[#26332D]">
             {lotsQuery.isLoading ? '...' : (lotsQuery.data?.page.totalElements ?? 0)}
           </div>
-          <span className="text-[11px] text-stone-500 mt-1 block">Traceable inventory lots</span>
+          <span className="text-[11px] text-[#78877E] mt-1 block">Traceable physical inventory</span>
         </div>
 
         {(hasRole('BUYER_USER') || hasRole('ADMIN')) && (
-          <div className="bg-white p-4 rounded-lg border border-stone-200 shadow-2xs">
-            <div className="flex items-center justify-between text-stone-500 mb-2">
-              <span className="text-xs font-medium">Requirements</span>
-              <ClipboardList className="h-4 w-4 text-emerald-700" />
+          <div className="agri-card p-4">
+            <div className="flex items-center justify-between text-[#78877E] mb-2">
+              <span className="text-[11px] font-heading font-semibold uppercase tracking-wider text-[#657169]">
+                Requirements
+              </span>
+              <div className="p-1.5 rounded-lg bg-[#E8F4EC] text-[#17633F]">
+                <ClipboardList className="h-3.5 w-3.5" />
+              </div>
             </div>
-            <div className="text-2xl font-bold text-stone-900">
+            <div className="text-2xl sm:text-3xl font-heading font-bold text-[#26332D]">
               {requirementsQuery.isLoading
                 ? '...'
                 : (requirementsQuery.data?.page.totalElements ?? 0)}
             </div>
-            <span className="text-[11px] text-stone-500 mt-1 block">Buyer procurement intents</span>
+            <span className="text-[11px] text-[#78877E] mt-1 block">Buyer procurement intents</span>
           </div>
         )}
 
         {(hasRole('FARMER') || hasRole('FPO_USER') || hasRole('ADMIN')) && (
-          <div className="bg-white p-4 rounded-lg border border-stone-200 shadow-2xs">
-            <div className="flex items-center justify-between text-stone-500 mb-2">
-              <span className="text-xs font-medium">Supply Declarations</span>
-              <Boxes className="h-4 w-4 text-emerald-700" />
+          <div className="agri-card p-4">
+            <div className="flex items-center justify-between text-[#78877E] mb-2">
+              <span className="text-[11px] font-heading font-semibold uppercase tracking-wider text-[#657169]">
+                Supply Declarations
+              </span>
+              <div className="p-1.5 rounded-lg bg-[#E8F4EC] text-[#17633F]">
+                <Boxes className="h-3.5 w-3.5" />
+              </div>
             </div>
-            <div className="text-2xl font-bold text-stone-900">
+            <div className="text-2xl sm:text-3xl font-heading font-bold text-[#26332D]">
               {suppliesQuery.isLoading ? '...' : (suppliesQuery.data?.page.totalElements ?? 0)}
             </div>
-            <span className="text-[11px] text-stone-500 mt-1 block">Farmer / FPO declarations</span>
+            <span className="text-[11px] text-[#78877E] mt-1 block">Farmer & FPO declared volume</span>
           </div>
         )}
       </div>
@@ -158,19 +179,20 @@ export default function DashboardPage() {
       {/* Main Two-Column Live Panels */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Market Price Intelligence */}
-        <div className="bg-white rounded-lg border border-stone-200 shadow-2xs overflow-hidden flex flex-col">
-          <div className="px-5 py-4 border-b border-stone-200 flex items-center justify-between bg-stone-50/50">
+        <div className="agri-card overflow-hidden flex flex-col">
+          <div className="px-5 py-4 border-b border-[#DDE2DB] flex items-center justify-between bg-[#F8F9F6]">
             <div>
-              <h2 className="text-sm font-semibold text-stone-900">
-                Recent Market Price Observations
+              <h2 className="text-sm font-heading font-semibold text-[#26332D] flex items-center gap-2">
+                <TrendingUp className="h-4 w-4 text-[#17633F]" />
+                <span>Recent Market Price Observations</span>
               </h2>
-              <p className="text-xs text-stone-500">
+              <p className="text-xs text-[#657169] mt-0.5">
                 Live price points from monitored mandi locations
               </p>
             </div>
             <Link
               href="/market-prices"
-              className="text-xs font-medium text-emerald-800 hover:text-emerald-950 inline-flex items-center gap-1"
+              className="text-xs font-heading font-semibold text-[#17633F] hover:text-[#124D31] inline-flex items-center gap-1"
             >
               <span>View all</span>
               <ArrowRight className="h-3 w-3" />
@@ -190,32 +212,30 @@ export default function DashboardPage() {
               </div>
             ) : (
               <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs border-collapse">
+                <table className="agri-table">
                   <thead>
-                    <tr className="border-b border-stone-200 bg-stone-50/30 text-stone-500">
-                      <th className="py-2.5 px-4 font-semibold uppercase tracking-wider">Date</th>
-                      <th className="py-2.5 px-4 font-semibold uppercase tracking-wider">
-                        Modal Price
-                      </th>
-                      <th className="py-2.5 px-4 font-semibold uppercase tracking-wider">Range</th>
-                      <th className="py-2.5 px-4 font-semibold uppercase tracking-wider">Source</th>
+                    <tr>
+                      <th>Date</th>
+                      <th>Modal Price</th>
+                      <th>Range (Min - Max)</th>
+                      <th>Source</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-stone-100">
+                  <tbody>
                     {pricesQuery.data.data.map((price: MarketPrice) => (
-                      <tr key={price.id} className="hover:bg-stone-50/60 transition">
-                        <td className="py-3 px-4 font-medium text-stone-900">{price.observedOn}</td>
-                        <td className="py-3 px-4 font-semibold text-emerald-900">
+                      <tr key={price.id}>
+                        <td className="font-medium text-[#26332D]">{price.observedOn}</td>
+                        <td className="font-heading font-semibold text-[#17633F]">
                           {price.modalPrice !== null
                             ? `${price.currencyCode ?? 'INR'} ${price.modalPrice} / ${price.priceUnit}`
                             : 'N/A'}
                         </td>
-                        <td className="py-3 px-4 text-stone-600">
+                        <td className="text-[#657169]">
                           {price.minPrice !== null && price.maxPrice !== null
                             ? `${price.minPrice} - ${price.maxPrice}`
                             : '—'}
                         </td>
-                        <td className="py-3 px-4 text-stone-500 text-[11px]">{price.sourceName}</td>
+                        <td className="text-[#78877E] text-[11px]">{price.sourceName}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -226,17 +246,20 @@ export default function DashboardPage() {
         </div>
 
         {/* Visible Lots / Requirements */}
-        <div className="bg-white rounded-lg border border-stone-200 shadow-2xs overflow-hidden flex flex-col">
-          <div className="px-5 py-4 border-b border-stone-200 flex items-center justify-between bg-stone-50/50">
+        <div className="agri-card overflow-hidden flex flex-col">
+          <div className="px-5 py-4 border-b border-[#DDE2DB] flex items-center justify-between bg-[#F8F9F6]">
             <div>
-              <h2 className="text-sm font-semibold text-stone-900">Available Lots & Passports</h2>
-              <p className="text-xs text-stone-500">
+              <h2 className="text-sm font-heading font-semibold text-[#26332D] flex items-center gap-2">
+                <Database className="h-4 w-4 text-[#17633F]" />
+                <span>Physical Lots & Passports</span>
+              </h2>
+              <p className="text-xs text-[#657169] mt-0.5">
                 Physical lots registered for quality & matching
               </p>
             </div>
             <Link
               href="/lots"
-              className="text-xs font-medium text-emerald-800 hover:text-emerald-950 inline-flex items-center gap-1"
+              className="text-xs font-heading font-semibold text-[#17633F] hover:text-[#124D31] inline-flex items-center gap-1"
             >
               <span>View all</span>
               <ArrowRight className="h-3 w-3" />
@@ -256,31 +279,25 @@ export default function DashboardPage() {
               </div>
             ) : (
               <div className="overflow-x-auto">
-                <table className="w-full text-left text-xs border-collapse">
+                <table className="agri-table">
                   <thead>
-                    <tr className="border-b border-stone-200 bg-stone-50/30 text-stone-500">
-                      <th className="py-2.5 px-4 font-semibold uppercase tracking-wider">
-                        Lot Number
-                      </th>
-                      <th className="py-2.5 px-4 font-semibold uppercase tracking-wider">
-                        Quantity
-                      </th>
-                      <th className="py-2.5 px-4 font-semibold uppercase tracking-wider">Status</th>
-                      <th className="py-2.5 px-4 font-semibold uppercase tracking-wider text-right">
-                        Action
-                      </th>
+                    <tr>
+                      <th>Lot Number</th>
+                      <th>Quantity</th>
+                      <th>Status</th>
+                      <th className="text-right">Action</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-stone-100">
+                  <tbody>
                     {lotsQuery.data.data.map((lot: Lot) => (
-                      <tr key={lot.id} className="hover:bg-stone-50/60 transition">
-                        <td className="py-3 px-4 font-medium text-stone-900 font-mono text-xs">
+                      <tr key={lot.id}>
+                        <td className="font-medium text-[#26332D] font-mono text-xs">
                           {lot.lotNumber}
                         </td>
-                        <td className="py-3 px-4 text-stone-800">
+                        <td className="text-[#26332D] font-heading font-medium">
                           {lot.quantity} {lot.quantityUnit}
                         </td>
-                        <td className="py-3 px-4">
+                        <td>
                           <Badge
                             variant={
                               lot.status === 'VERIFIED'
@@ -295,10 +312,10 @@ export default function DashboardPage() {
                             {lot.status}
                           </Badge>
                         </td>
-                        <td className="py-3 px-4 text-right">
+                        <td className="text-right">
                           <Link
                             href={`/lots/${lot.id}/passport`}
-                            className="text-emerald-800 hover:text-emerald-950 font-medium inline-flex items-center gap-1 text-[11px]"
+                            className="text-[#17633F] hover:text-[#124D31] font-heading font-semibold inline-flex items-center gap-1 text-xs"
                           >
                             <span>Passport</span>
                             <ExternalLink className="h-3 w-3" />

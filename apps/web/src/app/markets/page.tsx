@@ -126,7 +126,7 @@ export default function MarketsPage() {
                 setNotification(null);
                 setModalOpen(true);
               }}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md bg-[#0e4937] hover:bg-[#135f48] text-white text-xs font-medium shadow-xs transition"
+              className="agri-btn-primary"
             >
               <Plus className="h-4 w-4" />
               <span>Add Market</span>
@@ -140,34 +140,34 @@ export default function MarketsPage() {
       )}
 
       {/* Filter Bar */}
-      <div className="bg-white p-4 rounded-lg border border-stone-200 shadow-2xs mb-6">
+      <div className="agri-card p-4 mb-6">
         <form
           onSubmit={handleFilterSubmit}
           className="grid grid-cols-1 sm:grid-cols-4 gap-3 items-end"
         >
           <div>
             <label
-              className="block text-[11px] font-semibold uppercase tracking-wider text-stone-500 mb-1"
+              className="block text-[11px] font-heading font-semibold uppercase tracking-wider text-[#657169] mb-1"
               htmlFor="mkt-search"
             >
               Keyword
             </label>
             <div className="relative">
-              <Search className="absolute left-3 top-2.5 h-3.5 w-3.5 text-stone-400" />
+              <Search className="absolute left-3 top-2.5 h-3.5 w-3.5 text-[#78877E]" />
               <input
                 id="mkt-search"
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Market name or code..."
-                className="w-full pl-8 pr-3 py-1.5 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+                className="agri-input pl-8"
               />
             </div>
           </div>
 
           <div>
             <label
-              className="block text-[11px] font-semibold uppercase tracking-wider text-stone-500 mb-1"
+              className="block text-[11px] font-heading font-semibold uppercase tracking-wider text-[#657169] mb-1"
               htmlFor="mkt-state"
             >
               State
@@ -178,13 +178,13 @@ export default function MarketsPage() {
               value={stateFilter}
               onChange={(e) => setStateFilter(e.target.value)}
               placeholder="e.g. Maharashtra"
-              className="w-full px-3 py-1.5 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+              className="agri-input"
             />
           </div>
 
           <div>
             <label
-              className="block text-[11px] font-semibold uppercase tracking-wider text-stone-500 mb-1"
+              className="block text-[11px] font-heading font-semibold uppercase tracking-wider text-[#657169] mb-1"
               htmlFor="mkt-district"
             >
               District
@@ -195,14 +195,14 @@ export default function MarketsPage() {
               value={districtFilter}
               onChange={(e) => setDistrictFilter(e.target.value)}
               placeholder="e.g. Nashik"
-              className="w-full px-3 py-1.5 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+              className="agri-input"
             />
           </div>
 
           <div className="flex gap-2">
             <button
               type="submit"
-              className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-stone-800 hover:bg-stone-900 text-white text-xs font-medium rounded-md transition"
+              className="agri-btn-primary flex-1"
             >
               <Filter className="h-3.5 w-3.5" />
               <span>Apply Filters</span>
@@ -211,7 +211,7 @@ export default function MarketsPage() {
               <button
                 type="button"
                 onClick={handleClearFilters}
-                className="px-3 py-2 border border-stone-300 hover:bg-stone-50 text-stone-700 text-xs font-medium rounded-md transition"
+                className="agri-btn-secondary"
               >
                 Clear
               </button>
@@ -221,7 +221,7 @@ export default function MarketsPage() {
       </div>
 
       {/* Markets Table */}
-      <div className="bg-white rounded-lg border border-stone-200 shadow-2xs overflow-hidden">
+      <div className="agri-card overflow-hidden">
         {query.isLoading ? (
           <LoadingState message="Fetching market directory from backend..." />
         ) : query.error ? (
@@ -238,44 +238,40 @@ export default function MarketsPage() {
         ) : (
           <div>
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs border-collapse">
+              <table className="agri-table">
                 <thead>
-                  <tr className="border-b border-stone-200 bg-stone-50/50 text-stone-600">
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider">
-                      Market Name
-                    </th>
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider">
-                      Market Code
-                    </th>
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider">Type</th>
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider">Location</th>
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider">Status</th>
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider text-right">
-                      Action
-                    </th>
+                  <tr>
+                    <th>Market Name</th>
+                    <th>Market Code</th>
+                    <th>Type</th>
+                    <th>Location</th>
+                    <th>Status</th>
+                    <th className="text-right">Action</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-stone-100">
+                <tbody>
                   {query.data.data.map((m: Market) => (
-                    <tr key={m.id} className="hover:bg-stone-50/60 transition">
-                      <td className="py-3.5 px-4 font-medium text-stone-900 flex items-center gap-2">
-                        <Store className="h-4 w-4 text-emerald-700" />
-                        <span>{m.name}</span>
+                    <tr key={m.id}>
+                      <td className="font-heading font-semibold text-[#26332D]">
+                        <div className="flex items-center gap-2">
+                          <Store className="h-4 w-4 text-[#17633F]" />
+                          <span>{m.name}</span>
+                        </div>
                       </td>
-                      <td className="py-3.5 px-4 font-mono text-stone-600">{m.marketCode}</td>
-                      <td className="py-3.5 px-4 text-stone-600">{m.marketTypeCode ?? 'APMC'}</td>
-                      <td className="py-3.5 px-4 text-stone-700">
+                      <td className="font-mono text-[#657169] text-xs">{m.marketCode}</td>
+                      <td className="text-[#657169]">{m.marketTypeCode ?? 'APMC'}</td>
+                      <td className="text-[#26332D]">
                         {[m.district, m.state].filter(Boolean).join(', ') || 'Not specified'}
                       </td>
-                      <td className="py-3.5 px-4">
+                      <td>
                         <Badge variant={m.active ? 'success' : 'default'}>
                           {m.active ? 'Active' : 'Inactive'}
                         </Badge>
                       </td>
-                      <td className="py-3.5 px-4 text-right">
+                      <td className="text-right">
                         <Link
                           href={`/markets/${m.id}`}
-                          className="inline-flex items-center gap-1 text-emerald-800 hover:text-emerald-950 font-medium"
+                          className="inline-flex items-center gap-1 text-[#17633F] hover:text-[#124D31] font-heading font-semibold text-xs"
                         >
                           <Eye className="h-3.5 w-3.5" />
                           <span>View</span>
@@ -309,7 +305,7 @@ export default function MarketsPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-heading font-semibold uppercase tracking-wider text-[#26332D] mb-1"
                 htmlFor="m-name"
               >
                 Market Name *
@@ -321,13 +317,13 @@ export default function MarketsPage() {
                 value={newName}
                 onChange={(e) => setNewName(e.target.value)}
                 placeholder="e.g. Lasalgaon APMC"
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+                className="agri-input"
               />
             </div>
 
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-heading font-semibold uppercase tracking-wider text-[#26332D] mb-1"
                 htmlFor="m-code"
               >
                 Market Code *
@@ -339,7 +335,7 @@ export default function MarketsPage() {
                 value={newCode}
                 onChange={(e) => setNewCode(e.target.value)}
                 placeholder="e.g. MKT-LAS-01"
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900 font-mono"
+                className="agri-input font-mono"
               />
             </div>
           </div>
@@ -347,7 +343,7 @@ export default function MarketsPage() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-heading font-semibold uppercase tracking-wider text-[#26332D] mb-1"
                 htmlFor="m-type"
               >
                 Type Code
@@ -358,13 +354,13 @@ export default function MarketsPage() {
                 value={newType}
                 onChange={(e) => setNewType(e.target.value)}
                 placeholder="e.g. PRIMARY_APMC"
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+                className="agri-input"
               />
             </div>
 
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-heading font-semibold uppercase tracking-wider text-[#26332D] mb-1"
                 htmlFor="m-state"
               >
                 State
@@ -375,13 +371,13 @@ export default function MarketsPage() {
                 value={newState}
                 onChange={(e) => setNewState(e.target.value)}
                 placeholder="e.g. Maharashtra"
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+                className="agri-input"
               />
             </div>
 
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-heading font-semibold uppercase tracking-wider text-[#26332D] mb-1"
                 htmlFor="m-district"
               >
                 District
@@ -392,7 +388,7 @@ export default function MarketsPage() {
                 value={newDistrict}
                 onChange={(e) => setNewDistrict(e.target.value)}
                 placeholder="e.g. Nashik"
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+                className="agri-input"
               />
             </div>
           </div>
@@ -403,25 +399,25 @@ export default function MarketsPage() {
               type="checkbox"
               checked={newActive}
               onChange={(e) => setNewActive(e.target.checked)}
-              className="h-4 w-4 text-emerald-800 rounded border-stone-300 focus:ring-emerald-700"
+              className="h-4 w-4 text-[#17633F] rounded border-[#DDE2DB] focus:ring-[#17633F]"
             />
-            <label htmlFor="m-active" className="text-xs font-medium text-stone-700">
+            <label htmlFor="m-active" className="text-xs font-medium text-[#26332D]">
               Active in procurement operations
             </label>
           </div>
 
-          <div className="pt-4 border-t border-stone-200 flex items-center justify-end gap-2">
+          <div className="pt-4 border-t border-[#DDE2DB] flex items-center justify-end gap-2">
             <button
               type="button"
               onClick={() => setModalOpen(false)}
-              className="px-4 py-2 border border-stone-300 hover:bg-stone-50 text-stone-700 text-xs font-medium rounded-md transition"
+              className="agri-btn-secondary"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={createMutation.isPending}
-              className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#0e4937] hover:bg-[#135f48] text-white text-xs font-medium rounded-md shadow-xs transition disabled:opacity-50"
+              className="agri-btn-primary"
             >
               {createMutation.isPending && <Loader2 className="h-3.5 w-3.5 animate-spin" />}
               <span>Register Market</span>

@@ -9,6 +9,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 import java.time.Instant;
 import java.util.UUID;
 
@@ -23,6 +25,7 @@ public class RefreshToken {
     private PlatformUser user;
 
     @Column(name = "token_hash", nullable = false, unique = true, length = 64)
+    @JdbcTypeCode(SqlTypes.CHAR)
     private String tokenHash;
 
     @Column(name = "token_family_id", nullable = false)

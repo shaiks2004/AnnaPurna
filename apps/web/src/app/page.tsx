@@ -20,10 +20,10 @@ export default function RootPage() {
   }, [user, loading, router]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-stone-100 text-stone-600">
-      <div className="flex items-center gap-2.5 bg-white p-5 rounded-lg border border-stone-200 shadow-xs">
-        <Loader2 className="h-5 w-5 animate-spin text-emerald-800" />
-        <span className="text-sm font-medium">Initializing Annapurna platform...</span>
+    <div className="min-h-screen flex items-center justify-center bg-[#F4F1E8] text-[#26332D]">
+      <div className="agri-card p-6 flex items-center gap-3 shadow-sm">
+        <Loader2 className="h-5 w-5 animate-spin text-[#17633F]" />
+        <span className="text-sm font-semibold text-[#123C2C] font-heading">Initializing Annapurna platform...</span>
       </div>
     </div>
   );

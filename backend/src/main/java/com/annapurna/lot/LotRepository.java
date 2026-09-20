@@ -15,7 +15,8 @@ public interface LotRepository extends JpaRepository<Lot, UUID> {
 
     @Query("""
             select l from Lot l
-            where (:search is null or lower(l.lotNumber) like lower(concat('%', :search, '%')))
+            left join l.farmer f
+            where (:search is null or lower(l.lotNumber) like lower(concat('%', cast(:search as string), '%')))
               and (:commodityId is null or l.commodity.id = :commodityId)
               and (:farmerId is null or l.farmer.id = :farmerId)
               and (:organizationId is null or l.organization.id = :organizationId)
@@ -23,7 +24,7 @@ public interface LotRepository extends JpaRepository<Lot, UUID> {
               and (:status is null or l.status = :status)
               and (:availableFrom is null or l.availableFrom >= :availableFrom)
               and (:availableTo is null or l.availableFrom <= :availableTo)
-              and (:unrestricted = true or l.farmer.user.id = :userId or l.organization.id in :organizationIds)
+              and (:unrestricted = true or f.user.id = :userId or (l.organization is not null and l.organization.id in :organizationIds))
             """)
     Page<Lot> search(
             @Param("search") String search,

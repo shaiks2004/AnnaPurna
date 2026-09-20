@@ -302,6 +302,8 @@ export type Me = {
   organizationIds: string[];
   globalRoles: Role[];
   organizationRoles: Record<string, Role[]>;
+  buyerProfileId?: string | null;
+  farmerProfileId?: string | null;
 };
 
 export type AuthToken = {

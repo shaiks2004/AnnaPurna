@@ -69,7 +69,7 @@ export default function RequirementsPage() {
           canCreate && (
             <Link
               href="/requirements/new"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md bg-[#0e4937] hover:bg-[#135f48] text-white text-xs font-medium shadow-xs transition"
+              className="agri-btn-primary"
             >
               <Plus className="h-4 w-4" />
               <span>New Requirement</span>
@@ -79,14 +79,14 @@ export default function RequirementsPage() {
       />
 
       {/* Filter Bar */}
-      <div className="bg-white p-4 rounded-lg border border-stone-200 shadow-2xs mb-6">
+      <div className="agri-card p-4 sm:p-5 mb-6">
         <form
           onSubmit={handleFilterSubmit}
           className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-end"
         >
           <div>
             <label
-              className="block text-[11px] font-semibold uppercase tracking-wider text-stone-500 mb-1"
+              className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
               htmlFor="req-comm"
             >
               Commodity
@@ -95,7 +95,7 @@ export default function RequirementsPage() {
               id="req-comm"
               value={commodityId}
               onChange={(e) => setCommodityId(e.target.value)}
-              className="w-full px-3 py-1.5 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900 bg-white"
+              className="agri-input text-xs py-1.5"
             >
               <option value="">All Commodities</option>
               {commoditiesQuery.data?.data.map((c) => (
@@ -108,7 +108,7 @@ export default function RequirementsPage() {
 
           <div>
             <label
-              className="block text-[11px] font-semibold uppercase tracking-wider text-stone-500 mb-1"
+              className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
               htmlFor="req-status"
             >
               Lifecycle Status
@@ -117,7 +117,7 @@ export default function RequirementsPage() {
               id="req-status"
               value={status}
               onChange={(e) => setStatus(e.target.value as RequirementStatus | '')}
-              className="w-full px-3 py-1.5 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900 bg-white"
+              className="agri-input text-xs py-1.5"
             >
               <option value="">All Statuses</option>
               <option value="DRAFT">DRAFT (Editable)</option>
@@ -130,7 +130,7 @@ export default function RequirementsPage() {
           <div className="flex gap-2">
             <button
               type="submit"
-              className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-stone-800 hover:bg-stone-900 text-white text-xs font-medium rounded-md transition"
+              className="flex-1 agri-btn-primary justify-center text-xs py-2"
             >
               <Filter className="h-3.5 w-3.5" />
               <span>Apply Filters</span>
@@ -139,7 +139,7 @@ export default function RequirementsPage() {
               <button
                 type="button"
                 onClick={handleClear}
-                className="px-3 py-2 border border-stone-300 hover:bg-stone-50 text-stone-700 text-xs font-medium rounded-md transition"
+                className="agri-btn-secondary text-xs py-2"
               >
                 Clear
               </button>
@@ -149,7 +149,7 @@ export default function RequirementsPage() {
       </div>
 
       {/* Requirements Table */}
-      <div className="bg-white rounded-lg border border-stone-200 shadow-2xs overflow-hidden">
+      <div className="agri-card overflow-hidden">
         {query.isLoading ? (
           <LoadingState message="Fetching buyer requirements from backend..." />
         ) : query.error ? (
@@ -165,7 +165,7 @@ export default function RequirementsPage() {
                 canCreate ? (
                   <Link
                     href="/requirements/new"
-                    className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md bg-[#0e4937] hover:bg-[#135f48] text-white text-xs font-medium transition"
+                    className="agri-btn-primary"
                   >
                     <Plus className="h-4 w-4" />
                     <span>Create Procurement Requirement</span>
@@ -177,48 +177,42 @@ export default function RequirementsPage() {
         ) : (
           <div>
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs border-collapse">
+              <table className="agri-table">
                 <thead>
-                  <tr className="border-b border-stone-200 bg-stone-50/50 text-stone-600">
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider">
-                      Requirement ID
-                    </th>
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider">Quantity</th>
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider">
-                      Target / Max Price
-                    </th>
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider">
-                      Required By
-                    </th>
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider">Status</th>
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider text-right">
-                      Actions
-                    </th>
+                  <tr>
+                    <th>Requirement ID</th>
+                    <th>Quantity</th>
+                    <th>Target / Max Price</th>
+                    <th>Required By</th>
+                    <th>Status</th>
+                    <th className="text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-stone-100">
+                <tbody>
                   {query.data.data.map((req: Requirement) => (
-                    <tr key={req.id} className="hover:bg-stone-50/60 transition">
-                      <td className="py-3.5 px-4 font-medium text-stone-900 font-mono flex items-center gap-2">
-                        <ClipboardList className="h-4 w-4 text-emerald-700" />
-                        <span>{req.id.substring(0, 8)}...</span>
+                    <tr key={req.id}>
+                      <td className="font-medium text-[#26332D] font-mono">
+                        <span className="inline-flex items-center gap-2">
+                          <ClipboardList className="h-4 w-4 text-[#17633F]" />
+                          <span>{req.id.substring(0, 8)}...</span>
+                        </span>
                       </td>
-                      <td className="py-3.5 px-4 font-semibold text-stone-800">
+                      <td className="font-semibold text-[#123C2C]">
                         {req.quantity} {req.quantityUnit}
                       </td>
-                      <td className="py-3.5 px-4 text-stone-700">
+                      <td className="text-[#26332D]">
                         {req.targetPrice !== null
                           ? `${req.currencyCode ?? 'INR'} ${req.targetPrice}`
                           : '—'}
                         {req.maximumPrice !== null ? ` (Max: ${req.maximumPrice})` : ''}
                       </td>
-                      <td className="py-3.5 px-4 text-stone-600">
-                        <span className="flex items-center gap-1">
-                          <Calendar className="h-3.5 w-3.5 text-stone-400" />
+                      <td className="text-[#657169]">
+                        <span className="flex items-center gap-1.5">
+                          <Calendar className="h-3.5 w-3.5 text-[#78877E]" />
                           <span>{req.requiredBy}</span>
                         </span>
                       </td>
-                      <td className="py-3.5 px-4">
+                      <td>
                         <Badge
                           variant={
                             req.status === 'OPEN'
@@ -233,20 +227,20 @@ export default function RequirementsPage() {
                           {req.status}
                         </Badge>
                       </td>
-                      <td className="py-3.5 px-4 text-right space-x-2">
+                      <td className="text-right space-x-2">
                         {(req.status === 'OPEN' || req.status === 'PUBLISHED') && (
                           <Link
                             href={`/requirements/${req.id}/matches`}
-                            className="inline-flex items-center gap-1 text-emerald-800 hover:text-emerald-950 font-semibold bg-emerald-50 px-2 py-1 rounded border border-emerald-200 transition"
+                            className="inline-flex items-center gap-1 text-[#17633F] hover:text-[#123C2C] font-semibold bg-[#EAF2E8] px-2.5 py-1 rounded border border-[#B8D99F]/60 transition text-xs font-heading"
                             title="Execute deterministic matching engine"
                           >
-                            <Boxes className="h-3.5 w-3.5" />
+                            <Boxes className="h-3.5 w-3.5 text-[#17633F]" />
                             <span>Matches</span>
                           </Link>
                         )}
                         <Link
                           href={`/requirements/${req.id}`}
-                          className="inline-flex items-center gap-1 text-stone-700 hover:text-stone-950 font-medium px-2 py-1 rounded border border-stone-200 hover:bg-stone-50 transition"
+                          className="agri-btn-secondary text-xs py-1 px-2.5"
                         >
                           <Eye className="h-3.5 w-3.5" />
                           <span>View</span>

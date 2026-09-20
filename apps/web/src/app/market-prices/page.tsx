@@ -154,7 +154,7 @@ export default function MarketPricesPage() {
                 setNotification(null);
                 setModalOpen(true);
               }}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md bg-[#0e4937] hover:bg-[#135f48] text-white text-xs font-medium shadow-xs transition"
+              className="agri-btn-primary"
             >
               <Plus className="h-4 w-4" />
               <span>Record Price Observation</span>
@@ -168,14 +168,14 @@ export default function MarketPricesPage() {
       )}
 
       {/* Filter Bar */}
-      <div className="bg-white p-4 rounded-lg border border-stone-200 shadow-2xs mb-6">
+      <div className="agri-card p-4 sm:p-5 mb-6">
         <form
           onSubmit={handleFilterSubmit}
           className="grid grid-cols-1 sm:grid-cols-5 gap-3 items-end"
         >
           <div>
             <label
-              className="block text-[11px] font-semibold uppercase tracking-wider text-stone-500 mb-1"
+              className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
               htmlFor="f-comm"
             >
               Commodity
@@ -184,7 +184,7 @@ export default function MarketPricesPage() {
               id="f-comm"
               value={commodityIdFilter}
               onChange={(e) => setCommodityIdFilter(e.target.value)}
-              className="w-full px-3 py-1.5 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900 bg-white"
+              className="agri-input text-xs py-1.5"
             >
               <option value="">All Commodities</option>
               {commoditiesQuery.data?.data.map((c) => (
@@ -197,7 +197,7 @@ export default function MarketPricesPage() {
 
           <div>
             <label
-              className="block text-[11px] font-semibold uppercase tracking-wider text-stone-500 mb-1"
+              className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
               htmlFor="f-mkt"
             >
               Market / Mandi
@@ -206,7 +206,7 @@ export default function MarketPricesPage() {
               id="f-mkt"
               value={marketIdFilter}
               onChange={(e) => setMarketIdFilter(e.target.value)}
-              className="w-full px-3 py-1.5 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900 bg-white"
+              className="agri-input text-xs py-1.5"
             >
               <option value="">All Markets</option>
               {marketsQuery.data?.data.map((m) => (
@@ -219,7 +219,7 @@ export default function MarketPricesPage() {
 
           <div>
             <label
-              className="block text-[11px] font-semibold uppercase tracking-wider text-stone-500 mb-1"
+              className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
               htmlFor="f-from"
             >
               Observed From
@@ -229,13 +229,13 @@ export default function MarketPricesPage() {
               type="date"
               value={fromDateFilter}
               onChange={(e) => setFromDateFilter(e.target.value)}
-              className="w-full px-3 py-1.5 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+              className="agri-input text-xs py-1.5"
             />
           </div>
 
           <div>
             <label
-              className="block text-[11px] font-semibold uppercase tracking-wider text-stone-500 mb-1"
+              className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
               htmlFor="f-to"
             >
               Observed To
@@ -245,14 +245,14 @@ export default function MarketPricesPage() {
               type="date"
               value={toDateFilter}
               onChange={(e) => setToDateFilter(e.target.value)}
-              className="w-full px-3 py-1.5 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+              className="agri-input text-xs py-1.5"
             />
           </div>
 
           <div className="flex gap-2">
             <button
               type="submit"
-              className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-stone-800 hover:bg-stone-900 text-white text-xs font-medium rounded-md transition"
+              className="flex-1 agri-btn-primary justify-center text-xs py-2"
             >
               <Filter className="h-3.5 w-3.5" />
               <span>Apply</span>
@@ -264,7 +264,7 @@ export default function MarketPricesPage() {
               <button
                 type="button"
                 onClick={handleClearFilters}
-                className="px-3 py-2 border border-stone-300 hover:bg-stone-50 text-stone-700 text-xs font-medium rounded-md transition"
+                className="agri-btn-secondary text-xs py-2"
               >
                 Clear
               </button>
@@ -274,7 +274,7 @@ export default function MarketPricesPage() {
       </div>
 
       {/* Market Prices Table */}
-      <div className="bg-white rounded-lg border border-stone-200 shadow-2xs overflow-hidden">
+      <div className="agri-card overflow-hidden">
         {query.isLoading ? (
           <LoadingState message="Fetching market price observations from backend..." />
         ) : query.error ? (
@@ -291,46 +291,42 @@ export default function MarketPricesPage() {
         ) : (
           <div>
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs border-collapse">
+              <table className="agri-table">
                 <thead>
-                  <tr className="border-b border-stone-200 bg-stone-50/50 text-stone-600">
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider">Date</th>
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider">
-                      Modal Price
-                    </th>
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider">
-                      Min - Max Range
-                    </th>
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider">Unit</th>
-                    <th className="py-3 px-4 font-semibold uppercase tracking-wider">
-                      Source & Traceability
-                    </th>
+                  <tr>
+                    <th>Observation Date</th>
+                    <th>Modal Price</th>
+                    <th>Min - Max Range</th>
+                    <th>Unit</th>
+                    <th>Source & Traceability</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-stone-100">
+                <tbody>
                   {query.data.data.map((p: MarketPrice) => (
-                    <tr key={p.id} className="hover:bg-stone-50/60 transition">
-                      <td className="py-3.5 px-4 font-medium text-stone-900 flex items-center gap-1.5">
-                        <MapPinned className="h-4 w-4 text-emerald-700" />
-                        <span>{p.observedOn}</span>
+                    <tr key={p.id}>
+                      <td className="font-medium text-[#26332D]">
+                        <span className="inline-flex items-center gap-1.5">
+                          <MapPinned className="h-3.5 w-3.5 text-[#17633F]" />
+                          <span>{p.observedOn}</span>
+                        </span>
                       </td>
-                      <td className="py-3.5 px-4 font-semibold text-emerald-900 text-sm">
+                      <td className="font-semibold text-[#123C2C] text-sm">
                         {p.modalPrice !== null
-                          ? `${p.currencyCode ?? 'INR'} ${p.modalPrice}`
+                          ? `${p.currencyCode ?? 'INR'} ${p.modalPrice.toLocaleString()}`
                           : 'N/A'}
                       </td>
-                      <td className="py-3.5 px-4 text-stone-700">
+                      <td className="text-[#657169]">
                         {p.minPrice !== null && p.maxPrice !== null
                           ? `${p.minPrice} — ${p.maxPrice}`
                           : (p.minPrice ?? p.maxPrice ?? '—')}
                       </td>
-                      <td className="py-3.5 px-4 text-stone-600 uppercase font-mono text-[11px]">
+                      <td className="text-[#657169] uppercase font-mono text-[11px]">
                         {p.priceUnit}
                       </td>
-                      <td className="py-3.5 px-4 text-stone-600">
-                        <span className="font-medium text-stone-800">{p.sourceName}</span>
+                      <td className="text-[#26332D]">
+                        <span className="font-medium text-[#123C2C]">{p.sourceName}</span>
                         {p.sourceReference && (
-                          <span className="block text-[11px] text-stone-400 font-mono">
+                          <span className="block text-[11px] text-[#78877E] font-mono">
                             Ref: {p.sourceReference}
                           </span>
                         )}
@@ -363,7 +359,7 @@ export default function MarketPricesPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                 htmlFor="p-comm"
               >
                 Commodity *
@@ -373,7 +369,7 @@ export default function MarketPricesPage() {
                 required
                 value={newCommodityId}
                 onChange={(e) => setNewCommodityId(e.target.value)}
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900 bg-white"
+                className="agri-input text-xs"
               >
                 <option value="">Select commodity...</option>
                 {commoditiesQuery.data?.data.map((c) => (
@@ -386,7 +382,7 @@ export default function MarketPricesPage() {
 
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                 htmlFor="p-mkt"
               >
                 Market / Mandi *
@@ -396,7 +392,7 @@ export default function MarketPricesPage() {
                 required
                 value={newMarketId}
                 onChange={(e) => setNewMarketId(e.target.value)}
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900 bg-white"
+                className="agri-input text-xs"
               >
                 <option value="">Select market...</option>
                 {marketsQuery.data?.data.map((m) => (
@@ -411,7 +407,7 @@ export default function MarketPricesPage() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                 htmlFor="p-date"
               >
                 Observation Date *
@@ -422,13 +418,13 @@ export default function MarketPricesPage() {
                 required
                 value={newObservedOn}
                 onChange={(e) => setNewObservedOn(e.target.value)}
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+                className="agri-input text-xs"
               />
             </div>
 
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                 htmlFor="p-modal"
               >
                 Modal Price (Typical)
@@ -440,13 +436,13 @@ export default function MarketPricesPage() {
                 value={newModalPrice}
                 onChange={(e) => setNewModalPrice(e.target.value)}
                 placeholder="e.g. 2450.00"
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+                className="agri-input text-xs"
               />
             </div>
 
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                 htmlFor="p-unit"
               >
                 Price Unit *
@@ -458,7 +454,7 @@ export default function MarketPricesPage() {
                 value={newPriceUnit}
                 onChange={(e) => setNewPriceUnit(e.target.value)}
                 placeholder="QUINTAL / MT / KG"
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900 uppercase font-mono"
+                className="agri-input text-xs uppercase font-mono"
               />
             </div>
           </div>
@@ -466,7 +462,7 @@ export default function MarketPricesPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                 htmlFor="p-min"
               >
                 Minimum Observed Price
@@ -478,13 +474,13 @@ export default function MarketPricesPage() {
                 value={newMinPrice}
                 onChange={(e) => setNewMinPrice(e.target.value)}
                 placeholder="e.g. 2300.00"
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+                className="agri-input text-xs"
               />
             </div>
 
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                 htmlFor="p-max"
               >
                 Maximum Observed Price
@@ -496,7 +492,7 @@ export default function MarketPricesPage() {
                 value={newMaxPrice}
                 onChange={(e) => setNewMaxPrice(e.target.value)}
                 placeholder="e.g. 2600.00"
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+                className="agri-input text-xs"
               />
             </div>
           </div>
@@ -504,7 +500,7 @@ export default function MarketPricesPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                 htmlFor="p-source"
               >
                 Data Source Name *
@@ -516,13 +512,13 @@ export default function MarketPricesPage() {
                 value={newSourceName}
                 onChange={(e) => setNewSourceName(e.target.value)}
                 placeholder="e.g. Agmarknet Daily Bulletin"
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900"
+                className="agri-input text-xs"
               />
             </div>
 
             <div>
               <label
-                className="block text-xs font-semibold uppercase tracking-wider text-stone-600 mb-1"
+                className="block text-[11px] font-semibold uppercase tracking-wider text-[#657169] mb-1.5 font-heading"
                 htmlFor="p-ref"
               >
                 Source Reference / Report ID
@@ -533,23 +529,23 @@ export default function MarketPricesPage() {
                 value={newSourceRef}
                 onChange={(e) => setNewSourceRef(e.target.value)}
                 placeholder="e.g. RPT-2026-09-18"
-                className="w-full px-3 py-2 text-xs border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-700/20 focus:border-emerald-700 text-stone-900 font-mono"
+                className="agri-input text-xs font-mono"
               />
             </div>
           </div>
 
-          <div className="pt-4 border-t border-stone-200 flex items-center justify-end gap-2">
+          <div className="pt-4 border-t border-[#DDE2DB] flex items-center justify-end gap-2.5">
             <button
               type="button"
               onClick={() => setModalOpen(false)}
-              className="px-4 py-2 border border-stone-300 hover:bg-stone-50 text-stone-700 text-xs font-medium rounded-md transition"
+              className="agri-btn-secondary"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={createMutation.isPending}
-              className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#0e4937] hover:bg-[#135f48] text-white text-xs font-medium rounded-md shadow-xs transition disabled:opacity-50"
+              className="agri-btn-primary"
             >
               {createMutation.isPending && <Loader2 className="h-3.5 w-3.5 animate-spin" />}
               <span>Record Price</span>

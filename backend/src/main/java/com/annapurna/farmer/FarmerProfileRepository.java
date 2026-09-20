@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface FarmerProfileRepository extends JpaRepository<FarmerProfile, UUID> {
     Optional<FarmerProfile> findByIdAndUserId(UUID id, UUID userId);
+    Optional<FarmerProfile> findByUserId(UUID userId);
 }

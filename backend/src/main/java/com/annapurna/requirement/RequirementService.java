@@ -74,6 +74,7 @@ public class RequirementService {
         Commodity commodity = commodityRepository.findById(request.commodityId())
                 .orElseThrow(() -> new ResourceNotFoundException("Commodity"));
         BuyerProfile buyerProfile = buyerProfileRepository.findById(request.buyerProfileId())
+                .or(() -> buyerProfileRepository.findByOrganizationId(request.buyerProfileId()))
                 .orElseThrow(() -> new ResourceNotFoundException("Buyer profile"));
         if (buyerProfile.getOrganization() == null) {
             throw new ResourceNotFoundException("Buyer profile");
